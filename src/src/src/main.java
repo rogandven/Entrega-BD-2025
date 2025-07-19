@@ -8,12 +8,18 @@ package src;
  *
  * @author Roger
  */
+import java.sql.SQLException;
+import org.postgresql.*;
+
 public class main {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+        Driver d = new Driver();
+        d.connect("localhost", null);
+
         System.out.println("Hello, world!");
     }
     
