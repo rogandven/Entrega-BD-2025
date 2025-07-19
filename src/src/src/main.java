@@ -1,26 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package src;
+
+import java.util.Arrays;
+import src.database.Database;
 
 /**
  *
  * @author Roger
  */
-import java.sql.SQLException;
-import org.postgresql.*;
 
 public class main {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws SQLException {
-        Driver d = new Driver();
-        d.connect("localhost", null);
-
-        System.out.println("Hello, world!");
+    public static void main(String[] args) {
+        Database db = new Database();
+        db.connect("localhost", 5432, "bdproyecto", "postgres", "secret");
+        String[][] query = db.doReceivingQuery("SELECT c.codigo, c.anio FROM curso c;", 2);
+        System.out.println(Arrays.deepToString(query));
+        db.closeConnection();
     }
-    
 }
