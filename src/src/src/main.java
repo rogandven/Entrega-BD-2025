@@ -1,7 +1,8 @@
 package src;
 
-import java.util.Arrays;
-import src.database.Database;
+import database.*;
+import gui.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -9,13 +10,53 @@ import src.database.Database;
  */
 
 public class main {
+    public static void showSimplifiedDialog(String error, String title) {
+        JOptionPane.showMessageDialog(null, error, title, -1, null);
+    }
+    
+    public static void login(Database d) {
+        Login login = new Login();
+        login.getBtnLogin().addActionListener(e -> {
+            try {
+                d.connect(
+                        login.getTxtHost().getText(), 
+                        Integer.valueOf(login.getTxtPort().getText()), 
+                        login.getTxtDatabase().getText(),
+                        login.getTxtUsername().getText(),
+                        login.getTxtPassword().getText()
+                );
+                
+                try {
+                    initialSetup(d);
+                } catch (Exception ex) {
+                    throw new RuntimeException("Parece que hay tablas ya existentes con los mismos nombres.\nEs recomendable eliminarlas.");
+                }
+                
+                login.setVisible(false);
+                login.dispose();
+                
+                // d.closeConnection();
+            } catch (Exception ex) {
+                login.setVisible(false);
+                showSimplifiedDialog(ex.getLocalizedMessage(), ex.getClass().getSimpleName());
+                login.setVisible(true);
+            }
+        });
+        login.setVisible(true);
+    }
+    
+    public static void initialSetup(Database d) {
+        try {
+            d.doSendingQuery(SQLConstants.INITIAL_QUERY);
+        } catch (Exception e) {}
+        d.doSendingQuery(SQLConstants.INITIAL_TABLE_CHECK);
+    }
+    
     public static void main(String[] args) {
-        /*
-        Database db = new Database();
-        db.connect("localhost", 5432, "bdproyecto", "postgres", "secret");
-        String[][] query = db.doReceivingQuery("SELECT c.codigo, c.anio FROM curso c;", 2);
-        System.out.println(Arrays.deepToString(query));
-        db.closeConnection();
-        */
+        Database d = new Database();
+        login(d);
+        
+        Main m = new Main();
+        Alumnos a = new Alumnos();
     }
 }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package gui;
+package gui.Consultas;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -11,12 +11,12 @@ import javax.swing.JTable;
  *
  * @author Roger
  */
-public class Consulta1 extends javax.swing.JPanel {
+public class AlumnosPorCurso extends javax.swing.JPanel {
 
     /**
      * Creates new form Consulta1
      */
-    public Consulta1() {
+    public AlumnosPorCurso() {
         initComponents();
     }
 
@@ -37,14 +37,14 @@ public class Consulta1 extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N. Alumno", "Curso", "N. + A. Prof.", "N. Apod."
+                "Curso", "Alumnos"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -60,8 +60,6 @@ public class Consulta1 extends javax.swing.JPanel {
         if (tablaConsulta.getColumnModel().getColumnCount() > 0) {
             tablaConsulta.getColumnModel().getColumn(0).setResizable(false);
             tablaConsulta.getColumnModel().getColumn(1).setResizable(false);
-            tablaConsulta.getColumnModel().getColumn(2).setResizable(false);
-            tablaConsulta.getColumnModel().getColumn(3).setResizable(false);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

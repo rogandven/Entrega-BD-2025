@@ -1,5 +1,3 @@
-START TRANSACTION;
-
 -- Entidades
 
 CREATE TABLE IF NOT EXISTS curso (
@@ -97,5 +95,3 @@ CREATE TABLE IF NOT EXISTS tiene (
 	rut_profesor VARCHAR(15) NOT NULL REFERENCES profesor(rut) ON DELETE CASCADE,
 	codigo_especialidad INT  NOT NULL REFERENCES especialidad(codigo) ON DELETE CASCADE
 );
-
-COMMIT;

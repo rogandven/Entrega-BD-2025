@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package gui;
+package gui.Consultas;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -11,12 +11,12 @@ import javax.swing.JTable;
  *
  * @author Roger
  */
-public class AlumnosPorCurso extends javax.swing.JPanel {
+public class Consulta2 extends javax.swing.JPanel {
 
     /**
      * Creates new form Consulta1
      */
-    public AlumnosPorCurso() {
+    public Consulta2() {
         initComponents();
     }
 
@@ -37,7 +37,7 @@ public class AlumnosPorCurso extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Curso", "Alumnos"
+                "Nombre", "Apellido"
             }
         ) {
             Class[] types = new Class [] {
