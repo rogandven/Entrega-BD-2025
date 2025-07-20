@@ -4,6 +4,13 @@
  */
 package gui;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Roger
@@ -272,4 +279,156 @@ public class Cursos extends javax.swing.JPanel {
     private javax.swing.JScrollPane tableProfesoresContainer;
     private javax.swing.JTextField txtAnio;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getBtnAgregarProfesor() {
+        return btnAgregarProfesor;
+    }
+
+    public void setBtnAgregarProfesor(JButton btnAgregarProfesor) {
+        this.btnAgregarProfesor = btnAgregarProfesor;
+    }
+
+    public JButton getBtnCrearCurso() {
+        return btnCrearCurso;
+    }
+
+    public void setBtnCrearCurso(JButton btnCrearCurso) {
+        this.btnCrearCurso = btnCrearCurso;
+    }
+
+    public JButton getBtnEliminarCurso() {
+        return btnEliminarCurso;
+    }
+
+    public void setBtnEliminarCurso(JButton btnEliminarCurso) {
+        this.btnEliminarCurso = btnEliminarCurso;
+    }
+
+    public JButton getBtnEliminarProfesor() {
+        return btnEliminarProfesor;
+    }
+
+    public void setBtnEliminarProfesor(JButton btnEliminarProfesor) {
+        this.btnEliminarProfesor = btnEliminarProfesor;
+    }
+
+    public JButton getBtnModificarCurso() {
+        return btnModificarCurso;
+    }
+
+    public void setBtnModificarCurso(JButton btnModificarCurso) {
+        this.btnModificarCurso = btnModificarCurso;
+    }
+
+    public JButton getBtnModificarProfesor() {
+        return btnModificarProfesor;
+    }
+
+    public void setBtnModificarProfesor(JButton btnModificarProfesor) {
+        this.btnModificarProfesor = btnModificarProfesor;
+    }
+
+    public JComboBox<String> getCmbCargo() {
+        return cmbCargo;
+    }
+
+    public void setCmbCargo(JComboBox<String> cmbCargo) {
+        this.cmbCargo = cmbCargo;
+    }
+
+    public JComboBox<String> getCmbCurso() {
+        return cmbCurso;
+    }
+
+    public void setCmbCurso(JComboBox<String> cmbCurso) {
+        this.cmbCurso = cmbCurso;
+    }
+
+    public JComboBox<String> getCmbProfesor() {
+        return cmbProfesor;
+    }
+
+    public void setCmbProfesor(JComboBox<String> cmbProfesor) {
+        this.cmbProfesor = cmbProfesor;
+    }
+
+    public JComboBox<String> getCmbTipo() {
+        return cmbTipo;
+    }
+
+    public void setCmbTipo(JComboBox<String> cmbTipo) {
+        this.cmbTipo = cmbTipo;
+    }
+
+    public JLabel getLabelAnio() {
+        return labelAnio;
+    }
+
+    public void setLabelAnio(JLabel labelAnio) {
+        this.labelAnio = labelAnio;
+    }
+
+    public JLabel getLabelCargo() {
+        return labelCargo;
+    }
+
+    public void setLabelCargo(JLabel labelCargo) {
+        this.labelCargo = labelCargo;
+    }
+
+    public JLabel getLabelCurso() {
+        return labelCurso;
+    }
+
+    public void setLabelCurso(JLabel labelCurso) {
+        this.labelCurso = labelCurso;
+    }
+
+    public JLabel getLabelProfesor() {
+        return labelProfesor;
+    }
+
+    public void setLabelProfesor(JLabel labelProfesor) {
+        this.labelProfesor = labelProfesor;
+    }
+
+    public JLabel getLabelProfesores() {
+        return labelProfesores;
+    }
+
+    public void setLabelProfesores(JLabel labelProfesores) {
+        this.labelProfesores = labelProfesores;
+    }
+
+    public JLabel getLabelTipo() {
+        return labelTipo;
+    }
+
+    public void setLabelTipo(JLabel labelTipo) {
+        this.labelTipo = labelTipo;
+    }
+
+    public JTable getTableProfesores() {
+        return tableProfesores;
+    }
+
+    public void setTableProfesores(JTable tableProfesores) {
+        this.tableProfesores = tableProfesores;
+    }
+
+    public JScrollPane getTableProfesoresContainer() {
+        return tableProfesoresContainer;
+    }
+
+    public void setTableProfesoresContainer(JScrollPane tableProfesoresContainer) {
+        this.tableProfesoresContainer = tableProfesoresContainer;
+    }
+
+    public JTextField getTxtAnio() {
+        return txtAnio;
+    }
+
+    public void setTxtAnio(JTextField txtAnio) {
+        this.txtAnio = txtAnio;
+    }
 }

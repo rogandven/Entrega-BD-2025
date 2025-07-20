@@ -4,6 +4,13 @@
  */
 package gui;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Roger
@@ -318,4 +325,212 @@ public class Extraprogramatica extends javax.swing.JPanel {
     private javax.swing.JTextField txtLugar;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getBtnAgregarAlumno() {
+        return btnAgregarAlumno;
+    }
+
+    public void setBtnAgregarAlumno(JButton btnAgregarAlumno) {
+        this.btnAgregarAlumno = btnAgregarAlumno;
+    }
+
+    public JButton getBtnCrearActividad() {
+        return btnCrearActividad;
+    }
+
+    public void setBtnCrearActividad(JButton btnCrearActividad) {
+        this.btnCrearActividad = btnCrearActividad;
+    }
+
+    public JButton getBtnEliminarActividad() {
+        return btnEliminarActividad;
+    }
+
+    public void setBtnEliminarActividad(JButton btnEliminarActividad) {
+        this.btnEliminarActividad = btnEliminarActividad;
+    }
+
+    public JButton getBtnEliminarAlumno() {
+        return btnEliminarAlumno;
+    }
+
+    public void setBtnEliminarAlumno(JButton btnEliminarAlumno) {
+        this.btnEliminarAlumno = btnEliminarAlumno;
+    }
+
+    public JButton getBtnModificarActividad() {
+        return btnModificarActividad;
+    }
+
+    public void setBtnModificarActividad(JButton btnModificarActividad) {
+        this.btnModificarActividad = btnModificarActividad;
+    }
+
+    public JComboBox<String> getCmbActividad() {
+        return cmbActividad;
+    }
+
+    public void setCmbActividad(JComboBox<String> cmbActividad) {
+        this.cmbActividad = cmbActividad;
+    }
+
+    public JComboBox<String> getCmbAlumno() {
+        return cmbAlumno;
+    }
+
+    public void setCmbAlumno(JComboBox<String> cmbAlumno) {
+        this.cmbAlumno = cmbAlumno;
+    }
+
+    public JComboBox<String> getCmbProfesor() {
+        return cmbProfesor;
+    }
+
+    public void setCmbProfesor(JComboBox<String> cmbProfesor) {
+        this.cmbProfesor = cmbProfesor;
+    }
+
+    public JLabel getLabelActividad() {
+        return labelActividad;
+    }
+
+    public void setLabelActividad(JLabel labelActividad) {
+        this.labelActividad = labelActividad;
+    }
+
+    public JLabel getLabelAlumno() {
+        return labelAlumno;
+    }
+
+    public void setLabelAlumno(JLabel labelAlumno) {
+        this.labelAlumno = labelAlumno;
+    }
+
+    public JLabel getLabelAlumnos() {
+        return labelAlumnos;
+    }
+
+    public void setLabelAlumnos(JLabel labelAlumnos) {
+        this.labelAlumnos = labelAlumnos;
+    }
+
+    public JLabel getLabelCupos() {
+        return labelCupos;
+    }
+
+    public void setLabelCupos(JLabel labelCupos) {
+        this.labelCupos = labelCupos;
+    }
+
+    public JLabel getLabelDia() {
+        return labelDia;
+    }
+
+    public void setLabelDia(JLabel labelDia) {
+        this.labelDia = labelDia;
+    }
+
+    public JLabel getLabelHoraFin() {
+        return labelHoraFin;
+    }
+
+    public void setLabelHoraFin(JLabel labelHoraFin) {
+        this.labelHoraFin = labelHoraFin;
+    }
+
+    public JLabel getLabelHoraInicio() {
+        return labelHoraInicio;
+    }
+
+    public void setLabelHoraInicio(JLabel labelHoraInicio) {
+        this.labelHoraInicio = labelHoraInicio;
+    }
+
+    public JLabel getLabelLugar() {
+        return labelLugar;
+    }
+
+    public void setLabelLugar(JLabel labelLugar) {
+        this.labelLugar = labelLugar;
+    }
+
+    public JLabel getLabelNombre() {
+        return labelNombre;
+    }
+
+    public void setLabelNombre(JLabel labelNombre) {
+        this.labelNombre = labelNombre;
+    }
+
+    public JLabel getLabelProfesor() {
+        return labelProfesor;
+    }
+
+    public void setLabelProfesor(JLabel labelProfesor) {
+        this.labelProfesor = labelProfesor;
+    }
+
+    public JTable getTableAlumnos() {
+        return tableAlumnos;
+    }
+
+    public void setTableAlumnos(JTable tableAlumnos) {
+        this.tableAlumnos = tableAlumnos;
+    }
+
+    public JScrollPane getTableAlumnosContainer() {
+        return tableAlumnosContainer;
+    }
+
+    public void setTableAlumnosContainer(JScrollPane tableAlumnosContainer) {
+        this.tableAlumnosContainer = tableAlumnosContainer;
+    }
+
+    public JTextField getTxtCupos() {
+        return txtCupos;
+    }
+
+    public void setTxtCupos(JTextField txtCupos) {
+        this.txtCupos = txtCupos;
+    }
+
+    public JTextField getTxtDia() {
+        return txtDia;
+    }
+
+    public void setTxtDia(JTextField txtDia) {
+        this.txtDia = txtDia;
+    }
+
+    public JTextField getTxtHoraFin() {
+        return txtHoraFin;
+    }
+
+    public void setTxtHoraFin(JTextField txtHoraFin) {
+        this.txtHoraFin = txtHoraFin;
+    }
+
+    public JTextField getTxtHoraInicio() {
+        return txtHoraInicio;
+    }
+
+    public void setTxtHoraInicio(JTextField txtHoraInicio) {
+        this.txtHoraInicio = txtHoraInicio;
+    }
+
+    public JTextField getTxtLugar() {
+        return txtLugar;
+    }
+
+    public void setTxtLugar(JTextField txtLugar) {
+        this.txtLugar = txtLugar;
+    }
+
+    public JTextField getTxtNombre() {
+        return txtNombre;
+    }
+
+    public void setTxtNombre(JTextField txtNombre) {
+        this.txtNombre = txtNombre;
+    }
 }

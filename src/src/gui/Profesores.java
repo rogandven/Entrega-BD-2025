@@ -4,6 +4,13 @@
  */
 package gui;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Roger
@@ -277,4 +284,180 @@ public class Profesores extends javax.swing.JPanel {
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtNombres;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getBtnAgregarEspecialidad() {
+        return btnAgregarEspecialidad;
+    }
+
+    public void setBtnAgregarEspecialidad(JButton btnAgregarEspecialidad) {
+        this.btnAgregarEspecialidad = btnAgregarEspecialidad;
+    }
+
+    public JButton getBtnCrearProfesor() {
+        return btnCrearProfesor;
+    }
+
+    public void setBtnCrearProfesor(JButton btnCrearProfesor) {
+        this.btnCrearProfesor = btnCrearProfesor;
+    }
+
+    public JButton getBtnEliminarEspecialidad() {
+        return btnEliminarEspecialidad;
+    }
+
+    public void setBtnEliminarEspecialidad(JButton btnEliminarEspecialidad) {
+        this.btnEliminarEspecialidad = btnEliminarEspecialidad;
+    }
+
+    public JButton getBtnEliminarProfesor() {
+        return btnEliminarProfesor;
+    }
+
+    public void setBtnEliminarProfesor(JButton btnEliminarProfesor) {
+        this.btnEliminarProfesor = btnEliminarProfesor;
+    }
+
+    public JButton getBtnModificarProfesor() {
+        return btnModificarProfesor;
+    }
+
+    public void setBtnModificarProfesor(JButton btnModificarProfesor) {
+        this.btnModificarProfesor = btnModificarProfesor;
+    }
+
+    public JComboBox<String> getCmbEspecialidad() {
+        return cmbEspecialidad;
+    }
+
+    public void setCmbEspecialidad(JComboBox<String> cmbEspecialidad) {
+        this.cmbEspecialidad = cmbEspecialidad;
+    }
+
+    public JComboBox<String> getCmbProfesor() {
+        return cmbProfesor;
+    }
+
+    public void setCmbProfesor(JComboBox<String> cmbProfesor) {
+        this.cmbProfesor = cmbProfesor;
+    }
+
+    public JLabel getLabelApellidoMaterno() {
+        return labelApellidoMaterno;
+    }
+
+    public void setLabelApellidoMaterno(JLabel labelApellidoMaterno) {
+        this.labelApellidoMaterno = labelApellidoMaterno;
+    }
+
+    public JLabel getLabelApellidoPaterno() {
+        return labelApellidoPaterno;
+    }
+
+    public void setLabelApellidoPaterno(JLabel labelApellidoPaterno) {
+        this.labelApellidoPaterno = labelApellidoPaterno;
+    }
+
+    public JLabel getLabelCiudad() {
+        return labelCiudad;
+    }
+
+    public void setLabelCiudad(JLabel labelCiudad) {
+        this.labelCiudad = labelCiudad;
+    }
+
+    public JLabel getLabelDireccion() {
+        return labelDireccion;
+    }
+
+    public void setLabelDireccion(JLabel labelDireccion) {
+        this.labelDireccion = labelDireccion;
+    }
+
+    public JLabel getLabelEspecialidad() {
+        return labelEspecialidad;
+    }
+
+    public void setLabelEspecialidad(JLabel labelEspecialidad) {
+        this.labelEspecialidad = labelEspecialidad;
+    }
+
+    public JLabel getLabelEspecialidades() {
+        return labelEspecialidades;
+    }
+
+    public void setLabelEspecialidades(JLabel labelEspecialidades) {
+        this.labelEspecialidades = labelEspecialidades;
+    }
+
+    public JLabel getLabelNombres() {
+        return labelNombres;
+    }
+
+    public void setLabelNombres(JLabel labelNombres) {
+        this.labelNombres = labelNombres;
+    }
+
+    public JLabel getLabelProfesor() {
+        return labelProfesor;
+    }
+
+    public void setLabelProfesor(JLabel labelProfesor) {
+        this.labelProfesor = labelProfesor;
+    }
+
+    public JTable getTableEspecialidades() {
+        return tableEspecialidades;
+    }
+
+    public void setTableEspecialidades(JTable tableEspecialidades) {
+        this.tableEspecialidades = tableEspecialidades;
+    }
+
+    public JScrollPane getTableEspecialidadesContainer() {
+        return tableEspecialidadesContainer;
+    }
+
+    public void setTableEspecialidadesContainer(JScrollPane tableEspecialidadesContainer) {
+        this.tableEspecialidadesContainer = tableEspecialidadesContainer;
+    }
+
+    public JTextField getTxtApellidoMaterno() {
+        return txtApellidoMaterno;
+    }
+
+    public void setTxtApellidoMaterno(JTextField txtApellidoMaterno) {
+        this.txtApellidoMaterno = txtApellidoMaterno;
+    }
+
+    public JTextField getTxtApellidoPaterno() {
+        return txtApellidoPaterno;
+    }
+
+    public void setTxtApellidoPaterno(JTextField txtApellidoPaterno) {
+        this.txtApellidoPaterno = txtApellidoPaterno;
+    }
+
+    public JTextField getTxtCiudad() {
+        return txtCiudad;
+    }
+
+    public void setTxtCiudad(JTextField txtCiudad) {
+        this.txtCiudad = txtCiudad;
+    }
+
+    public JTextField getTxtDireccion() {
+        return txtDireccion;
+    }
+
+    public void setTxtDireccion(JTextField txtDireccion) {
+        this.txtDireccion = txtDireccion;
+    }
+
+    public JTextField getTxtNombres() {
+        return txtNombres;
+    }
+
+    public void setTxtNombres(JTextField txtNombres) {
+        this.txtNombres = txtNombres;
+    }
 }

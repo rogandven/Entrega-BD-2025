@@ -4,6 +4,13 @@
  */
 package gui;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Roger
@@ -350,4 +357,246 @@ public class Alumnos extends javax.swing.JPanel {
     private javax.swing.JTextField txtFechaTermino;
     private javax.swing.JTextField txtNombres;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getBtnAgregarApoderado() {
+        return btnAgregarApoderado;
+    }
+
+    public void setBtnAgregarApoderado(JButton btnAgregarApoderado) {
+        this.btnAgregarApoderado = btnAgregarApoderado;
+    }
+
+    public JButton getBtnCrearAlumno() {
+        return btnCrearAlumno;
+    }
+
+    public void setBtnCrearAlumno(JButton btnCrearAlumno) {
+        this.btnCrearAlumno = btnCrearAlumno;
+    }
+
+    public JButton getBtnEliminarAlumno() {
+        return btnEliminarAlumno;
+    }
+
+    public void setBtnEliminarAlumno(JButton btnEliminarAlumno) {
+        this.btnEliminarAlumno = btnEliminarAlumno;
+    }
+
+    public JButton getBtnEliminarApoderado() {
+        return btnEliminarApoderado;
+    }
+
+    public void setBtnEliminarApoderado(JButton btnEliminarApoderado) {
+        this.btnEliminarApoderado = btnEliminarApoderado;
+    }
+
+    public JButton getBtnModificarAlumno() {
+        return btnModificarAlumno;
+    }
+
+    public void setBtnModificarAlumno(JButton btnModificarAlumno) {
+        this.btnModificarAlumno = btnModificarAlumno;
+    }
+
+    public JComboBox<String> getCmbAlumno() {
+        return cmbAlumno;
+    }
+
+    public void setCmbAlumno(JComboBox<String> cmbAlumno) {
+        this.cmbAlumno = cmbAlumno;
+    }
+
+    public JComboBox<String> getCmbApoderado() {
+        return cmbApoderado;
+    }
+
+    public void setCmbApoderado(JComboBox<String> cmbApoderado) {
+        this.cmbApoderado = cmbApoderado;
+    }
+
+    public JComboBox<String> getCmbCurso() {
+        return cmbCurso;
+    }
+
+    public void setCmbCurso(JComboBox<String> cmbCurso) {
+        this.cmbCurso = cmbCurso;
+    }
+
+    public JLabel getLabelAlumno() {
+        return labelAlumno;
+    }
+
+    public void setLabelAlumno(JLabel labelAlumno) {
+        this.labelAlumno = labelAlumno;
+    }
+
+    public JLabel getLabelApellidoMaterno() {
+        return labelApellidoMaterno;
+    }
+
+    public void setLabelApellidoMaterno(JLabel labelApellidoMaterno) {
+        this.labelApellidoMaterno = labelApellidoMaterno;
+    }
+
+    public JLabel getLabelApellidoPaterno() {
+        return labelApellidoPaterno;
+    }
+
+    public void setLabelApellidoPaterno(JLabel labelApellidoPaterno) {
+        this.labelApellidoPaterno = labelApellidoPaterno;
+    }
+
+    public JLabel getLabelApoderado() {
+        return labelApoderado;
+    }
+
+    public void setLabelApoderado(JLabel labelApoderado) {
+        this.labelApoderado = labelApoderado;
+    }
+
+    public JLabel getLabelApoderados() {
+        return labelApoderados;
+    }
+
+    public void setLabelApoderados(JLabel labelApoderados) {
+        this.labelApoderados = labelApoderados;
+    }
+
+    public JLabel getLabelCiudad() {
+        return labelCiudad;
+    }
+
+    public void setLabelCiudad(JLabel labelCiudad) {
+        this.labelCiudad = labelCiudad;
+    }
+
+    public JLabel getLabelCurso() {
+        return labelCurso;
+    }
+
+    public void setLabelCurso(JLabel labelCurso) {
+        this.labelCurso = labelCurso;
+    }
+
+    public JLabel getLabelDireccion() {
+        return labelDireccion;
+    }
+
+    public void setLabelDireccion(JLabel labelDireccion) {
+        this.labelDireccion = labelDireccion;
+    }
+
+    public JLabel getLabelFechaInicio() {
+        return labelFechaInicio;
+    }
+
+    public void setLabelFechaInicio(JLabel labelFechaInicio) {
+        this.labelFechaInicio = labelFechaInicio;
+    }
+
+    public JLabel getLabelFechaNacimiento() {
+        return labelFechaNacimiento;
+    }
+
+    public void setLabelFechaNacimiento(JLabel labelFechaNacimiento) {
+        this.labelFechaNacimiento = labelFechaNacimiento;
+    }
+
+    public JLabel getLabelFechaTermino() {
+        return labelFechaTermino;
+    }
+
+    public void setLabelFechaTermino(JLabel labelFechaTermino) {
+        this.labelFechaTermino = labelFechaTermino;
+    }
+
+    public JLabel getLabelNombres() {
+        return labelNombres;
+    }
+
+    public void setLabelNombres(JLabel labelNombres) {
+        this.labelNombres = labelNombres;
+    }
+
+    public JTable getTablaAlumnos() {
+        return tablaAlumnos;
+    }
+
+    public void setTablaAlumnos(JTable tablaAlumnos) {
+        this.tablaAlumnos = tablaAlumnos;
+    }
+
+    public JScrollPane getTablaAlumnosContainer() {
+        return tablaAlumnosContainer;
+    }
+
+    public void setTablaAlumnosContainer(JScrollPane tablaAlumnosContainer) {
+        this.tablaAlumnosContainer = tablaAlumnosContainer;
+    }
+
+    public JTextField getTxtApellidoMaterno() {
+        return txtApellidoMaterno;
+    }
+
+    public void setTxtApellidoMaterno(JTextField txtApellidoMaterno) {
+        this.txtApellidoMaterno = txtApellidoMaterno;
+    }
+
+    public JTextField getTxtApellidoPaterno() {
+        return txtApellidoPaterno;
+    }
+
+    public void setTxtApellidoPaterno(JTextField txtApellidoPaterno) {
+        this.txtApellidoPaterno = txtApellidoPaterno;
+    }
+
+    public JTextField getTxtCiudad() {
+        return txtCiudad;
+    }
+
+    public void setTxtCiudad(JTextField txtCiudad) {
+        this.txtCiudad = txtCiudad;
+    }
+
+    public JTextField getTxtDireccion() {
+        return txtDireccion;
+    }
+
+    public void setTxtDireccion(JTextField txtDireccion) {
+        this.txtDireccion = txtDireccion;
+    }
+
+    public JTextField getTxtFechaInicio() {
+        return txtFechaInicio;
+    }
+
+    public void setTxtFechaInicio(JTextField txtFechaInicio) {
+        this.txtFechaInicio = txtFechaInicio;
+    }
+
+    public JTextField getTxtFechaNacimiento() {
+        return txtFechaNacimiento;
+    }
+
+    public void setTxtFechaNacimiento(JTextField txtFechaNacimiento) {
+        this.txtFechaNacimiento = txtFechaNacimiento;
+    }
+
+    public JTextField getTxtFechaTermino() {
+        return txtFechaTermino;
+    }
+
+    public void setTxtFechaTermino(JTextField txtFechaTermino) {
+        this.txtFechaTermino = txtFechaTermino;
+    }
+
+    public JTextField getTxtNombres() {
+        return txtNombres;
+    }
+
+    public void setTxtNombres(JTextField txtNombres) {
+        this.txtNombres = txtNombres;
+    }
+    
+    
 }

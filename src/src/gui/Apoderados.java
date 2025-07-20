@@ -4,6 +4,11 @@
  */
 package gui;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Roger
@@ -209,4 +214,140 @@ public class Apoderados extends javax.swing.JPanel {
     private javax.swing.JTextField txtFechaNacimiento;
     private javax.swing.JTextField txtNombres;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getBtnCrearApoderado() {
+        return btnCrearApoderado;
+    }
+
+    public void setBtnCrearApoderado(JButton btnCrearApoderado) {
+        this.btnCrearApoderado = btnCrearApoderado;
+    }
+
+    public JButton getBtnEliminarApoderado() {
+        return btnEliminarApoderado;
+    }
+
+    public void setBtnEliminarApoderado(JButton btnEliminarApoderado) {
+        this.btnEliminarApoderado = btnEliminarApoderado;
+    }
+
+    public JButton getBtnModificarApoderado() {
+        return btnModificarApoderado;
+    }
+
+    public void setBtnModificarApoderado(JButton btnModificarApoderado) {
+        this.btnModificarApoderado = btnModificarApoderado;
+    }
+
+    public JComboBox<String> getCmbApoderado() {
+        return cmbApoderado;
+    }
+
+    public void setCmbApoderado(JComboBox<String> cmbApoderado) {
+        this.cmbApoderado = cmbApoderado;
+    }
+
+    public JLabel getLabelApellidoMaterno() {
+        return labelApellidoMaterno;
+    }
+
+    public void setLabelApellidoMaterno(JLabel labelApellidoMaterno) {
+        this.labelApellidoMaterno = labelApellidoMaterno;
+    }
+
+    public JLabel getLabelApellidoPaterno() {
+        return labelApellidoPaterno;
+    }
+
+    public void setLabelApellidoPaterno(JLabel labelApellidoPaterno) {
+        this.labelApellidoPaterno = labelApellidoPaterno;
+    }
+
+    public JLabel getLabelApoderado() {
+        return labelApoderado;
+    }
+
+    public void setLabelApoderado(JLabel labelApoderado) {
+        this.labelApoderado = labelApoderado;
+    }
+
+    public JLabel getLabelCiudad() {
+        return labelCiudad;
+    }
+
+    public void setLabelCiudad(JLabel labelCiudad) {
+        this.labelCiudad = labelCiudad;
+    }
+
+    public JLabel getLabelDireccion() {
+        return labelDireccion;
+    }
+
+    public void setLabelDireccion(JLabel labelDireccion) {
+        this.labelDireccion = labelDireccion;
+    }
+
+    public JLabel getLabelFechaNacimiento() {
+        return labelFechaNacimiento;
+    }
+
+    public void setLabelFechaNacimiento(JLabel labelFechaNacimiento) {
+        this.labelFechaNacimiento = labelFechaNacimiento;
+    }
+
+    public JLabel getLabelNombres() {
+        return labelNombres;
+    }
+
+    public void setLabelNombres(JLabel labelNombres) {
+        this.labelNombres = labelNombres;
+    }
+
+    public JTextField getTxtApellidoMaterno() {
+        return txtApellidoMaterno;
+    }
+
+    public void setTxtApellidoMaterno(JTextField txtApellidoMaterno) {
+        this.txtApellidoMaterno = txtApellidoMaterno;
+    }
+
+    public JTextField getTxtApellidoPaterno() {
+        return txtApellidoPaterno;
+    }
+
+    public void setTxtApellidoPaterno(JTextField txtApellidoPaterno) {
+        this.txtApellidoPaterno = txtApellidoPaterno;
+    }
+
+    public JTextField getTxtCiudad() {
+        return txtCiudad;
+    }
+
+    public void setTxtCiudad(JTextField txtCiudad) {
+        this.txtCiudad = txtCiudad;
+    }
+
+    public JTextField getTxtDireccion() {
+        return txtDireccion;
+    }
+
+    public void setTxtDireccion(JTextField txtDireccion) {
+        this.txtDireccion = txtDireccion;
+    }
+
+    public JTextField getTxtFechaNacimiento() {
+        return txtFechaNacimiento;
+    }
+
+    public void setTxtFechaNacimiento(JTextField txtFechaNacimiento) {
+        this.txtFechaNacimiento = txtFechaNacimiento;
+    }
+
+    public JTextField getTxtNombres() {
+        return txtNombres;
+    }
+
+    public void setTxtNombres(JTextField txtNombres) {
+        this.txtNombres = txtNombres;
+    }
 }

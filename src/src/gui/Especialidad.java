@@ -4,6 +4,11 @@
  */
 package gui;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Roger
@@ -128,4 +133,60 @@ public class Especialidad extends javax.swing.JPanel {
     private javax.swing.JLabel labelEspecialidad;
     private javax.swing.JTextField txtDescripcion;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getBtnCrearEspecialidad() {
+        return btnCrearEspecialidad;
+    }
+
+    public void setBtnCrearEspecialidad(JButton btnCrearEspecialidad) {
+        this.btnCrearEspecialidad = btnCrearEspecialidad;
+    }
+
+    public JButton getBtnEliminarEspecialidad() {
+        return btnEliminarEspecialidad;
+    }
+
+    public void setBtnEliminarEspecialidad(JButton btnEliminarEspecialidad) {
+        this.btnEliminarEspecialidad = btnEliminarEspecialidad;
+    }
+
+    public JButton getBtnModificarEspecialidad() {
+        return btnModificarEspecialidad;
+    }
+
+    public void setBtnModificarEspecialidad(JButton btnModificarEspecialidad) {
+        this.btnModificarEspecialidad = btnModificarEspecialidad;
+    }
+
+    public JComboBox<String> getCmbEspecialidad() {
+        return cmbEspecialidad;
+    }
+
+    public void setCmbEspecialidad(JComboBox<String> cmbEspecialidad) {
+        this.cmbEspecialidad = cmbEspecialidad;
+    }
+
+    public JLabel getLabelDescripcion() {
+        return labelDescripcion;
+    }
+
+    public void setLabelDescripcion(JLabel labelDescripcion) {
+        this.labelDescripcion = labelDescripcion;
+    }
+
+    public JLabel getLabelEspecialidad() {
+        return labelEspecialidad;
+    }
+
+    public void setLabelEspecialidad(JLabel labelEspecialidad) {
+        this.labelEspecialidad = labelEspecialidad;
+    }
+
+    public JTextField getTxtDescripcion() {
+        return txtDescripcion;
+    }
+
+    public void setTxtDescripcion(JTextField txtDescripcion) {
+        this.txtDescripcion = txtDescripcion;
+    }
 }
