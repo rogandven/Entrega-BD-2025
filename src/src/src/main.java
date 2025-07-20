@@ -29,13 +29,13 @@ public class main {
                 try {
                     initialSetup(d);
                 } catch (Exception ex) {
+                    d.closeConnection();
                     throw new RuntimeException("Parece que hay tablas ya existentes con los mismos nombres.\nEs recomendable eliminarlas.");
                 }
                 
                 login.setVisible(false);
                 login.dispose();
-                
-                // d.closeConnection();
+                // 
             } catch (Exception ex) {
                 login.setVisible(false);
                 showSimplifiedDialog(ex.getLocalizedMessage(), ex.getClass().getSimpleName());
