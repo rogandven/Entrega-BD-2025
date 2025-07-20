@@ -597,6 +597,4 @@ public class Alumnos extends javax.swing.JPanel {
     public void setTxtNombres(JTextField txtNombres) {
         this.txtNombres = txtNombres;
     }
-    
-    
 }
