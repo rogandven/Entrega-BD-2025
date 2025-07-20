@@ -29,11 +29,11 @@ public class Apoderados extends javax.swing.JPanel {
         labelApoderado = new javax.swing.JLabel();
         cmbApoderado = new javax.swing.JComboBox<>();
         labelNombres = new javax.swing.JLabel();
-        txtApoderado = new javax.swing.JTextField();
-        labelApellidoPaterno = new javax.swing.JLabel();
         txtNombres = new javax.swing.JTextField();
-        labelApellidoMaterno = new javax.swing.JLabel();
+        labelApellidoPaterno = new javax.swing.JLabel();
         txtApellidoPaterno = new javax.swing.JTextField();
+        labelApellidoMaterno = new javax.swing.JLabel();
+        txtApellidoMaterno = new javax.swing.JTextField();
         labelFechaNacimiento = new javax.swing.JLabel();
         txtFechaNacimiento = new javax.swing.JTextField();
         labelDireccion = new javax.swing.JLabel();
@@ -50,15 +50,15 @@ public class Apoderados extends javax.swing.JPanel {
 
         labelNombres.setText("Nombres:");
 
-        txtApoderado.setText("jTextField1");
+        txtNombres.setText("jTextField1");
 
         labelApellidoPaterno.setText("Apellido P:");
 
-        txtNombres.setText("jTextField1");
+        txtApellidoPaterno.setText("jTextField1");
 
         labelApellidoMaterno.setText("Apellido M:");
 
-        txtApellidoPaterno.setText("jTextField1");
+        txtApellidoMaterno.setText("jTextField1");
 
         labelFechaNacimiento.setText("Fecha N:");
 
@@ -107,15 +107,15 @@ public class Apoderados extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelNombres)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtApoderado))
+                        .addComponent(txtNombres))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(labelApellidoPaterno)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombres))
+                        .addComponent(txtApellidoPaterno))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelApellidoMaterno)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtApellidoPaterno))
+                        .addComponent(txtApellidoMaterno))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelDireccion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -146,15 +146,15 @@ public class Apoderados extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNombres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtApoderado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelApellidoPaterno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelApellidoMaterno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelApellidoPaterno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtApellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelApellidoMaterno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtFechaNacimiento)
@@ -202,8 +202,8 @@ public class Apoderados extends javax.swing.JPanel {
     private javax.swing.JLabel labelDireccion;
     private javax.swing.JLabel labelFechaNacimiento;
     private javax.swing.JLabel labelNombres;
+    private javax.swing.JTextField txtApellidoMaterno;
     private javax.swing.JTextField txtApellidoPaterno;
-    private javax.swing.JTextField txtApoderado;
     private javax.swing.JTextField txtCiudad;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtFechaNacimiento;
