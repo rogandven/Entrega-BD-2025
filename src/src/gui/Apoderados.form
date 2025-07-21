@@ -125,12 +125,7 @@
     <Component class="javax.swing.JComboBox" name="cmbApoderado">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -143,9 +138,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNombres">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelApellidoPaterno">
       <Properties>
@@ -153,9 +145,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtApellidoPaterno">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelApellidoMaterno">
       <Properties>
@@ -163,9 +152,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtApellidoMaterno">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelFechaNacimiento">
       <Properties>
@@ -173,9 +159,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtFechaNacimiento">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelDireccion">
       <Properties>
@@ -183,9 +166,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDireccion">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelCiudad">
       <Properties>
@@ -193,9 +173,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCiudad">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnCrearApoderado">
       <Properties>

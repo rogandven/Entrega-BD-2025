@@ -4,6 +4,7 @@
  */
 package gui;
 
+import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 
 /**
@@ -31,10 +32,13 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         TabContainer = new javax.swing.JTabbedPane();
+        btnUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Entrega Base De Datos 2025");
         setMinimumSize(new java.awt.Dimension(450, 540));
+
+        btnUpdate.setText("Actualizar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -43,12 +47,18 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(TabContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 6, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnUpdate)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(TabContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
+                .addComponent(TabContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnUpdate)
+                .addContainerGap())
         );
 
         pack();
@@ -65,6 +75,7 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane TabContainer;
+    private javax.swing.JButton btnUpdate;
     // End of variables declaration//GEN-END:variables
 
     public JTabbedPane getTabContainer() {
@@ -73,5 +84,13 @@ public class Main extends javax.swing.JFrame {
 
     public void setTabContainer(JTabbedPane TabContainer) {
         this.TabContainer = TabContainer;
+    }
+
+    public JButton getBtnUpdate() {
+        return btnUpdate;
+    }
+
+    public void setBtnUpdate(JButton btnUpdate) {
+        this.btnUpdate = btnUpdate;
     }
 }

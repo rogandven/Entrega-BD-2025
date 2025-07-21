@@ -4,12 +4,18 @@
  */
 package gui;
 
+import database.Database;
+import java.util.ArrayList;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -22,6 +28,10 @@ public class Alumnos extends javax.swing.JPanel {
      */
     public Alumnos() {
         initComponents();
+        
+        this.getCmbAlumno().addActionListener(e -> {
+            this.actualizarCampos(false);
+        });
     }
 
     /**
@@ -66,35 +76,19 @@ public class Alumnos extends javax.swing.JPanel {
 
         labelAlumno.setText("Alumno:");
 
-        cmbAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        txtNombres.setText("jTextField1");
-
         labelNombres.setText("Nombres:");
 
-        txtApellidoPaterno.setText("jTextField1");
-
         labelApellidoPaterno.setText("Apellido P:");
-
-        txtApellidoMaterno.setText("jTextField1");
 
         labelApellidoMaterno.setText("Apellido M:");
 
         labelFechaNacimiento.setText("Fecha N:");
 
-        txtFechaNacimiento.setText("jTextField1");
-
         labelDireccion.setText("Dirección:");
-
-        txtDireccion.setText("jTextField1");
 
         labelCiudad.setText("Ciudad:");
 
-        txtCiudad.setText("jTextField1");
-
         labelCurso.setText("Curso:");
-
-        cmbCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         labelApoderados.setText("Apoderados:");
 
@@ -150,8 +144,6 @@ public class Alumnos extends javax.swing.JPanel {
             }
         });
 
-        cmbApoderado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         labelApoderado.setText("Apoderado:");
 
         btnAgregarApoderado.setText("Agregar Apoderado");
@@ -169,10 +161,6 @@ public class Alumnos extends javax.swing.JPanel {
         });
 
         labelFechaInicio.setText("Fecha Inicio:");
-
-        txtFechaInicio.setText("jTextField1");
-
-        txtFechaTermino.setText("jTextField1");
 
         labelFechaTermino.setText("Fecha Término:");
 
@@ -597,4 +585,178 @@ public class Alumnos extends javax.swing.JPanel {
     public void setTxtNombres(JTextField txtNombres) {
         this.txtNombres = txtNombres;
     }
+
+    public Database getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(Database database) {
+        this.database = database;
+    }
+
+    public String[][] getDatosApoderados() {
+        return datosApoderados;
+    }
+
+    public void setDatosApoderados(String[][] datosApoderados) {
+        this.datosApoderados = datosApoderados;
+    }
+    
+    private Database database;
+    private String[][] datosAlumnos;
+    private String[][] datosApoderados;
+    private String[][] datosCursos;
+
+    public String[][] getDatosCursos() {
+        return datosCursos;
+    }
+
+    public void setDatosCursos(String[][] datosCursos) {
+        this.datosCursos = datosCursos;
+    }
+
+    public String[][] getDatosAlumnos() {
+        return datosAlumnos;
+    }
+
+    public void setDatosAlumnos(String[][] datosAlumnos) {
+        this.datosAlumnos = datosAlumnos;
+    }
+    
+    public String[] buscarPorRut(String rut) {
+        for (String[] a : datosAlumnos) {
+            if (a[0].equals(rut)) {
+                return a;
+            }
+        }
+        return null;
+    }
+    
+    public void actualizarCmbAlumnos(String[] data) {
+        ComboBoxModel<String> model = new DefaultComboBoxModel<String>(data);
+        this.getCmbAlumno().setModel(model);
+    }
+    
+    public void actualizarCmbApoderado(String[] data) {
+        ComboBoxModel<String> model = new DefaultComboBoxModel<String>(data);
+        this.getCmbApoderado().setModel(model);
+    }
+    
+    public void actualizarCmbCurso(String[] data) {
+        ComboBoxModel<String> model = new DefaultComboBoxModel<String>(data);
+        this.getCmbCurso().setModel(model);
+    }    
+    
+    public void actualizarTablaApoderados(String[][] data) {
+        String[] enunciados = {"Rut", "Nombre", "Fecha Inicio", "Fecha Término"};
+        TableModel model = new DefaultTableModel(data, enunciados);
+    }
+    
+    public void actualizarCmbAlumnosConDatosGenerales() {
+        ArrayList<String> al = new ArrayList<String>();
+        for (String[] s: datosAlumnos) {
+            al.add(s[ALUMNOS_RUT]);
+        }
+        
+        this.actualizarCmbAlumnos(al.toArray(String[]::new));
+    }
+    
+    public void actualizarCmbCursosConDatosGenerales() {
+        ArrayList<String> al = new ArrayList<String>();
+        for (String[] s: datosCursos) {
+            al.add(s[CURSOS_CODIGO]);
+        }
+        
+        this.actualizarCmbCurso(al.toArray(String[]::new));
+    }
+    
+    public void actualizarCmbApoderadosConDatosGenerales() {
+        ArrayList<String> al = new ArrayList<String>();
+        for (String[] s : datosApoderados) {
+            al.add(s[APODERADOS_RUT]);
+        }
+        
+        this.actualizarCmbApoderado(al.toArray(String[]::new));
+    }
+    
+    public void actualizarTablaApoderadosConDatosGenerales() {
+        this.actualizarTablaApoderados(datosApoderados);
+    }
+    
+    public void actualizarCampos(Boolean actualizarCmbAlumnos) {
+        if (actualizarCmbAlumnos != null && actualizarCmbAlumnos == true) {
+            this.actualizarCmbAlumnosConDatosGenerales();
+        }
+        
+        
+        if (this.getCmbAlumno().getSelectedIndex() == -1) {
+            this.getTxtNombres().setText("");
+            this.getTxtApellidoMaterno().setText("");
+            this.getTxtApellidoPaterno().setText("");
+            this.getTxtFechaNacimiento().setText("");
+            this.getTxtDireccion().setText("");
+            this.getTxtCiudad().setText("");
+            
+            /*
+            String[] emptyData = {};
+            this.actualizarCmbCurso(emptyData);
+            this.getCmbCurso().setSelectedIndex(-1);
+            */
+            /*
+            String[][] emptyData2 = {{}};
+            this.actualizarTablaApoderados(emptyData2);
+            this.getCmbApoderado().setSelectedIndex(-1);
+            */
+            /*
+            this.actualizarCmbApoderado(emptyData);
+            this.getCmbApoderado().setSelectedIndex(-1);
+            */
+            
+            this.getTxtFechaInicio().setText("");
+            this.getTxtFechaTermino().setText("");
+        } else {
+            String[] datos = buscarPorRut(this.getCmbAlumno().getSelectedItem().toString());
+            
+            this.getTxtNombres().setText(datos[ALUMNOS_NOMBRES]);
+            this.getTxtApellidoMaterno().setText(datos[ALUMNOS_AM]);
+            this.getTxtApellidoPaterno().setText(datos[ALUMNOS_AP]);
+            this.getTxtFechaNacimiento().setText(datos[ALUMNOS_FECHA_NACIMIENTO]);
+            this.getTxtDireccion().setText(datos[ALUMNOS_DIRECCION]);
+            this.getTxtCiudad().setText(datos[ALUMNOS_CIUDAD]);
+            this.getTxtFechaInicio().setText("");
+            this.getTxtFechaTermino().setText("");
+        }
+        
+        this.actualizarCmbCursosConDatosGenerales();
+        this.actualizarTablaApoderadosConDatosGenerales();
+        this.actualizarCmbApoderadosConDatosGenerales();
+    }
+    
+    public void doQueries() {
+        this.setDatosAlumnos(database.doReceivingQuery(GET_ALUMNOS_QUERY, 8));
+        this.setDatosApoderados(database.doReceivingQuery(GET_APODERADOS_QUERY, 4));
+        this.setDatosCursos(database.doReceivingQuery(GET_CURSOS_QUERY, 2));
+    }
+    
+    public static final String GET_ALUMNOS_QUERY = "SELECT rut, nombres, apellido_paterno, apellido_materno, fecha_nacimiento, direccion, ciudad, codigo_curso FROM alumno;";
+    public static final int ALUMNOS_RUT = 0;
+    public static final int ALUMNOS_NOMBRES = 1;
+    public static final int ALUMNOS_AP = 2;
+    public static final int ALUMNOS_AM = 3;
+    public static final int ALUMNOS_FECHA_NACIMIENTO = 4;
+    public static final int ALUMNOS_DIRECCION = 5;
+    public static final int ALUMNOS_CIUDAD = 6;
+    public static final int ALUMNOS_CODIGO_CURSO = 7;
+    
+    public static final String GET_CURSOS_QUERY = "SELECT codigo, anio FROM curso;";
+    public static final int CURSOS_CODIGO = 0;
+    public static final int CURSOS_ANIO = 1;
+    
+    public static final String GET_APODERADOS_QUERY = "SELECT a.rut, a.nombres, r.fecha_inicio, r.fecha_termino FROM apoderado a JOIN representa r ON a.rut = r.rut_apoderado;";
+    public static final int APODERADOS_RUT = 0;
+    public static final int APODERADOS_NOMBRE = 1;
+    public static final int APODERADOS_FECHA_INICIO = 2;
+    public static final int APODERADOS_FECHA_FIN = 3;
+
+    
 }

@@ -58,27 +58,15 @@ public class Profesores extends javax.swing.JPanel {
 
         labelProfesor.setText("Profesor:");
 
-        cmbProfesor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        txtNombres.setText("jTextField1");
-
         labelNombres.setText("Nombres:");
 
-        txtApellidoPaterno.setText("jTextField1");
-
         labelApellidoPaterno.setText("Apellido P:");
-
-        txtApellidoMaterno.setText("jTextField1");
 
         labelApellidoMaterno.setText("Apellido M:");
 
         labelDireccion.setText("Dirección:");
 
-        txtDireccion.setText("jTextField1");
-
         labelCiudad.setText("Ciudad:");
-
-        txtCiudad.setText("jTextField1");
 
         labelEspecialidades.setText("Especialidades:");
 
@@ -122,8 +110,6 @@ public class Profesores extends javax.swing.JPanel {
                 btnEliminarProfesorActionPerformed(evt);
             }
         });
-
-        cmbEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         labelEspecialidad.setText("Especialidad:");
 

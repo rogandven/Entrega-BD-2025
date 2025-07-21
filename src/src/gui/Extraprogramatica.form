@@ -160,12 +160,7 @@
     <Component class="javax.swing.JComboBox" name="cmbActividad">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -173,9 +168,6 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNombre">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelNombre">
       <Properties>
@@ -183,9 +175,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDia">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelDia">
       <Properties>
@@ -193,9 +182,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtHoraInicio">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelHoraInicio">
       <Properties>
@@ -208,9 +194,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtHoraFin">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelCupos">
       <Properties>
@@ -218,9 +201,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCupos">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelLugar">
       <Properties>
@@ -228,9 +208,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtLugar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelProfesor">
       <Properties>
@@ -240,12 +217,7 @@
     <Component class="javax.swing.JComboBox" name="cmbProfesor">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -321,12 +293,7 @@
     <Component class="javax.swing.JComboBox" name="cmbAlumno">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>

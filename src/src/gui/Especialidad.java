@@ -41,11 +41,7 @@ public class Especialidad extends javax.swing.JPanel {
 
         labelEspecialidad.setText("Especialidad:");
 
-        cmbEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         labelDescripcion.setText("Descripción:");
-
-        txtDescripcion.setText("jTextField1");
 
         btnCrearEspecialidad.setText("Crear Especialidad");
         btnCrearEspecialidad.addActionListener(new java.awt.event.ActionListener() {

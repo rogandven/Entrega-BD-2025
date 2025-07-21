@@ -2,6 +2,7 @@ package src;
 
 import database.*;
 import gui.*;
+import gui.Consultas.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,15 +36,51 @@ public class main {
                 
                 login.setVisible(false);
                 login.dispose();
-                // 
             } catch (Exception ex) {
                 login.setVisible(false);
                 showSimplifiedDialog(ex.getLocalizedMessage(), ex.getClass().getSimpleName());
                 login.setVisible(true);
             }
+            
+            mainWindow(d);
         });
+        
+        
         login.setVisible(true);
     }
+
+    public static void mainWindow(Database d) {
+        Main m = new Main();
+        Alumnos al = new Alumnos();
+        Apoderados ap = new Apoderados();
+        Cursos c = new Cursos();
+        Especialidad esp = new Especialidad();
+        Extraprogramatica ext = new Extraprogramatica();
+        Profesores p = new Profesores();
+        AlumnosPorCurso apc = new AlumnosPorCurso();
+        Consulta1 c1 = new Consulta1();
+        Consulta1 c2 = new Consulta1();
+        Consulta1 c3 = new Consulta1();
+        
+        m.getTabContainer().add("Alumnos", al);
+        m.getTabContainer().add("Apoderados", ap);
+        m.getTabContainer().add("Cursos", c);
+        m.getTabContainer().add("Especialidad", esp);
+        m.getTabContainer().add("Extraprogramáticas", ext);
+        m.getTabContainer().add("Profesores", p);
+        m.getTabContainer().add("Alumnos Por Curso", apc);
+        m.getTabContainer().add("Consulta 1", c1);
+        m.getTabContainer().add("Consulta 2", c2);
+        m.getTabContainer().add("Consulta 3", c3);
+        
+        al.setDatabase(d);
+        al.doQueries();
+        al.actualizarCampos(true);
+        
+        m.setVisible(true);
+    }
+    
+    
     
     public static void initialSetup(Database d) {
         try {
@@ -55,8 +92,5 @@ public class main {
     public static void main(String[] args) {
         Database d = new Database();
         login(d);
-        
-        Main m = new Main();
-        Alumnos a = new Alumnos();
     }
 }

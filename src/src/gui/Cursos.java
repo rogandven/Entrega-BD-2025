@@ -55,10 +55,6 @@ public class Cursos extends javax.swing.JPanel {
 
         labelCurso.setText("Curso:");
 
-        cmbCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        txtAnio.setText("jTextField1");
-
         labelAnio.setText("Año:");
 
         labelProfesores.setText("Profesores:");
@@ -116,8 +112,6 @@ public class Cursos extends javax.swing.JPanel {
             }
         });
 
-        cmbProfesor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         labelProfesor.setText("Profesor:");
 
         btnAgregarProfesor.setText("Agregar Profesor");
@@ -134,8 +128,6 @@ public class Cursos extends javax.swing.JPanel {
             }
         });
 
-        cmbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         labelCargo.setText("Cargo:");
 
         btnModificarProfesor.setText("Modificar Profesor");
@@ -146,8 +138,6 @@ public class Cursos extends javax.swing.JPanel {
         });
 
         labelTipo.setText("Tipo:");
-
-        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

@@ -62,35 +62,19 @@ public class Extraprogramatica extends javax.swing.JPanel {
 
         labelActividad.setText("Actividad:");
 
-        cmbActividad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        txtNombre.setText("jTextField1");
-
         labelNombre.setText("Nombre:");
 
-        txtDia.setText("jTextField1");
-
         labelDia.setText("Día:");
-
-        txtHoraInicio.setText("jTextField1");
 
         labelHoraInicio.setText("Hora Inicio:");
 
         labelHoraFin.setText("Hora Fin:");
 
-        txtHoraFin.setText("jTextField1");
-
         labelCupos.setText("Cupos:");
-
-        txtCupos.setText("jTextField1");
 
         labelLugar.setText("Lugar:");
 
-        txtLugar.setText("jTextField1");
-
         labelProfesor.setText("Profesor:");
-
-        cmbProfesor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         labelAlumnos.setText("Alumnos:");
 
@@ -145,8 +129,6 @@ public class Extraprogramatica extends javax.swing.JPanel {
                 btnEliminarActividadActionPerformed(evt);
             }
         });
-
-        cmbAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         labelAlumno.setText("Alumno:");
 

@@ -50,15 +50,16 @@ public class Login extends javax.swing.JFrame {
 
         labelHost.setText("Host:");
 
-        txtHost.setText("jTextField1");
-
-        txtPort.setText("jTextField1");
+        txtHost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtHostActionPerformed(evt);
+            }
+        });
 
         labelPort.setText("Port:");
 
         labelDatabase.setText("Base de Datos:");
 
-        txtDatabase.setText("jTextField1");
         txtDatabase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDatabaseActionPerformed(evt);
@@ -67,7 +68,6 @@ public class Login extends javax.swing.JFrame {
 
         labelUsername.setText("Nombre de Usuario:");
 
-        txtUsername.setText("jTextField1");
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameActionPerformed(evt);
@@ -148,6 +148,10 @@ public class Login extends javax.swing.JFrame {
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsernameActionPerformed
+
+    private void txtHostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHostActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtHostActionPerformed
 
     /**
      * @param args the command line arguments

@@ -51,31 +51,17 @@ public class Apoderados extends javax.swing.JPanel {
 
         labelApoderado.setText("Apoderado:");
 
-        cmbApoderado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         labelNombres.setText("Nombres:");
-
-        txtNombres.setText("jTextField1");
 
         labelApellidoPaterno.setText("Apellido P:");
 
-        txtApellidoPaterno.setText("jTextField1");
-
         labelApellidoMaterno.setText("Apellido M:");
-
-        txtApellidoMaterno.setText("jTextField1");
 
         labelFechaNacimiento.setText("Fecha N:");
 
-        txtFechaNacimiento.setText("jTextField1");
-
         labelDireccion.setText("Dirección:");
 
-        txtDireccion.setText("jTextField1");
-
         labelCiudad.setText("Ciudad:");
-
-        txtCiudad.setText("jTextField1");
 
         btnCrearApoderado.setText("Crear Apoderado");
         btnCrearApoderado.addActionListener(new java.awt.event.ActionListener() {
