@@ -3,6 +3,7 @@ package src;
 import database.*;
 import gui.*;
 import gui.Consultas.*;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,16 +16,27 @@ public class main {
         JOptionPane.showMessageDialog(null, error, title, -1, null);
     }
     
+    public static String convertPassword(char[] password) {
+        String result = "";
+        for (char c : password) {
+            result += c;
+        }
+        return result;
+    }
+    
     public static void login(Database d) {
         Login login = new Login();
+        
         login.getBtnLogin().addActionListener(e -> {
             try {
-                d.connect(
-                        login.getTxtHost().getText(), 
+                String password = convertPassword(login.getTxtPassword().getPassword());
+                // System.out.println(password);
+                
+                d.connect(login.getTxtHost().getText(), 
                         Integer.valueOf(login.getTxtPort().getText()), 
                         login.getTxtDatabase().getText(),
                         login.getTxtUsername().getText(),
-                        login.getTxtPassword().getText()
+                        password
                 );
                 
                 try {
@@ -42,7 +54,9 @@ public class main {
                 login.setVisible(true);
             }
             
-            mainWindow(d);
+            if (d.isConnected()) {
+                mainWindow(d);
+            }
         });
         
         
@@ -79,8 +93,6 @@ public class main {
         
         m.setVisible(true);
     }
-    
-    
     
     public static void initialSetup(Database d) {
         try {

@@ -6,11 +6,13 @@ package gui;
 
 import database.Database;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -60,8 +62,8 @@ public class Alumnos extends javax.swing.JPanel {
         labelCurso = new javax.swing.JLabel();
         cmbCurso = new javax.swing.JComboBox<>();
         labelApoderados = new javax.swing.JLabel();
-        tablaAlumnosContainer = new javax.swing.JScrollPane();
-        tablaAlumnos = new javax.swing.JTable();
+        tablaApoderadosContainer = new javax.swing.JScrollPane();
+        tablaApoderados = new javax.swing.JTable();
         btnCrearAlumno = new javax.swing.JButton();
         btnModificarAlumno = new javax.swing.JButton();
         btnEliminarAlumno = new javax.swing.JButton();
@@ -92,7 +94,7 @@ public class Alumnos extends javax.swing.JPanel {
 
         labelApoderados.setText("Apoderados:");
 
-        tablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaApoderados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -115,12 +117,12 @@ public class Alumnos extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tablaAlumnos.setShowGrid(false);
-        tablaAlumnos.getTableHeader().setReorderingAllowed(false);
-        tablaAlumnosContainer.setViewportView(tablaAlumnos);
-        if (tablaAlumnos.getColumnModel().getColumnCount() > 0) {
-            tablaAlumnos.getColumnModel().getColumn(0).setResizable(false);
-            tablaAlumnos.getColumnModel().getColumn(1).setResizable(false);
+        tablaApoderados.setShowGrid(false);
+        tablaApoderados.getTableHeader().setReorderingAllowed(false);
+        tablaApoderadosContainer.setViewportView(tablaApoderados);
+        if (tablaApoderados.getColumnModel().getColumnCount() > 0) {
+            tablaApoderados.getColumnModel().getColumn(0).setResizable(false);
+            tablaApoderados.getColumnModel().getColumn(1).setResizable(false);
         }
 
         btnCrearAlumno.setText("Crear Alumno");
@@ -200,7 +202,7 @@ public class Alumnos extends javax.swing.JPanel {
                         .addComponent(labelCurso)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(tablaAlumnosContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(tablaApoderadosContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnCrearAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -272,7 +274,7 @@ public class Alumnos extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelApoderados)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tablaAlumnosContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tablaApoderadosContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelApoderado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -293,23 +295,44 @@ public class Alumnos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearAlumnoActionPerformed
-        // TODO add your handling code here:
+
+        this.getDatabase().doSendingQuery(this.getQueryCrearAlumno());
+        this.doQueries();
+        this.actualizarCampos(true);
+        this.showSimplifiedDialog("Alumno ingresado con éxito!", "Éxito");
+        
     }//GEN-LAST:event_btnCrearAlumnoActionPerformed
 
     private void btnModificarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarAlumnoActionPerformed
-        // TODO add your handling code here:
+        
+        this.getDatabase().doSendingQuery(this.getQueryModificarAlumno());
+        this.doQueries();
+        this.actualizarCampos(true);
+        this.showSimplifiedDialog("Alumno modificado con éxito!", "Éxito");
+
     }//GEN-LAST:event_btnModificarAlumnoActionPerformed
 
     private void btnEliminarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAlumnoActionPerformed
-        // TODO add your handling code here:
+        this.getDatabase().doSendingQuery(this.getQueryEliminarAlumno());
+        this.doQueries();
+        this.actualizarCampos(true);
+        this.showSimplifiedDialog("Alumno eliminado con éxito!", "Éxito");
     }//GEN-LAST:event_btnEliminarAlumnoActionPerformed
 
     private void btnAgregarApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarApoderadoActionPerformed
         // TODO add your handling code here:
+        this.getDatabase().doSendingQuery(this.getQueryAgregarApoderado());
+        this.doQueries();
+        this.actualizarCampos(true);
+        this.showSimplifiedDialog("Apoderado agregado con éxito!", "Éxito");
     }//GEN-LAST:event_btnAgregarApoderadoActionPerformed
 
     private void btnEliminarApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarApoderadoActionPerformed
         // TODO add your handling code here:
+        this.getDatabase().doSendingQuery(this.getQueryEliminarAlumno());
+        this.doQueries();
+        this.actualizarCampos(true);
+        this.showSimplifiedDialog("Apoderado eliminado con éxito!", "Éxito");
     }//GEN-LAST:event_btnEliminarApoderadoActionPerformed
 
 
@@ -334,8 +357,8 @@ public class Alumnos extends javax.swing.JPanel {
     private javax.swing.JLabel labelFechaNacimiento;
     private javax.swing.JLabel labelFechaTermino;
     private javax.swing.JLabel labelNombres;
-    private javax.swing.JTable tablaAlumnos;
-    private javax.swing.JScrollPane tablaAlumnosContainer;
+    private javax.swing.JTable tablaApoderados;
+    private javax.swing.JScrollPane tablaApoderadosContainer;
     private javax.swing.JTextField txtApellidoMaterno;
     private javax.swing.JTextField txtApellidoPaterno;
     private javax.swing.JTextField txtCiudad;
@@ -506,20 +529,20 @@ public class Alumnos extends javax.swing.JPanel {
         this.labelNombres = labelNombres;
     }
 
-    public JTable getTablaAlumnos() {
-        return tablaAlumnos;
+    public JTable getTablaApoderados() {
+        return tablaApoderados;
     }
 
-    public void setTablaAlumnos(JTable tablaAlumnos) {
-        this.tablaAlumnos = tablaAlumnos;
+    public void setTablaApoderados(JTable tablaApoderados) {
+        this.tablaApoderados = tablaApoderados;
     }
 
-    public JScrollPane getTablaAlumnosContainer() {
-        return tablaAlumnosContainer;
+    public JScrollPane getTablaApoderadosContainer() {
+        return tablaApoderadosContainer;
     }
 
-    public void setTablaAlumnosContainer(JScrollPane tablaAlumnosContainer) {
-        this.tablaAlumnosContainer = tablaAlumnosContainer;
+    public void setTablaApoderadosContainer(JScrollPane tablaApoderadosContainer) {
+        this.tablaApoderadosContainer = tablaApoderadosContainer;
     }
 
     public JTextField getTxtApellidoMaterno() {
@@ -648,8 +671,9 @@ public class Alumnos extends javax.swing.JPanel {
     }    
     
     public void actualizarTablaApoderados(String[][] data) {
-        String[] enunciados = {"Rut", "Nombre", "Fecha Inicio", "Fecha Término"};
+        String[] enunciados = {"Rut", "Nombre", "Fecha Inicio", "Fecha Término", "Rut Alumno"};
         TableModel model = new DefaultTableModel(data, enunciados);
+        this.getTablaApoderados().setModel(model);
     }
     
     public void actualizarCmbAlumnosConDatosGenerales() {
@@ -674,13 +698,34 @@ public class Alumnos extends javax.swing.JPanel {
         ArrayList<String> al = new ArrayList<String>();
         for (String[] s : datosApoderados) {
             al.add(s[APODERADOS_RUT]);
+            // System.out.println(Arrays.toString(s));
         }
         
         this.actualizarCmbApoderado(al.toArray(String[]::new));
     }
     
     public void actualizarTablaApoderadosConDatosGenerales() {
-        this.actualizarTablaApoderados(datosApoderados);
+        Object temp = this.getCmbAlumno().getSelectedItem();
+        String rutActual = "";
+        if (temp != null) {
+            rutActual = temp.toString();
+        }
+        temp = null;
+        
+        ArrayList<String[]> datosApoderadosFiltrados = new ArrayList<String[]>();
+        for (String[] s : datosApoderados) {
+            if (s[APODERADOS_RUT_ALUMNO] == null) {
+                continue;
+            }
+            if (s[APODERADOS_RUT_ALUMNO].equals(rutActual)) {
+                datosApoderadosFiltrados.add(s);
+            }
+        }
+        String[][] datosFiltradosConvertidos = datosApoderadosFiltrados.toArray(String[][]::new);
+        this.actualizarTablaApoderados(datosFiltradosConvertidos);
+        datosFiltradosConvertidos = null;
+        rutActual = null;
+        datosApoderadosFiltrados = null;
     }
     
     public void actualizarCampos(Boolean actualizarCmbAlumnos) {
@@ -702,11 +747,11 @@ public class Alumnos extends javax.swing.JPanel {
             this.actualizarCmbCurso(emptyData);
             this.getCmbCurso().setSelectedIndex(-1);
             */
-            /*
+
             String[][] emptyData2 = {{}};
             this.actualizarTablaApoderados(emptyData2);
             this.getCmbApoderado().setSelectedIndex(-1);
-            */
+            
             /*
             this.actualizarCmbApoderado(emptyData);
             this.getCmbApoderado().setSelectedIndex(-1);
@@ -732,10 +777,59 @@ public class Alumnos extends javax.swing.JPanel {
         this.actualizarCmbApoderadosConDatosGenerales();
     }
     
+    public String pedirRut() {
+        return JOptionPane.showInputDialog(this, "Ingrese el RUT del alumno a ingresar:");
+    }
+    
     public void doQueries() {
         this.setDatosAlumnos(database.doReceivingQuery(GET_ALUMNOS_QUERY, 8));
-        this.setDatosApoderados(database.doReceivingQuery(GET_APODERADOS_QUERY, 4));
+        this.setDatosApoderados(database.doReceivingQuery(GET_APODERADOS_QUERY, 5));
+        // System.out.println(Arrays.deepToString(this.getDatosApoderados()));
         this.setDatosCursos(database.doReceivingQuery(GET_CURSOS_QUERY, 2));
+    }
+    
+    public String getQueryCrearAlumno() {
+        return 
+        """
+               INSERT INTO alumno 
+                (rut, 
+                nombres, 
+                apellido_paterno, 
+                apellido_materno, 
+                fecha_nacimiento, 
+                direccion, ciudad, 
+                codigo_curso
+                ) VALUES ('""" + this.pedirRut().trim() + "', '" + 
+              this.getTxtNombres().getText().trim() + "', '" + 
+              this.getTxtApellidoPaterno().getText().trim() + "', '" +
+              this.getTxtApellidoMaterno().getText().trim() + "', '" +
+              this.getTxtFechaNacimiento().getText().trim() + "', '" +
+              this.getTxtDireccion().getText().trim() + "','" +
+              this.getTxtCiudad().getText().trim() + "', " +
+              this.getCmbCurso().getSelectedItem().toString().trim() + ");";
+    }
+    
+    public String getQueryModificarAlumno() {
+        return "UPDATE alumno SET nombres = '" + this.getTxtNombres().getText().trim() +
+               "', apellido_paterno = '" + this.getTxtNombres().getText().trim() +
+               "', apellido_materno = '" + this.getTxtApellidoMaterno().getText().trim() +
+               "', fecha_nacimiento = '" + this.getTxtFechaNacimiento().getText().trim() +
+               "', direccion = '" + this.getTxtDireccion().getText().trim() +
+               "', ciudad = '" + this.getTxtCiudad().getText().trim() +
+               "', codigo_curso = " + this.getCmbCurso().getSelectedItem().toString().trim() + 
+               " WHERE rut = '" + this.getCmbAlumno().getSelectedItem().toString().trim() + "';";
+    }
+    
+    public String getQueryEliminarAlumno() {
+        return "DELETE FROM alumno WHERE rut = '" + this.getCmbAlumno().getSelectedItem().toString().trim() + "';";
+    }
+    
+    public String getQueryAgregarApoderado() {
+        return "INSERT INTO representa (rut_alumno, rut_apoderado, fecha_inicio, fecha_termino) VALUES ('" + this.getCmbAlumno().getSelectedItem().toString().trim() + "', '" + this.getCmbApoderado().getSelectedItem().toString().trim() + "','" + this.getTxtFechaInicio().getText().trim() + "','" + this.getTxtFechaTermino().getText().trim() + "');";
+    }
+    
+    public String getQueryEliminarApoderado() {
+        return "DELETE FROM representa WHERE rut_alumno = '" + this.getCmbAlumno().getSelectedItem().toString().trim() + "' AND rut_apoderado = '" + this.getCmbApoderado().getSelectedItem().toString().trim() + "';";
     }
     
     public static final String GET_ALUMNOS_QUERY = "SELECT rut, nombres, apellido_paterno, apellido_materno, fecha_nacimiento, direccion, ciudad, codigo_curso FROM alumno;";
@@ -752,11 +846,14 @@ public class Alumnos extends javax.swing.JPanel {
     public static final int CURSOS_CODIGO = 0;
     public static final int CURSOS_ANIO = 1;
     
-    public static final String GET_APODERADOS_QUERY = "SELECT a.rut, a.nombres, r.fecha_inicio, r.fecha_termino FROM apoderado a JOIN representa r ON a.rut = r.rut_apoderado;";
+    public static final String GET_APODERADOS_QUERY = "SELECT a.rut, a.nombres, r.fecha_inicio, r.fecha_termino, r.rut_alumno FROM apoderado a LEFT JOIN representa r ON a.rut = r.rut_apoderado;";
     public static final int APODERADOS_RUT = 0;
     public static final int APODERADOS_NOMBRE = 1;
     public static final int APODERADOS_FECHA_INICIO = 2;
     public static final int APODERADOS_FECHA_FIN = 3;
+    public static final int APODERADOS_RUT_ALUMNO = 4;
 
-    
+    public static void showSimplifiedDialog(String error, String title) {
+        JOptionPane.showMessageDialog(null, error, title, -1, null);
+    }
 }

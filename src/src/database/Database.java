@@ -64,6 +64,9 @@ public class Database {
         }
     }    
     
+    public boolean isConnected() {
+        return this.connection != null;
+    }
     
 }   
 
