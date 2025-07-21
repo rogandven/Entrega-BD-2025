@@ -75,6 +75,7 @@ public class Alumnos extends javax.swing.JPanel {
         txtFechaInicio = new javax.swing.JTextField();
         txtFechaTermino = new javax.swing.JTextField();
         labelFechaTermino = new javax.swing.JLabel();
+        btnModificarApoderado = new javax.swing.JButton();
 
         labelAlumno.setText("Alumno:");
 
@@ -166,6 +167,13 @@ public class Alumnos extends javax.swing.JPanel {
 
         labelFechaTermino.setText("Fecha Término:");
 
+        btnModificarApoderado.setText("Modificar Apoderado");
+        btnModificarApoderado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarApoderadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -218,9 +226,11 @@ public class Alumnos extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAgregarApoderado, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAgregarApoderado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnModificarApoderado, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEliminarApoderado, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnEliminarApoderado))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelFechaInicio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -290,7 +300,8 @@ public class Alumnos extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregarApoderado)
-                    .addComponent(btnEliminarApoderado)))
+                    .addComponent(btnEliminarApoderado)
+                    .addComponent(btnModificarApoderado)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -335,6 +346,14 @@ public class Alumnos extends javax.swing.JPanel {
         this.showSimplifiedDialog("Apoderado eliminado con éxito!", "Éxito");
     }//GEN-LAST:event_btnEliminarApoderadoActionPerformed
 
+    private void btnModificarApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarApoderadoActionPerformed
+        // TODO add your handling code here:
+        this.getDatabase().doSendingQuery(this.getQueryModificarApoderado());
+        this.doQueries();
+        this.actualizarCampos(true);
+        this.showSimplifiedDialog("Apoderado modificado con éxito!", "Éxito");
+    }//GEN-LAST:event_btnModificarApoderadoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarApoderado;
@@ -342,6 +361,7 @@ public class Alumnos extends javax.swing.JPanel {
     private javax.swing.JButton btnEliminarAlumno;
     private javax.swing.JButton btnEliminarApoderado;
     private javax.swing.JButton btnModificarAlumno;
+    private javax.swing.JButton btnModificarApoderado;
     private javax.swing.JComboBox<String> cmbAlumno;
     private javax.swing.JComboBox<String> cmbApoderado;
     private javax.swing.JComboBox<String> cmbCurso;
@@ -830,6 +850,10 @@ public class Alumnos extends javax.swing.JPanel {
     
     public String getQueryEliminarApoderado() {
         return "DELETE FROM representa WHERE rut_alumno = '" + this.getCmbAlumno().getSelectedItem().toString().trim() + "' AND rut_apoderado = '" + this.getCmbApoderado().getSelectedItem().toString().trim() + "';";
+    }
+    
+    public String getQueryModificarApoderado() {
+        return "UPDATE representa SET fecha_inicio = '" + this.getTxtFechaInicio().getText().trim() + "', fecha_termino = '" + this.getTxtFechaTermino().getText().trim() + "' WHERE rut_alumno = '" + this.getCmbAlumno().getSelectedItem().toString().trim() + "' AND rut_apoderado = '" + this.getCmbApoderado().getSelectedItem().toString().trim() + "';"; 
     }
     
     public static final String GET_ALUMNOS_QUERY = "SELECT rut, nombres, apellido_paterno, apellido_materno, fecha_nacimiento, direccion, ciudad, codigo_curso FROM alumno;";

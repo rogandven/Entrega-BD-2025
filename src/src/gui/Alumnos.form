@@ -74,9 +74,11 @@
                       <Component id="txtFechaNacimiento" min="-2" pref="354" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnAgregarApoderado" min="-2" pref="197" max="-2" attributes="0"/>
+                      <Component id="btnAgregarApoderado" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnModificarApoderado" min="-2" pref="137" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnEliminarApoderado" min="-2" pref="202" max="-2" attributes="0"/>
+                      <Component id="btnEliminarApoderado" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="labelFechaInicio" min="-2" max="-2" attributes="0"/>
@@ -165,6 +167,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnAgregarApoderado" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnEliminarApoderado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnModificarApoderado" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -365,6 +368,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Fecha T&#xe9;rmino:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnModificarApoderado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Modificar Apoderado"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModificarApoderadoActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
