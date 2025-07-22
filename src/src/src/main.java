@@ -91,6 +91,10 @@ public class main {
         al.doQueries();
         al.actualizarCampos(true);
         
+        ap.setDatabase(d);
+        ap.obtenerDatos();
+        ap.actualizarTodosLosCampos();
+        
         m.setVisible(true);
     }
     

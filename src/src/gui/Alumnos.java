@@ -667,6 +667,9 @@ public class Alumnos extends javax.swing.JPanel {
     }
     
     public String[] buscarPorRut(String rut) {
+        if (rut == null) {
+            return null;
+        }
         for (String[] a : datosAlumnos) {
             if (a[0].equals(rut)) {
                 return a;

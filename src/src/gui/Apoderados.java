@@ -4,9 +4,13 @@
  */
 package gui;
 
+import database.Database;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -14,14 +18,20 @@ import javax.swing.JTextField;
  * @author Roger
  */
 public class Apoderados extends javax.swing.JPanel {
-
+    
     /**
      * Creates new form Apoderados
      */
     public Apoderados() {
         initComponents();
+        this.getCmbApoderado().addActionListener(e -> {
+            actualizarCamposActuales();
+        });
     }
-
+    
+    public String pedirRut() {
+        return JOptionPane.showInputDialog(this, "Ingrese el RUT del apoderado a ingresar:");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,8 +49,6 @@ public class Apoderados extends javax.swing.JPanel {
         txtApellidoPaterno = new javax.swing.JTextField();
         labelApellidoMaterno = new javax.swing.JLabel();
         txtApellidoMaterno = new javax.swing.JTextField();
-        labelFechaNacimiento = new javax.swing.JLabel();
-        txtFechaNacimiento = new javax.swing.JTextField();
         labelDireccion = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
         labelCiudad = new javax.swing.JLabel();
@@ -56,8 +64,6 @@ public class Apoderados extends javax.swing.JPanel {
         labelApellidoPaterno.setText("Apellido P:");
 
         labelApellidoMaterno.setText("Apellido M:");
-
-        labelFechaNacimiento.setText("Fecha N:");
 
         labelDireccion.setText("Dirección:");
 
@@ -117,14 +123,9 @@ public class Apoderados extends javax.swing.JPanel {
                         .addComponent(txtCiudad))
                     .addComponent(btnEliminarApoderado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnCrearApoderado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCrearApoderado, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnModificarApoderado, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(labelFechaNacimiento)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnModificarApoderado, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -147,10 +148,6 @@ public class Apoderados extends javax.swing.JPanel {
                     .addComponent(labelApellidoMaterno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtFechaNacimiento)
-                    .addComponent(labelFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDireccion))
@@ -170,14 +167,28 @@ public class Apoderados extends javax.swing.JPanel {
 
     private void btnCrearApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearApoderadoActionPerformed
         // TODO add your handling code here:
+        this.getDatabase().doSendingQuery(this.getQueryCrearApoderado());
+        this.obtenerDatos();
+        this.actualizarTodosLosCampos();
+        this.showSimplifiedDialog("Apoderado ingresado con éxito!", "Éxito");
     }//GEN-LAST:event_btnCrearApoderadoActionPerformed
 
     private void btnModificarApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarApoderadoActionPerformed
         // TODO add your handling code here:
+        // System.out.println(this.getQueryModificarApoderado());
+        this.getDatabase().doSendingQuery(this.getQueryModificarApoderado());
+        this.obtenerDatos();
+        this.actualizarTodosLosCampos();
+        this.showSimplifiedDialog("Apoderado modificado con éxito!", "Éxito");
     }//GEN-LAST:event_btnModificarApoderadoActionPerformed
 
     private void btnEliminarApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarApoderadoActionPerformed
         // TODO add your handling code here:
+        // System.out.println(this.getQueryEliminarApoderado());
+        this.getDatabase().doSendingQuery(this.getQueryEliminarApoderado());
+        this.obtenerDatos();
+        this.actualizarTodosLosCampos();
+        this.showSimplifiedDialog("Apoderado eliminado con éxito!", "Éxito");
     }//GEN-LAST:event_btnEliminarApoderadoActionPerformed
 
 
@@ -191,13 +202,11 @@ public class Apoderados extends javax.swing.JPanel {
     private javax.swing.JLabel labelApoderado;
     private javax.swing.JLabel labelCiudad;
     private javax.swing.JLabel labelDireccion;
-    private javax.swing.JLabel labelFechaNacimiento;
     private javax.swing.JLabel labelNombres;
     private javax.swing.JTextField txtApellidoMaterno;
     private javax.swing.JTextField txtApellidoPaterno;
     private javax.swing.JTextField txtCiudad;
     private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtFechaNacimiento;
     private javax.swing.JTextField txtNombres;
     // End of variables declaration//GEN-END:variables
 
@@ -273,14 +282,6 @@ public class Apoderados extends javax.swing.JPanel {
         this.labelDireccion = labelDireccion;
     }
 
-    public JLabel getLabelFechaNacimiento() {
-        return labelFechaNacimiento;
-    }
-
-    public void setLabelFechaNacimiento(JLabel labelFechaNacimiento) {
-        this.labelFechaNacimiento = labelFechaNacimiento;
-    }
-
     public JLabel getLabelNombres() {
         return labelNombres;
     }
@@ -321,19 +322,116 @@ public class Apoderados extends javax.swing.JPanel {
         this.txtDireccion = txtDireccion;
     }
 
-    public JTextField getTxtFechaNacimiento() {
-        return txtFechaNacimiento;
-    }
-
-    public void setTxtFechaNacimiento(JTextField txtFechaNacimiento) {
-        this.txtFechaNacimiento = txtFechaNacimiento;
-    }
-
     public JTextField getTxtNombres() {
         return txtNombres;
     }
 
     public void setTxtNombres(JTextField txtNombres) {
         this.txtNombres = txtNombres;
+    }
+    
+    private Database database;
+    private String[][] datosApoderados;
+
+    public String[][] getDatosApoderados() {
+        return datosApoderados;
+    }
+
+    public void setDatosApoderados(String[][] datosApoderados) {
+        this.datosApoderados = datosApoderados;
+    }
+
+    public Database getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(Database database) {
+        this.database = database;
+    }
+    
+    public static final String GET_APODERADOS_QUERY = "SELECT rut, nombres, apellido_paterno, apellido_materno, direccion, ciudad FROM apoderado;";
+    public static final int APODERADO_RUT = 0;
+    public static final int APODERADO_NOMBRES = 1;
+    public static final int APODERADO_AP = 2;
+    public static final int APODERADO_AM = 3;
+    public static final int APODERADO_DIRECCION = 4;
+    public static final int APODERADO_CIUDAD = 5;
+    
+    public void obtenerDatos() {
+        this.setDatosApoderados(database.doReceivingQuery(GET_APODERADOS_QUERY, 6));
+    }
+    
+    public boolean isEmpty(String s) {
+        return s == null || s.isEmpty();
+    }
+    
+    
+    public String[] buscarPorRut(String rut) {
+        for (String[] s : datosApoderados) {
+            if (rut.equals(s[APODERADO_RUT])) {
+                return s;
+            }
+        }
+        return null;
+    }
+    
+    public void actualizarCamposActuales() {
+        String selectedItem = this.getCmbApoderado().getSelectedItem().toString();
+        
+        if (isEmpty(selectedItem)) {
+            this.getTxtNombres().setText("");
+            this.getTxtDireccion().setText("");
+            this.getTxtCiudad().setText("");
+            this.getTxtApellidoPaterno().setText("");
+            this.getTxtApellidoMaterno().setText("");
+        } else {
+            String[] datosActuales = buscarPorRut(selectedItem);
+            if (datosActuales != null) {
+                this.getTxtNombres().setText(datosActuales[APODERADO_NOMBRES]);
+                this.getTxtDireccion().setText(datosActuales[APODERADO_DIRECCION]);
+                this.getTxtCiudad().setText(datosActuales[APODERADO_CIUDAD]);
+                this.getTxtApellidoMaterno().setText(datosActuales[APODERADO_AM]);
+                this.getTxtApellidoPaterno().setText(datosActuales[APODERADO_AP]);
+            }
+        }
+    }
+    
+    public void actualizarCmbApoderado() {
+        ArrayList<String> nombres = new ArrayList<>();
+        
+        for (String[] s : datosApoderados) {
+            nombres.add(s[APODERADO_RUT]);
+        }
+        
+        String[] temp = nombres.toArray(String[]::new);
+        
+        this.getCmbApoderado().setModel(new DefaultComboBoxModel<>(temp));
+        
+        if (temp.length != 0) {
+            this.getCmbApoderado().setSelectedIndex(0);
+        } else {
+            this.getCmbApoderado().setSelectedIndex(-1);
+        }
+    }
+    
+    public void actualizarTodosLosCampos() {
+        actualizarCmbApoderado();
+        actualizarCamposActuales();
+    }
+    
+    public String getQueryCrearApoderado() {
+        return "INSERT INTO apoderado (rut, nombres, apellido_paterno, apellido_materno, direccion, ciudad) VALUES ('" + this.pedirRut().trim() + "', '" + this.getTxtNombres().getText().trim() + "', '" + this.getTxtApellidoPaterno().getText().trim() + "', '" + this.getTxtApellidoMaterno().getText().trim() + "', '" + this.getTxtDireccion().getText().trim() + "', '" + this.getTxtCiudad().getText().trim() + "');";
+    }
+    
+    public static void showSimplifiedDialog(String error, String title) {
+        JOptionPane.showMessageDialog(null, error, title, -1, null);
+    }
+
+    private String getQueryModificarApoderado() {
+        return "UPDATE apoderado SET nombres = '" + this.getTxtNombres().getText().trim() + "', apellido_paterno = '" + this.getTxtApellidoPaterno().getText().trim() + "', apellido_materno = '" + this.getTxtApellidoMaterno().getText() + "', direccion = '" + this.getTxtDireccion().getText().trim() + "', ciudad = '" + this.getTxtCiudad().getText().trim() + "' WHERE rut = '" + this.getCmbApoderado().getSelectedItem().toString().trim() + "';";
+    }
+
+    private String getQueryEliminarApoderado() {
+        return "DELETE FROM apoderado WHERE rut = '" + this.getCmbApoderado().getSelectedItem().toString().trim() + "';";
     }
 }
