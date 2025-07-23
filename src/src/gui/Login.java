@@ -74,8 +74,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        txtPassword.setText("jPasswordField1");
-
         labelPassword.setText("Contraseña:");
 
         btnLogin.setText("Login");

@@ -4,12 +4,18 @@
  */
 package gui;
 
+import database.Database;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,6 +28,11 @@ public class Cursos extends javax.swing.JPanel {
      */
     public Cursos() {
         initComponents();
+        this.getLabelOrientacion().setVisible(false);
+        this.getTxtOrientacion().setVisible(false);
+        this.getCmbCurso().addActionListener(e -> {
+            this.actualizarDatosActuales();
+        });
     }
 
     /**
@@ -52,6 +63,8 @@ public class Cursos extends javax.swing.JPanel {
         btnModificarProfesor = new javax.swing.JButton();
         labelTipo = new javax.swing.JLabel();
         cmbTipo = new javax.swing.JComboBox<>();
+        labelOrientacion = new javax.swing.JLabel();
+        txtOrientacion = new javax.swing.JTextField();
 
         labelCurso.setText("Curso:");
 
@@ -128,6 +141,8 @@ public class Cursos extends javax.swing.JPanel {
             }
         });
 
+        cmbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jefe", "Asistente" }));
+
         labelCargo.setText("Cargo:");
 
         btnModificarProfesor.setText("Modificar Profesor");
@@ -138,6 +153,10 @@ public class Cursos extends javax.swing.JPanel {
         });
 
         labelTipo.setText("Tipo:");
+
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Básica", "Media" }));
+
+        labelOrientacion.setText("Orientacion:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -155,13 +174,11 @@ public class Cursos extends javax.swing.JPanel {
                         .addComponent(labelAnio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtAnio))
-                    .addComponent(tableProfesoresContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(tableProfesoresContainer)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnCrearCurso, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                        .addComponent(labelOrientacion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnModificarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtOrientacion))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelProfesor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -179,7 +196,13 @@ public class Cursos extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelTipo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(cmbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnCrearCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnModificarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -198,6 +221,10 @@ public class Cursos extends javax.swing.JPanel {
                     .addComponent(cmbTipo)
                     .addComponent(labelTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelOrientacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtOrientacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrearCurso)
                     .addComponent(btnModificarCurso)
@@ -224,27 +251,41 @@ public class Cursos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCursoActionPerformed
-        // TODO add your handling code here:
+        crearCurso();
+        obtenerYactualizarTodosLosDatos();
+        Cursos.showSimplifiedDialog("Curso creado con éxito!", "Éxito");
     }//GEN-LAST:event_btnCrearCursoActionPerformed
 
     private void btnModificarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCursoActionPerformed
         // TODO add your handling code here:
+        modificarCurso();
+        obtenerYactualizarTodosLosDatos();
+        Cursos.showSimplifiedDialog("Curso modificado con éxito!", "Éxito");
     }//GEN-LAST:event_btnModificarCursoActionPerformed
 
     private void btnEliminarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCursoActionPerformed
         // TODO add your handling code here:
+        eliminarCurso();
+        obtenerYactualizarTodosLosDatos();
+        Cursos.showSimplifiedDialog("Curso eliminado con éxito!", "Éxito");
     }//GEN-LAST:event_btnEliminarCursoActionPerformed
 
     private void btnAgregarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProfesorActionPerformed
-        // TODO add your handling code here:
+        agregarProfesor();
+        obtenerYactualizarTodosLosDatos();
+        Cursos.showSimplifiedDialog("Profesor agregado con éxito!", "Éxito");        
     }//GEN-LAST:event_btnAgregarProfesorActionPerformed
 
     private void btnEliminarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProfesorActionPerformed
-        // TODO add your handling code here:
+        eliminarProfesor();
+        obtenerYactualizarTodosLosDatos();
+        Cursos.showSimplifiedDialog("Profesor eliminado con éxito!", "Éxito");    
     }//GEN-LAST:event_btnEliminarProfesorActionPerformed
 
     private void btnModificarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarProfesorActionPerformed
-        // TODO add your handling code here:
+        modificarProfesor();
+        obtenerYactualizarTodosLosDatos();
+        Cursos.showSimplifiedDialog("Profesor modificado con éxito!", "Éxito");    
     }//GEN-LAST:event_btnModificarProfesorActionPerformed
 
 
@@ -262,12 +303,14 @@ public class Cursos extends javax.swing.JPanel {
     private javax.swing.JLabel labelAnio;
     private javax.swing.JLabel labelCargo;
     private javax.swing.JLabel labelCurso;
+    private javax.swing.JLabel labelOrientacion;
     private javax.swing.JLabel labelProfesor;
     private javax.swing.JLabel labelProfesores;
     private javax.swing.JLabel labelTipo;
     private javax.swing.JTable tableProfesores;
     private javax.swing.JScrollPane tableProfesoresContainer;
     private javax.swing.JTextField txtAnio;
+    private javax.swing.JTextField txtOrientacion;
     // End of variables declaration//GEN-END:variables
 
     public JButton getBtnAgregarProfesor() {
@@ -421,4 +464,289 @@ public class Cursos extends javax.swing.JPanel {
     public void setTxtAnio(JTextField txtAnio) {
         this.txtAnio = txtAnio;
     }
+    
+
+    public static final int TIPO_BASICA = 0;
+    public static final int TIPO_MEDIA = 1;
+    public static final int TIPO_JEFE = 0;
+    public static final int TIPO_ASISTENTE = 1;
+    
+    public static final String GET_CURSOS_QUERY = "SELECT c.codigo, c.anio, (b.codigo_curso * 0 + 1) AS is_basica, (m.codigo_curso * 0 + 1) AS is_media, m.orientacion FROM curso c LEFT JOIN basica b ON c.codigo = b.codigo_curso LEFT JOIN media m ON c.codigo = m.codigo_curso;";
+    public static final int CURSO_CODIGO = 0;
+    public static final int CURSO_ANIO = 1;
+    public static final int IS_BASICA = 2;
+    public static final int IS_MEDIA = 3;
+    public static final int ORIENTACION = 4;
+    
+    public static final String GET_PROFESORES_QUERY = "SELECT p.rut, p.nombres, ej.codigo_curso AS curso_jefe, ea.codigo_curso AS curso_asistente FROM profesor p LEFT JOIN es_asistente ea ON p.rut = ea.rut_profesor_asistente LEFT JOIN es_jefe ej ON p.rut = ej.rut_profesor_jefe;";
+    public static final int PROFESOR_RUT = 0;
+    public static final int PROFESOR_NOMBRES = 1;
+    public static final int CURSO_JEFE = 2;
+    public static final int CURSO_ASISTENTE = 3;
+    
+    private String[][] datosCursos;
+    private String[][] datosProfesores;
+    private String[] orientaciones;
+    
+    private Database database;
+
+    public String[][] getDatosCursos() {
+        return datosCursos;
+    }
+
+    public void setDatosCursos(String[][] datosCursos) {
+        this.datosCursos = datosCursos;
+    }
+
+    public String[][] getDatosProfesores() {
+        return datosProfesores;
+    }
+
+    public void setDatosProfesores(String[][] datosProfesores) {
+        this.datosProfesores = datosProfesores;
+    }
+
+    public Database getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(Database database) {
+        this.database = database;
+    }
+    
+    public void obtenerDatos() {
+        this.setDatosCursos(database.doReceivingQuery(GET_CURSOS_QUERY, 5));
+        System.out.println(Arrays.deepToString(datosCursos));
+        this.setDatosProfesores(database.doReceivingQuery(GET_PROFESORES_QUERY, 5));
+        System.out.println(Arrays.deepToString(datosProfesores));
+    }
+    
+    public String[] buscarCursoPorCodigo(String codigo) {
+        for (String[] s : datosCursos) {
+            if (codigo.equals(s[CURSO_CODIGO])) {
+                return s;
+            }
+        }
+        
+        return null;
+    }
+    
+    public void actualizarCmbCurso() {
+        System.out.println("Actualizar Combo Curso");
+        ArrayList<String> cursos = new ArrayList<String>();
+        for (String[] s : datosCursos) {
+            System.out.println(Arrays.toString(s));
+            System.out.println(s[CURSO_CODIGO]);
+            cursos.add(s[CURSO_CODIGO]);
+        }
+        String[] cursos2 = cursos.toArray(String[]::new);
+        System.out.println(Arrays.toString(cursos2));
+        this.getCmbCurso().setModel(new DefaultComboBoxModel(cursos2));
+    }
+    
+    public void actualizarTablaProfesores() {
+        String[][] model = null;
+        String[] enunciados = {"Rut", "Nombre", "Cargo"};
+        if (cmbCurso.getSelectedItem() == null) {
+            model = new String[3][0];
+            this.getTableProfesores().setModel(new DefaultTableModel(model, enunciados));
+            return;
+        }
+        ArrayList<String[]> profesores = new ArrayList<String[]>();
+        String[] actual = null;
+        for (String[] s : datosProfesores) {
+            System.out.println(Arrays.toString(s));
+            if (s[CURSO_JEFE] != null && s[CURSO_JEFE].equals(cmbCurso.getSelectedItem().toString())) {
+                actual = new String[3];
+                actual[0] = s[PROFESOR_RUT];
+                actual[1] = s[PROFESOR_NOMBRES];
+                actual[2] = "Jefe";
+                profesores.add(actual);
+            } else if (s[CURSO_ASISTENTE] != null && s[CURSO_ASISTENTE].equals(cmbCurso.getSelectedItem().toString())) {
+                actual = new String[3];
+                actual[0] = s[PROFESOR_RUT];
+                actual[1] = s[PROFESOR_NOMBRES];
+                actual[2] = "Asistente";
+                profesores.add(actual);
+            }
+        }
+        model = profesores.toArray(String[][]::new);
+        this.getTableProfesores().setModel(new DefaultTableModel(model, enunciados));
+    }
+    
+    public void actualizarCmbProfesores() {
+        ArrayList<String> profesores = new ArrayList<>();
+        for (String[] s : datosProfesores) {
+            System.out.println(Arrays.toString(s));
+            profesores.add(s[PROFESOR_RUT]);
+        }
+
+        this.getCmbProfesor().setModel(new DefaultComboBoxModel(profesores.toArray()));
+    }
+    
+    public String returnEmptyStringIfNull(String s) {
+        if (s == null) {
+            return "";
+        }
+        return s;
+    }
+    
+    public void actualizarDatosActuales() {
+        if (this.getCmbCurso().getSelectedItem() != null) {
+            String[] datosPorCurso = buscarCursoPorCodigo(this.getCmbCurso().getSelectedItem().toString());
+            this.getTxtAnio().setText(datosPorCurso[CURSO_ANIO]);
+            this.getTxtOrientacion().setText(returnEmptyStringIfNull(datosPorCurso[ORIENTACION]));
+            if (datosPorCurso[IS_BASICA] != null) {
+                this.getCmbTipo().setSelectedIndex(TIPO_BASICA);
+                this.getLabelOrientacion().setVisible(false);
+                this.getTxtOrientacion().setVisible(false);
+            } else if (datosPorCurso[IS_MEDIA] != null) {
+                this.getLabelOrientacion().setVisible(true);
+                this.getTxtOrientacion().setVisible(true);
+                this.getCmbTipo().setSelectedIndex(TIPO_MEDIA);
+            } else {
+                this.getCmbTipo().setSelectedIndex(-1);
+                this.getLabelOrientacion().setVisible(false);
+                this.getTxtOrientacion().setVisible(false);
+            }
+        } else {
+            this.getTxtAnio().setText("");
+            this.getCmbTipo().setSelectedIndex(-1);
+        }
+
+        this.actualizarTablaProfesores();
+    }
+    
+    public void obtenerYactualizarTodosLosDatos() {
+        this.obtenerDatos();
+        this.actualizarCmbCurso();
+        this.actualizarCmbProfesores();
+        this.actualizarDatosActuales();
+    }
+    
+    public Integer pedirCodigo() {
+        return Integer.valueOf(JOptionPane.showInputDialog(this, "Ingrese el código del curso a ingresar:"));
+    }
+    
+    public String pedirOrientacion() {
+        // return JOptionPane.showInputDialog(this, "Ingrese la orientación del curso a ingresar:");
+        return this.getTxtOrientacion().getText();
+    }
+    
+    public void crearCurso() {
+        Integer codigo = pedirCodigo();
+        String orientacion = null;
+        String query1 = "INSERT INTO curso (codigo, anio) VALUES (" + codigo.toString() + ", " + Integer.valueOf(this.getTxtAnio().getText()).toString() + ");"; 
+        String query2 = "SELECT 1 FROM curso LIMIT 0;";
+        this.database.doSendingQuery(query1);
+        switch(this.getCmbTipo().getSelectedIndex()) {
+            case TIPO_BASICA:
+                query2 = "INSERT INTO basica (codigo_curso) VALUES (" + codigo.toString() + ");";
+                break;
+            case TIPO_MEDIA:
+                query2 = "INSERT INTO media (codigo_curso, orientacion) VALUES (" + codigo.toString() + ", '" + orientacion + "');";
+                break;
+            default:
+                break;
+        }
+        
+        this.database.doSendingQuery(query2);
+    }
+    
+    public void modificarCurso() {
+        String codigo = this.getCmbCurso().getSelectedItem().toString();
+        String query1 = "DELETE FROM media WHERE codigo_curso = " + codigo + ";";
+        String query2 = "DELETE FROM basica WHERE codigo_curso = " + codigo + ";";
+        String query3 = null;
+        String orientacion = null;
+        database.doSendingQuery(query1);
+        database.doSendingQuery(query2);
+        
+        switch(this.getCmbTipo().getSelectedIndex()) {
+            case TIPO_BASICA:
+                query3 = "INSERT INTO basica (codigo_curso) VALUES (" + codigo + ");";
+                break;
+            case TIPO_MEDIA:
+                orientacion = pedirOrientacion();
+                query3 = "INSERT INTO media (codigo_curso, orientacion) VALUES (" + codigo + ", '" + orientacion + "');";
+                break;
+            default:
+                query3 = "SELECT 1 FROM curso LIMIT 0;";
+                break;
+        }
+        database.doSendingQuery(query3);
+        
+        String query4 = "UPDATE curso SET anio = " + (Integer.valueOf(this.getTxtAnio().getText())).toString() + " WHERE codigo = " + codigo + ";";
+        database.doSendingQuery(query4);
+    }
+    
+    public void eliminarCurso() {
+        String codigo = this.getCmbCurso().getSelectedItem().toString();
+        String query1 = "DELETE FROM media WHERE codigo_curso = " + codigo + ";";
+        String query2 = "DELETE FROM basica WHERE codigo_curso = " + codigo + ";";
+        String query3 = "DELETE FROM es_jefe WHERE codigo_curso = " + codigo + ";";
+        String query4 = "DELETE FROM es_asistente WHERE codigo_curso = " + codigo + ";";
+        String query5 = "DELETE FROM curso WHERE codigo = " + codigo + ";";
+
+        database.doSendingQuery(query1);
+        database.doSendingQuery(query2);
+        database.doSendingQuery(query3);
+        database.doSendingQuery(query4);
+        database.doSendingQuery(query5);
+    }
+    
+    public static void showSimplifiedDialog(String error, String title) {
+        JOptionPane.showMessageDialog(null, error, title, -1, null);
+    }
+    
+    public void agregarProfesor() {
+        String profesor = this.getCmbProfesor().getSelectedItem().toString();
+        String curso = this.getCmbCurso().getSelectedItem().toString();
+        String query = null;
+        
+        switch (this.getCmbCargo().getSelectedIndex()) {
+            case TIPO_JEFE:
+                query = "INSERT INTO es_jefe (codigo_curso, rut_profesor_jefe) VALUES (" + curso + ", '" + profesor + "');";
+                break;
+            case TIPO_ASISTENTE:
+                query = "INSERT INTO es_asistente (codigo_curso, rut_profesor_asistente) VALUES (" + curso + ", '" + profesor + "');";
+                break;
+            default:
+                query = "SELECT 1 FROM curso LIMIT 0;";
+                break;
+        }
+        database.doSendingQuery(query);
+    }
+    
+    public void eliminarProfesor() {
+        String profesor = this.getCmbProfesor().getSelectedItem().toString();
+        String curso = this.getCmbCurso().getSelectedItem().toString();
+        String query1 = "DELETE FROM es_jefe WHERE codigo_curso = " + curso + " AND rut_profesor_jefe = '" + profesor + "';";
+        String query2 = "DELETE FROM es_asistente WHERE codigo_curso = " + curso + " AND rut_profesor_jefe = '" + profesor + "';";
+        database.doSendingQuery(query1);
+        database.doSendingQuery(query2);
+    }
+    
+    public void modificarProfesor() {
+        this.eliminarProfesor();
+        this.agregarProfesor();
+    }
+
+    public JLabel getLabelOrientacion() {
+        return labelOrientacion;
+    }
+
+    public void setLabelOrientacion(JLabel labelOrientacion) {
+        this.labelOrientacion = labelOrientacion;
+    }
+
+    public JTextField getTxtOrientacion() {
+        return txtOrientacion;
+    }
+
+    public void setTxtOrientacion(JTextField txtOrientacion) {
+        this.txtOrientacion = txtOrientacion;
+    }
+    
+    
 }

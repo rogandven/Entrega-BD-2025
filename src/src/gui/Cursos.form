@@ -30,13 +30,11 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtAnio" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="tableProfesoresContainer" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="tableProfesoresContainer" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="btnCrearCurso" pref="137" max="32767" attributes="0"/>
+                      <Component id="labelOrientacion" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnModificarCurso" min="-2" pref="138" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnEliminarCurso" min="-2" pref="118" max="-2" attributes="0"/>
+                      <Component id="txtOrientacion" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="labelProfesor" min="-2" max="-2" attributes="0"/>
@@ -59,6 +57,13 @@
                       <Component id="labelTipo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cmbTipo" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btnCrearCurso" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnModificarCurso" min="-2" pref="138" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnEliminarCurso" min="-2" pref="118" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -84,6 +89,11 @@
                   <Component id="labelTipo" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="labelOrientacion" alignment="3" max="32767" attributes="0"/>
+                  <Component id="txtOrientacion" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCrearCurso" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnModificarCurso" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -243,7 +253,10 @@
     <Component class="javax.swing.JComboBox" name="cmbCargo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
+          <StringArray count="2">
+            <StringItem index="0" value="Jefe"/>
+            <StringItem index="1" value="Asistente"/>
+          </StringArray>
         </Property>
       </Properties>
       <AuxValues>
@@ -271,12 +284,22 @@
     <Component class="javax.swing.JComboBox" name="cmbTipo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
+          <StringArray count="2">
+            <StringItem index="0" value="B&#xe1;sica"/>
+            <StringItem index="1" value="Media"/>
+          </StringArray>
         </Property>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelOrientacion">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Orientacion:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtOrientacion">
     </Component>
   </SubComponents>
 </Form>

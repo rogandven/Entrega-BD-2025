@@ -95,6 +95,9 @@ public class main {
         ap.obtenerDatos();
         ap.actualizarTodosLosCampos();
         
+        c.setDatabase(d);
+        c.obtenerYactualizarTodosLosDatos();
+        
         m.setVisible(true);
     }
     
