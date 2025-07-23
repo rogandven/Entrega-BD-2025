@@ -106,6 +106,9 @@ public class main {
         ext.obtenerDatos();
         ext.actualizarTodos();
         
+        p.setDatabase(d);
+        p.obtenerDatos();
+        p.actualizarTodo();
         
         m.setVisible(true);
     }

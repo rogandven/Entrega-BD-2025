@@ -4,12 +4,19 @@
  */
 package gui;
 
+import database.Database;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,6 +29,10 @@ public class Profesores extends javax.swing.JPanel {
      */
     public Profesores() {
         initComponents();
+        this.getCmbProfesor().addActionListener(e -> {
+            this.actualizarCamposDeTexto();
+            this.actualizarTablaEspecialidades();
+        });
     }
 
     /**
@@ -226,23 +237,42 @@ public class Profesores extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearProfesorActionPerformed
-        // TODO add your handling code here:
+        this.crearProfesor();
+        this.obtenerDatos();
+        this.actualizarTodo();
+        Profesores.showSimplifiedDialog("¡Profesor creado con éxito!", "¡Éxito!");
     }//GEN-LAST:event_btnCrearProfesorActionPerformed
 
     private void btnModificarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarProfesorActionPerformed
         // TODO add your handling code here:
+        this.modificarProfesor();
+        this.obtenerDatos();
+        this.actualizarTodo();
+        Profesores.showSimplifiedDialog("¡Profesor modificado con éxito!", "¡Éxito!");
     }//GEN-LAST:event_btnModificarProfesorActionPerformed
 
     private void btnEliminarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProfesorActionPerformed
         // TODO add your handling code here:
+        this.eliminarProfesor();
+        this.obtenerDatos();
+        this.actualizarTodo();
+        Profesores.showSimplifiedDialog("¡Profesor eliminado con éxito!", "¡Éxito!");
     }//GEN-LAST:event_btnEliminarProfesorActionPerformed
 
     private void btnAgregarEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEspecialidadActionPerformed
         // TODO add your handling code here:
+        this.agregarEspecialidad();
+        this.obtenerDatos();
+        this.actualizarTodo();
+        Profesores.showSimplifiedDialog("¡Especialidad agregada con éxito!", "¡Éxito!");
     }//GEN-LAST:event_btnAgregarEspecialidadActionPerformed
 
     private void btnEliminarEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEspecialidadActionPerformed
         // TODO add your handling code here:
+        this.eliminarEspecialidad();
+        this.obtenerDatos();
+        this.actualizarTodo();
+        Profesores.showSimplifiedDialog("¡Especialidad eliminada con éxito!", "¡Éxito!");
     }//GEN-LAST:event_btnEliminarEspecialidadActionPerformed
 
 
@@ -445,5 +475,191 @@ public class Profesores extends javax.swing.JPanel {
 
     public void setTxtNombres(JTextField txtNombres) {
         this.txtNombres = txtNombres;
+    }
+
+    public Database getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(Database database) {
+        this.database = database;
+    }
+
+    public String[][] getDatosProfesores() {
+        return datosProfesores;
+    }
+
+    public void setDatosProfesores(String[][] datosProfesores) {
+        this.datosProfesores = datosProfesores;
+    }
+
+    public String[][] getDatosEspecialidades() {
+        return datosEspecialidades;
+    }
+
+    public void setDatosEspecialidades(String[][] datosEspecialidades) {
+        this.datosEspecialidades = datosEspecialidades;
+    }
+    
+    private Database database;
+    
+    private String[][] datosProfesores;
+    private String[][] datosEspecialidades;
+
+    public static final String GET_PROFESORES_QUERY = "SELECT rut, nombres, apellido_paterno, apellido_materno, direccion, ciudad FROM profesor;";
+    public static final int PROFESOR_RUT = 0;
+    public static final int PROFESOR_NOMBRE = 1;
+    public static final int PROFESOR_AP = 2;
+    public static final int PROFESOR_AM = 3;
+    public static final int PROFESOR_DIRECCION = 4;
+    public static final int PROFESOR_CIUDAD = 5;
+    
+    public static final String GET_ESPECIALIDADES_QUERY = "SELECT p.rut, t.codigo_especialidad AS codigo, e.descripcion AS desk FROM profesor p LEFT JOIN tiene t ON p.rut = t.rut_profesor LEFT JOIN especialidad e ON t.codigo_especialidad = e.codigo;";
+    public static final int ESPECIALIDAD_RUT = 0;
+    public static final int ESPECIALIDAD_CODIGO = 1;
+    public static final int ESPECIALIDAD_DESCRIPCION = 2;
+    
+    public void obtenerDatos() {
+       this.setDatosProfesores(database.doReceivingQuery(GET_PROFESORES_QUERY, 6));
+       this.setDatosEspecialidades(database.doReceivingQuery(GET_ESPECIALIDADES_QUERY, 3));
+    }
+    
+    public String[] buscarPorRutProfesor() {
+        Object rut = this.getCmbProfesor().getSelectedItem();
+        if (rut == null) {
+            return null;
+        }
+        String convertedRut = rut.toString();
+        
+        for (String[] s : datosProfesores) {
+            if (convertedRut.equals(s[PROFESOR_RUT])) {
+                return s;
+            }
+        }
+        
+        return null;
+    }
+    
+    public String[][] buscarPorRutEspecialidad() {
+        ArrayList<String[]> especialidades = new ArrayList<String[]>();
+        
+        Object rut = this.getCmbProfesor().getSelectedItem();
+        if (rut == null) {
+            return null;
+        }
+        String convertedRut = rut.toString();
+        
+        for (String[] s : datosEspecialidades) {
+            if (convertedRut.equals(s[ESPECIALIDAD_RUT])) {
+                especialidades.add(s);
+            }
+        }
+        
+        return especialidades.toArray(String[][]::new);
+    }
+    
+    public void actualizarCamposDeTexto() {
+        String[] datos = buscarPorRutProfesor();
+        if (datos != null) {
+            this.getTxtNombres().setText(datos[PROFESOR_NOMBRE]);
+            this.getTxtApellidoMaterno().setText(datos[PROFESOR_AM]);
+            this.getTxtApellidoPaterno().setText(datos[PROFESOR_AP]);
+            this.getTxtCiudad().setText(datos[PROFESOR_CIUDAD]);
+            this.getTxtDireccion().setText(datos[PROFESOR_DIRECCION]);
+        } else {
+            this.getTxtNombres().setText("");
+            this.getTxtApellidoMaterno().setText("");
+            this.getTxtApellidoPaterno().setText("");
+            this.getTxtCiudad().setText("");
+            this.getTxtDireccion().setText("");
+        }
+    }
+    
+    public void actualizarCmbProfesor() {
+        ArrayList<String> profesores = new ArrayList<>();
+        for (String[] s : this.datosProfesores) {
+            profesores.add(s[PROFESOR_RUT]);
+        }
+        String[] nombres = profesores.toArray(String[]::new);
+        this.getCmbProfesor().setModel(new DefaultComboBoxModel(nombres));
+    }
+    
+    public void actualizarCmbEspecialidades() {
+        LinkedHashSet<String> especialidades = new LinkedHashSet<>();
+        for (String[] s : this.datosEspecialidades) {
+            especialidades.add(s[ESPECIALIDAD_CODIGO]);
+        }
+        String[] codigos = especialidades.toArray(String[]::new);
+        this.getCmbEspecialidad().setModel(new DefaultComboBoxModel(codigos));
+    }
+    
+    public void actualizarTablaEspecialidades() {
+        String[] enunciados = {"Rut", "Código", "Especialidad"};
+        String[][] datos = buscarPorRutEspecialidad();
+        if (datos == null) {
+            datos = new String[3][0];
+        }
+        this.getTableEspecialidades().setModel(new DefaultTableModel(datos, enunciados));
+    }
+    
+    public void actualizarTodo() {
+        actualizarCmbProfesor();
+        actualizarCamposDeTexto();
+        actualizarCmbEspecialidades();
+        actualizarTablaEspecialidades();
+    }
+    
+    public String pedirRut() {
+        return JOptionPane.showInputDialog(this, "Ingrese el RUT del profesor a ingresar:");
+    }
+    
+//  "SELECT rut, nombres, apellido_paterno, apellido_materno, direccion, ciudad FROM profesor;";    
+    
+    public void crearProfesor() {
+        String rut = pedirRut();
+        String nombres = this.getTxtNombres().getText();
+        String AP = this.getTxtApellidoPaterno().getText();
+        String AM = this.getTxtApellidoMaterno().getText();
+        String direccion = this.getTxtDireccion().getText();
+        String ciudad = this.getTxtCiudad().getText();
+        
+        String query = "INSERT INTO profesor (rut, nombres, apellido_paterno, apellido_materno, direccion, ciudad) VALUES ('" + rut + "', '" + nombres + "', '" + AP + "', '" + AM + "', '" + direccion + "', '" + ciudad + "');";
+        database.doSendingQuery(query);
+    }
+    
+    public void modificarProfesor() {
+        String rut = this.getCmbProfesor().getSelectedItem().toString();
+        String nombres = this.getTxtNombres().getText();
+        String AP = this.getTxtApellidoPaterno().getText();
+        String AM = this.getTxtApellidoMaterno().getText();
+        String direccion = this.getTxtDireccion().getText();
+        String ciudad = this.getTxtCiudad().getText();
+        
+        String query = "UPDATE profesor SET nombres = '" + nombres + "', apellido_paterno = '" + AP + "', apellido_materno = '" + AM + "', direccion = '" + direccion + "', ciudad = '" + ciudad + "' WHERE rut = '" + rut + "';";
+        database.doSendingQuery(query);
+    }
+
+    public void eliminarProfesor() {
+        String rut = this.getCmbProfesor().getSelectedItem().toString();
+        String query = "DELETE FROM profesor WHERE rut = '" + rut + "';";
+        database.doSendingQuery(query);
+    }    
+    
+    public void agregarEspecialidad() {
+        String rut = this.getCmbProfesor().getSelectedItem().toString();
+        String especialidad = this.getCmbEspecialidad().getSelectedItem().toString();
+        String query = "INSERT INTO tiene (rut_profesor, codigo_especialidad) VALUES ('" + rut + "', " + especialidad + ");";
+        database.doSendingQuery(query);
+    }
+    
+    public void eliminarEspecialidad() {
+        String rut = this.getCmbProfesor().getSelectedItem().toString();
+        String especialidad = this.getCmbEspecialidad().getSelectedItem().toString();
+        String query = "DELETE FROM tiene WHERE rut_profesor = '" + rut + "' AND codigo_especialidad = " + especialidad + ";";
+        database.doSendingQuery(query);
+    }
+    
+    public static void showSimplifiedDialog(String error, String title) {
+        JOptionPane.showMessageDialog(null, error, title, -1, null);
     }
 }
