@@ -709,6 +709,10 @@ public class Cursos extends javax.swing.JPanel {
                 query = "INSERT INTO es_jefe (codigo_curso, rut_profesor_jefe) VALUES (" + curso + ", '" + profesor + "');";
                 break;
             case TIPO_ASISTENTE:
+                if (this.getCmbTipo().getSelectedIndex() == TIPO_MEDIA) {
+                    throw new RuntimeException("Solo pueden haber asistentes en cursos de básica");
+                }
+                
                 query = "INSERT INTO es_asistente (codigo_curso, rut_profesor_asistente) VALUES (" + curso + ", '" + profesor + "');";
                 break;
             default:
@@ -747,6 +751,4 @@ public class Cursos extends javax.swing.JPanel {
     public void setTxtOrientacion(JTextField txtOrientacion) {
         this.txtOrientacion = txtOrientacion;
     }
-    
-    
 }

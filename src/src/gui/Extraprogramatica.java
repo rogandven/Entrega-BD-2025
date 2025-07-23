@@ -4,12 +4,18 @@
  */
 package gui;
 
+import database.Database;
+import java.util.ArrayList;
+import java.util.HashSet;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,6 +28,9 @@ public class Extraprogramatica extends javax.swing.JPanel {
      */
     public Extraprogramatica() {
         initComponents();
+        this.getCmbActividad().addActionListener(e -> {
+            this.actualizarDatosActuales();
+        });
     }
 
     /**
@@ -187,8 +196,9 @@ public class Extraprogramatica extends javax.swing.JPanel {
                         .addComponent(cmbAlumno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAgregarAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEliminarAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminarAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelHoraFin)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -259,23 +269,42 @@ public class Extraprogramatica extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActividadActionPerformed
-        // TODO add your handling code here:
+        this.agregarActividad();
+        this.obtenerDatos();
+        this.actualizarTodos();
+        Extraprogramatica.showSimplifiedDialog("¡Actividad creada con éxito!", "¡Éxito!");
     }//GEN-LAST:event_btnCrearActividadActionPerformed
 
     private void btnModificarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActividadActionPerformed
         // TODO add your handling code here:
+        this.modificarActividad();
+        this.obtenerDatos();
+        this.actualizarTodos();
+        Extraprogramatica.showSimplifiedDialog("¡Actividad modificada con éxito!", "¡Éxito!");
     }//GEN-LAST:event_btnModificarActividadActionPerformed
 
     private void btnEliminarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActividadActionPerformed
         // TODO add your handling code here:
+        this.eliminarActividad();
+        this.obtenerDatos();
+        this.actualizarTodos();
+        Extraprogramatica.showSimplifiedDialog("¡Actividad eliminada con éxito!", "¡Éxito!");
     }//GEN-LAST:event_btnEliminarActividadActionPerformed
 
     private void btnAgregarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAlumnoActionPerformed
         // TODO add your handling code here:
+        this.agregarAlumno();
+        this.obtenerDatos();
+        this.actualizarTodos();
+        Extraprogramatica.showSimplifiedDialog("¡Alumno agregado con éxito!", "¡Éxito!");
     }//GEN-LAST:event_btnAgregarAlumnoActionPerformed
 
     private void btnEliminarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAlumnoActionPerformed
         // TODO add your handling code here:
+        this.eliminarAlumno();
+        this.obtenerDatos();
+        this.actualizarTodos();
+        Extraprogramatica.showSimplifiedDialog("¡Alumno eliminado con éxito!", "¡Éxito!");
     }//GEN-LAST:event_btnEliminarAlumnoActionPerformed
 
 
@@ -514,5 +543,258 @@ public class Extraprogramatica extends javax.swing.JPanel {
 
     public void setTxtNombre(JTextField txtNombre) {
         this.txtNombre = txtNombre;
+    }
+    
+    private String[][] datosExtraprogramatica;
+    private String[][] datosAlumnos;
+    private String[][] datosProfesores;
+
+    public String[][] getDatosExtraprogramatica() {
+        return datosExtraprogramatica;
+    }
+
+    public void setDatosExtraprogramatica(String[][] datosExtraprogramatica) {
+        this.datosExtraprogramatica = datosExtraprogramatica;
+    }
+
+    public String[][] getDatosAlumnos() {
+        return datosAlumnos;
+    }
+
+    public void setDatosAlumnos(String[][] datosAlumnos) {
+        this.datosAlumnos = datosAlumnos;
+    }
+
+    public String[][] getDatosProfesores() {
+        return datosProfesores;
+    }
+
+    public void setDatosProfesores(String[][] datosProfesores) {
+        this.datosProfesores = datosProfesores;
+    }
+
+    public Database getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(Database database) {
+        this.database = database;
+    }
+    
+    private Database database;
+    public static final String GET_EXTRAPROGRAMATICA_QUERY = "SELECT codigo, nombre, dia, hora_inicio, hora_fin, cupos, lugar, rut_profesor FROM extraprogramatica;";
+    public static final String GET_ALUMNOS_QUERY = "SELECT a.rut, a.nombres, p.codigo FROM alumno a LEFT JOIN participa p ON p.rut_alumno = a.rut;";
+    public static final String GET_PROFESORES_QUERY = "SELECT p.rut, e.codigo FROM profesor p LEFT JOIN extraprogramatica e ON p.rut = e.rut_profesor;";
+    
+    public static final int EXT_CODIGO = 0;
+    public static final int EXT_NOMBRE = 1;
+    public static final int EXT_DIA = 2;
+    public static final int EXT_HORAINICIO = 3;
+    public static final int EXT_HORAFIN = 4;
+    public static final int EXT_CUPOS = 5;
+    public static final int EXT_LUGAR = 6;
+    public static final int EXT_RUT_PROFESOR = 7;
+    
+    public static final int PROFESORES_RUT = 0;
+    public static final int PROFESORES_CODIGO = 1;
+    
+    public static final int ALUMNOS_RUT = 0;
+    public static final int ALUMNOS_NOMBRES = 1;
+    public static final int ALUMNOS_CODIGO = 2;
+    
+    public void obtenerDatos() {
+        this.setDatosAlumnos(database.doReceivingQuery(GET_ALUMNOS_QUERY, 3));
+        this.setDatosProfesores(database.doReceivingQuery(GET_PROFESORES_QUERY, 3));
+        this.setDatosExtraprogramatica(database.doReceivingQuery(GET_EXTRAPROGRAMATICA_QUERY, 8));
+    }
+    
+    public void actualizarCmbActividad() {
+        ArrayList<String> actividades = new ArrayList<>();
+        for (String[] s : this.datosExtraprogramatica) {
+            actividades.add(s[EXT_CODIGO]);
+        }
+        
+        this.getCmbActividad().setModel(new DefaultComboBoxModel(actividades.toArray()));
+        if (!actividades.isEmpty()) {
+            this.getCmbActividad().setSelectedItem(0);
+        } else {
+            this.getCmbActividad().setSelectedItem(-1);
+        }
+    }
+        
+    public void actualizarCmbAlumno() {
+        ArrayList<String> alumnos = new ArrayList<>();
+        for (String[] s : this.datosAlumnos) {
+            alumnos.add(s[ALUMNOS_RUT]);
+        }
+        
+        this.getCmbAlumno().setModel(new DefaultComboBoxModel(alumnos.toArray()));
+        if (!alumnos.isEmpty()) {
+            this.getCmbAlumno().setSelectedItem(0);
+        } else {
+            this.getCmbAlumno().setSelectedItem(-1);
+        }
+    }
+    
+    public void actualizarTablaAlumnos() {
+        ArrayList<String[]> alumnos = new ArrayList<>();
+        Object codigo = this.getCmbActividad().getSelectedItem();
+        String codigo2 = null;
+        String[] actual = null;
+        String[][] empty = null;
+        String[] enunciados = {"Rut", "Nombre"};
+        
+        if (codigo != null) {
+            codigo2 = codigo.toString();
+            for (String[] s : this.datosAlumnos) {
+                if (codigo2.equals(s[ALUMNOS_CODIGO])) {
+                    actual = new String[2];
+                    actual[ALUMNOS_RUT] = s[ALUMNOS_RUT];
+                    actual[ALUMNOS_NOMBRES] = s[ALUMNOS_NOMBRES];
+                    alumnos.add(actual);
+                }
+            }
+            String[][] datos = (alumnos.toArray(String[][]::new));
+            this.getTableAlumnos().setModel(new DefaultTableModel(datos, enunciados));
+        } else {
+            empty = new String[3][0];
+            this.getTableAlumnos().setModel(new DefaultTableModel(empty, enunciados));
+        }
+    }
+    
+    public void actualizarCmbProfesor() {
+        HashSet<String> profesores = new HashSet<>();
+        for (String[] s : this.datosProfesores) {
+            profesores.add(s[PROFESORES_RUT]);
+        }
+        this.getCmbProfesor().setModel(new DefaultComboBoxModel(profesores.toArray()));
+        if (!profesores.isEmpty()) {
+            this.getCmbActividad().setSelectedItem(0);
+        } else {
+            this.getCmbActividad().setSelectedItem(-1);
+        }
+    }  
+    
+    public String[] buscarPorCodigo() {
+        Object codigo = this.getCmbActividad().getSelectedItem();
+        if (codigo == null) {
+            return null;
+        }
+        for (String[] s : this.datosExtraprogramatica) {
+            if (codigo.equals(s[EXT_CODIGO])) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    public void actualizarDatosActuales() {
+        String[] datos = buscarPorCodigo();
+        this.getCmbProfesor().setSelectedItem(null);
+        if (datos != null) {
+            this.getTxtCupos().setText(datos[EXT_CUPOS]);
+            this.getTxtDia().setText(datos[EXT_DIA]);
+            this.getTxtHoraFin().setText(datos[EXT_HORAFIN]);
+            this.getTxtHoraInicio().setText(datos[EXT_HORAINICIO]);
+            this.getTxtLugar().setText(datos[EXT_LUGAR]);
+            this.getTxtNombre().setText(datos[EXT_NOMBRE]);
+            this.getCmbProfesor().setSelectedItem(datos[EXT_RUT_PROFESOR]);
+        } else {
+            this.getTxtCupos().setText("");
+            this.getTxtDia().setText("");
+            this.getTxtHoraFin().setText("");
+            this.getTxtHoraInicio().setText("");
+            this.getTxtLugar().setText("");
+            this.getTxtNombre().setText("");
+        }
+        this.actualizarTablaAlumnos();
+    }
+    
+    public void actualizarTodos() {
+        this.actualizarCmbActividad();
+        this.actualizarCmbAlumno();
+        this.actualizarCmbProfesor();
+        
+        System.out.println(this.getCmbActividad().getModel().getSize());
+        
+        if (this.getCmbActividad().getModel().getSize() == 0) {
+            this.getCmbActividad().setSelectedIndex(-1);
+        } else {
+            this.getCmbActividad().setSelectedIndex(0);
+        }
+        
+        System.out.println(this.getCmbAlumno().getModel().getSize());
+        
+        if (this.getCmbAlumno().getModel().getSize() == 0) {
+            this.getCmbAlumno().setSelectedIndex(-1);
+        } else {
+            this.getCmbAlumno().setSelectedIndex(0);
+        }
+        
+        System.out.println(this.getCmbProfesor().getModel().getSize());
+        
+        if (this.getCmbProfesor().getModel().getSize() == 0) {
+            this.getCmbProfesor().setSelectedIndex(-1);
+        } else {
+            this.getCmbProfesor().setSelectedIndex(0);
+        }
+
+        this.actualizarDatosActuales();
+    }
+    
+    public Integer pedirCodigo() {
+        return Integer.valueOf(JOptionPane.showInputDialog(this, "Ingrese el código de la actividad a ingresar:"));
+    }
+    
+    public void agregarActividad() {
+       String codigo = pedirCodigo().toString();
+       String nombre = this.getTxtNombre().getText();
+       String dia = this.getTxtDia().getText();
+       String horaInicio = this.getTxtHoraInicio().getText();
+       String horaFinal = this.getTxtHoraFin().getText();
+       String cupos = this.getTxtCupos().getText();
+       String lugar = this.getTxtLugar().getText();
+       String profesor = this.getCmbProfesor().getSelectedItem().toString();
+       
+       String query = "INSERT INTO extraprogramatica (codigo, nombre, dia, hora_inicio, hora_fin, cupos, lugar, rut_profesor) VALUES (" + codigo + ", '" + nombre + "', " + dia + ", " + horaInicio + ", " + horaFinal + ", " + cupos + ", " + lugar + ", '" + profesor + "');";
+       this.database.doSendingQuery(query);
+    }
+    
+    public void modificarActividad() {
+       String codigo = this.getCmbProfesor().getSelectedItem().toString();
+       String nombre = this.getTxtNombre().getText();
+       String dia = this.getTxtDia().getText();
+       String horaInicio = this.getTxtHoraInicio().getText();
+       String horaFinal = this.getTxtHoraFin().getText();
+       String cupos = this.getTxtCupos().getText();
+       String lugar = this.getTxtLugar().getText();
+       String profesor = this.getCmbProfesor().getSelectedItem().toString();
+       
+       String query = "UPDATE extraprogramatica SET nombre = '" + nombre + "', dia = " + dia + ", hora_inicio = " + horaInicio + ", hora_fin = " + horaFinal + ", cupos = " + cupos + ", lugar = '" + lugar + "', rut_profesor = '" + profesor + "' WHERE codigo = " + codigo + ";";
+       this.database.doSendingQuery(query);
+    }
+    
+    public void eliminarActividad() {
+        String codigo = this.getCmbProfesor().getSelectedItem().toString();
+        String query = "DELETE FROM extraprogramatica WHERE codigo = " + codigo + ";";
+        this.database.doSendingQuery(query);
+    }
+    
+    public static void showSimplifiedDialog(String error, String title) {
+        JOptionPane.showMessageDialog(null, error, title, -1, null);
+    }
+    
+    public void agregarAlumno() {
+        String rut = this.getCmbAlumno().getSelectedItem().toString();
+        String actividad = this.getCmbActividad().getSelectedItem().toString();
+        String query = "INSERT INTO participa (rut_alumno, codigo) VALUES ('" + rut + "', " + actividad + ");";
+        this.database.doSendingQuery(query);
+    }
+    
+    public void eliminarAlumno() {
+        String rut = this.getCmbAlumno().getSelectedItem().toString();
+        String actividad = this.getCmbActividad().getSelectedItem().toString();
+        String query = "DELETE FROM participa WHERE rut = '" + rut + "' AND codigo = " + actividad + ";";
+        this.database.doSendingQuery(query);
     }
 }

@@ -102,6 +102,11 @@ public class main {
         esp.obtenerDatos();
         esp.actualizarTodosLosDatos();
         
+        ext.setDatabase(d);
+        ext.obtenerDatos();
+        ext.actualizarTodos();
+        
+        
         m.setVisible(true);
     }
     
