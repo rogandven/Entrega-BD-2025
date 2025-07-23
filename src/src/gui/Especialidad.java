@@ -4,9 +4,13 @@
  */
 package gui;
 
+import database.Database;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -20,6 +24,9 @@ public class Especialidad extends javax.swing.JPanel {
      */
     public Especialidad() {
         initComponents();
+        this.getCmbEspecialidad().addActionListener(e -> {
+            this.actualizarDatosActuales();
+        });
     }
 
     /**
@@ -109,14 +116,24 @@ public class Especialidad extends javax.swing.JPanel {
 
     private void btnCrearEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearEspecialidadActionPerformed
         // TODO add your handling code here:
+        this.crearEspecialidad();
+        this.obtenerDatos();
+        this.actualizarTodosLosDatos();
+        Especialidad.showSimplifiedDialog("¡Especialidad creada con éxito!", "¡Éxito!");
     }//GEN-LAST:event_btnCrearEspecialidadActionPerformed
 
     private void btnModificarEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarEspecialidadActionPerformed
-        // TODO add your handling code here:
+        this.modificarEspecialidad();
+        this.obtenerDatos();
+        this.actualizarTodosLosDatos();
+        Especialidad.showSimplifiedDialog("¡Especialidad modificada con éxito!", "¡Éxito!");
     }//GEN-LAST:event_btnModificarEspecialidadActionPerformed
 
     private void btnEliminarEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEspecialidadActionPerformed
-        // TODO add your handling code here:
+        this.eliminarEspecialidad();
+        this.obtenerDatos();
+        this.actualizarTodosLosDatos();
+        Especialidad.showSimplifiedDialog("¡Especialidad eliminada con éxito!", "¡Éxito!");
     }//GEN-LAST:event_btnEliminarEspecialidadActionPerformed
 
 
@@ -185,4 +202,106 @@ public class Especialidad extends javax.swing.JPanel {
     public void setTxtDescripcion(JTextField txtDescripcion) {
         this.txtDescripcion = txtDescripcion;
     }
+    
+    public String[][] getDatosEspecialidad() {
+        return datosEspecialidad;
+    }
+
+    public void setDatosEspecialidad(String[][] datosEspecialidad) {
+        this.datosEspecialidad = datosEspecialidad;
+    }
+
+    public Database getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(Database database) {
+        this.database = database;
+    }
+    
+    private String[][] datosEspecialidad;
+    private Database database;
+    
+    
+    public static final String GET_ESPECIALIDAD_QUERY = "SELECT codigo, descripcion FROM especialidad;";
+    
+    public static final int ESP_CODIGO = 0;
+    public static final int ESP_DESCRIPCION = 1;
+    
+    public void obtenerDatos() {
+        this.setDatosEspecialidad(database.doReceivingQuery(GET_ESPECIALIDAD_QUERY, 2));
+    }
+    
+    public void actualizarCmbEspecialidad() {
+        ArrayList<String> especialidades = new ArrayList<String>();
+        for (String[] s : datosEspecialidad) {
+            especialidades.add(s[ESP_CODIGO]);
+        }
+        this.getCmbEspecialidad().setModel(new DefaultComboBoxModel(especialidades.toArray()));
+        
+        if (!especialidades.isEmpty()) {
+            this.getCmbEspecialidad().setSelectedIndex(0);
+        } else {
+            this.getCmbEspecialidad().setSelectedIndex(-1);
+        }
+    }
+    
+    public String[] buscarPorCodigo(String codigo) {
+        if (codigo == null) {
+            return null;
+        }
+        for (String[] s : datosEspecialidad) {
+            if (s[ESP_CODIGO].equals(codigo)) {
+                return s;
+            }
+        }
+        return null;
+    }
+    
+    public void actualizarDatosActuales() {
+        Object item = this.getCmbEspecialidad().getSelectedItem();
+        if (item != null) {
+            item = item.toString();
+        }
+        
+        String[] datos = buscarPorCodigo((String)item);
+        if (datos != null) {
+            this.getTxtDescripcion().setText(datos[ESP_DESCRIPCION]);
+        } else {
+            this.getTxtDescripcion().setText("");
+        }
+    }
+    
+    public void actualizarTodosLosDatos() {
+        this.actualizarCmbEspecialidad();
+        this.actualizarDatosActuales();
+    }
+    
+    public void crearEspecialidad() {
+        Integer codigo = this.pedirCodigo();
+        String query = "INSERT INTO especialidad (codigo, descripcion) VALUES (" + codigo.toString() + ", '" + this.getTxtDescripcion().getText() + "');";
+        database.doSendingQuery(query);
+    }
+    
+    public void modificarEspecialidad() {
+        String codigo = Integer.valueOf(this.getCmbEspecialidad().getSelectedItem().toString()).toString();
+        String query = "UPDATE especialidad SET descripcion = '" + this.getTxtDescripcion().getText() + "' WHERE codigo = " + codigo + ";";
+        database.doSendingQuery(query);
+    }
+    
+    public void eliminarEspecialidad() {
+        String codigo = Integer.valueOf(this.getCmbEspecialidad().getSelectedItem().toString()).toString();
+        String query = "DELETE FROM especialidad WHERE codigo = " + codigo + ";";
+        database.doSendingQuery(query);
+    }
+    
+    public Integer pedirCodigo() {
+        return Integer.valueOf(JOptionPane.showInputDialog(this, "Ingrese el código de la especialidad a ingresar:"));
+    }
+    
+    public static void showSimplifiedDialog(String error, String title) {
+        JOptionPane.showMessageDialog(null, error, title, -1, null);
+    }
+    
+    
 }

@@ -98,6 +98,10 @@ public class main {
         c.setDatabase(d);
         c.obtenerYactualizarTodosLosDatos();
         
+        esp.setDatabase(d);
+        esp.obtenerDatos();
+        esp.actualizarTodosLosDatos();
+        
         m.setVisible(true);
     }
     

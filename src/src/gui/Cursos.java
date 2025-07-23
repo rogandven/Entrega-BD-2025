@@ -516,9 +516,9 @@ public class Cursos extends javax.swing.JPanel {
     
     public void obtenerDatos() {
         this.setDatosCursos(database.doReceivingQuery(GET_CURSOS_QUERY, 5));
-        System.out.println(Arrays.deepToString(datosCursos));
+        // System.out.println(Arrays.deepToString(datosCursos));
         this.setDatosProfesores(database.doReceivingQuery(GET_PROFESORES_QUERY, 5));
-        System.out.println(Arrays.deepToString(datosProfesores));
+        // System.out.println(Arrays.deepToString(datosProfesores));
     }
     
     public String[] buscarCursoPorCodigo(String codigo) {
@@ -532,15 +532,15 @@ public class Cursos extends javax.swing.JPanel {
     }
     
     public void actualizarCmbCurso() {
-        System.out.println("Actualizar Combo Curso");
+        // System.out.println("Actualizar Combo Curso");
         ArrayList<String> cursos = new ArrayList<String>();
         for (String[] s : datosCursos) {
-            System.out.println(Arrays.toString(s));
-            System.out.println(s[CURSO_CODIGO]);
+            // System.out.println(Arrays.toString(s));
+            // System.out.println(s[CURSO_CODIGO]);
             cursos.add(s[CURSO_CODIGO]);
         }
         String[] cursos2 = cursos.toArray(String[]::new);
-        System.out.println(Arrays.toString(cursos2));
+        // System.out.println(Arrays.toString(cursos2));
         this.getCmbCurso().setModel(new DefaultComboBoxModel(cursos2));
     }
     
@@ -555,7 +555,7 @@ public class Cursos extends javax.swing.JPanel {
         ArrayList<String[]> profesores = new ArrayList<String[]>();
         String[] actual = null;
         for (String[] s : datosProfesores) {
-            System.out.println(Arrays.toString(s));
+            // System.out.println(Arrays.toString(s));
             if (s[CURSO_JEFE] != null && s[CURSO_JEFE].equals(cmbCurso.getSelectedItem().toString())) {
                 actual = new String[3];
                 actual[0] = s[PROFESOR_RUT];
@@ -577,7 +577,7 @@ public class Cursos extends javax.swing.JPanel {
     public void actualizarCmbProfesores() {
         ArrayList<String> profesores = new ArrayList<>();
         for (String[] s : datosProfesores) {
-            System.out.println(Arrays.toString(s));
+            // System.out.println(Arrays.toString(s));
             profesores.add(s[PROFESOR_RUT]);
         }
 
