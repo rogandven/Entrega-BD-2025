@@ -73,8 +73,8 @@ public class main {
         Profesores p = new Profesores();
         AlumnosPorCurso apc = new AlumnosPorCurso();
         Consulta1 c1 = new Consulta1();
-        Consulta1 c2 = new Consulta1();
-        Consulta1 c3 = new Consulta1();
+        Consulta2 c2 = new Consulta2();
+        Consulta3 c3 = new Consulta3();
         
         m.getTabContainer().add("Alumnos", al);
         m.getTabContainer().add("Apoderados", ap);
@@ -109,6 +109,53 @@ public class main {
         p.setDatabase(d);
         p.obtenerDatos();
         p.actualizarTodo();
+        
+        apc.setDatabase(d);
+        apc.obtenerDatos();
+        apc.actualizarTabla();
+        
+        c1.setDatabase(d);
+        c1.obtenerDatos();
+        c1.actualizarTabla();
+        
+        c2.setDatabase(d);
+        c2.obtenerDatos();
+        c2.actualizarTabla();
+        
+        c3.setDatabase(d);
+        c3.obtenerDatos();
+        c3.actualizarTabla();
+        
+        m.getBtnUpdate().addActionListener(e -> {
+            al.doQueries();
+            al.actualizarCampos(true);
+            
+            ap.obtenerDatos();
+            ap.actualizarTodosLosCampos();
+            
+            c.obtenerYactualizarTodosLosDatos();
+            
+            esp.obtenerDatos();
+            esp.actualizarTodosLosDatos();
+            
+            ext.obtenerDatos();
+            ext.actualizarTodos();
+            
+            p.obtenerDatos();
+            p.actualizarTodo();
+            
+            apc.obtenerDatos();
+            apc.actualizarTabla();
+            
+            c1.obtenerDatos();
+            c1.actualizarTabla();
+            
+            c2.obtenerDatos();
+            c2.actualizarTabla();
+            
+            c3.obtenerDatos();
+            c3.actualizarTabla();
+        });
         
         m.setVisible(true);
     }

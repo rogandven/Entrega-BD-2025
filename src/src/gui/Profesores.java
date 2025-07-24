@@ -500,11 +500,20 @@ public class Profesores extends javax.swing.JPanel {
     public void setDatosEspecialidades(String[][] datosEspecialidades) {
         this.datosEspecialidades = datosEspecialidades;
     }
+
+    public String[][] getDatosCmbEspecialidades() {
+        return datosCmbEspecialidades;
+    }
+
+    public void setDatosCmbEspecialidades(String[][] datosCmbEspecialidades) {
+        this.datosCmbEspecialidades = datosCmbEspecialidades;
+    }
     
     private Database database;
     
     private String[][] datosProfesores;
     private String[][] datosEspecialidades;
+    private String[][] datosCmbEspecialidades;
 
     public static final String GET_PROFESORES_QUERY = "SELECT rut, nombres, apellido_paterno, apellido_materno, direccion, ciudad FROM profesor;";
     public static final int PROFESOR_RUT = 0;
@@ -515,6 +524,7 @@ public class Profesores extends javax.swing.JPanel {
     public static final int PROFESOR_CIUDAD = 5;
     
     public static final String GET_ESPECIALIDADES_QUERY = "SELECT p.rut, t.codigo_especialidad AS codigo, e.descripcion AS desk FROM profesor p LEFT JOIN tiene t ON p.rut = t.rut_profesor LEFT JOIN especialidad e ON t.codigo_especialidad = e.codigo;";
+    public static final String GET_CMB_ESPECIALIDADES_QUERY = "SELECT e.codigo FROM especialidad e;";
     public static final int ESPECIALIDAD_RUT = 0;
     public static final int ESPECIALIDAD_CODIGO = 1;
     public static final int ESPECIALIDAD_DESCRIPCION = 2;
@@ -522,6 +532,7 @@ public class Profesores extends javax.swing.JPanel {
     public void obtenerDatos() {
        this.setDatosProfesores(database.doReceivingQuery(GET_PROFESORES_QUERY, 6));
        this.setDatosEspecialidades(database.doReceivingQuery(GET_ESPECIALIDADES_QUERY, 3));
+       this.setDatosCmbEspecialidades(database.doReceivingQuery(GET_CMB_ESPECIALIDADES_QUERY, 1));
     }
     
     public String[] buscarPorRutProfesor() {
@@ -586,8 +597,9 @@ public class Profesores extends javax.swing.JPanel {
     
     public void actualizarCmbEspecialidades() {
         LinkedHashSet<String> especialidades = new LinkedHashSet<>();
-        for (String[] s : this.datosEspecialidades) {
-            especialidades.add(s[ESPECIALIDAD_CODIGO]);
+        for (String[] s : this.datosCmbEspecialidades) {
+            System.out.println(especialidades.toString());
+            especialidades.add(s[0]);
         }
         String[] codigos = especialidades.toArray(String[]::new);
         this.getCmbEspecialidad().setModel(new DefaultComboBoxModel(codigos));
@@ -597,7 +609,7 @@ public class Profesores extends javax.swing.JPanel {
         String[] enunciados = {"Rut", "Código", "Especialidad"};
         String[][] datos = buscarPorRutEspecialidad();
         if (datos == null) {
-            datos = new String[3][0];
+            datos = new String[0][3];
         }
         this.getTableEspecialidades().setModel(new DefaultTableModel(datos, enunciados));
     }

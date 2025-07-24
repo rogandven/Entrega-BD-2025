@@ -517,7 +517,7 @@ public class Cursos extends javax.swing.JPanel {
     public void obtenerDatos() {
         this.setDatosCursos(database.doReceivingQuery(GET_CURSOS_QUERY, 5));
         // System.out.println(Arrays.deepToString(datosCursos));
-        this.setDatosProfesores(database.doReceivingQuery(GET_PROFESORES_QUERY, 5));
+        this.setDatosProfesores(database.doReceivingQuery(GET_PROFESORES_QUERY, 4));
         // System.out.println(Arrays.deepToString(datosProfesores));
     }
     
@@ -548,7 +548,7 @@ public class Cursos extends javax.swing.JPanel {
         String[][] model = null;
         String[] enunciados = {"Rut", "Nombre", "Cargo"};
         if (cmbCurso.getSelectedItem() == null) {
-            model = new String[3][0];
+            model = new String[0][3];
             this.getTableProfesores().setModel(new DefaultTableModel(model, enunciados));
             return;
         }

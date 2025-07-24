@@ -125,6 +125,10 @@ public interface SQLConstants {
         );
 
         ALTER TABLE tiene ADD CONSTRAINT PK_tiene PRIMARY KEY (rut_profesor, codigo_especialidad);              
+    
+        CREATE OR REPLACE VIEW alumnosXcurso AS (
+        	SELECT c.codigo, COALESCE(s.cantidad, 0) AS cantidad FROM curso c LEFT JOIN (SELECT a.codigo_curso as codigo, COUNT(a.rut) as cantidad FROM alumno a GROUP BY a.codigo_curso) s ON c.codigo = s.codigo
+        );
     """;
     
     public static final String INITIAL_TABLE_CHECK = 
@@ -141,6 +145,7 @@ public interface SQLConstants {
         SELECT p.rut_alumno, p.codigo FROM participa p LIMIT 0;
         SELECT p.rut, p.nombres, p.apellido_paterno, p.apellido_materno, p.direccion, p.ciudad FROM profesor p LIMIT 0;
         SELECT r.rut_alumno, r.rut_apoderado, r.fecha_inicio, r.fecha_termino FROM representa r LIMIT 0;
-        SELECT t.rut_profesor, t.codigo_especialidad FROM tiene t LIMIT 0;                                                                    
+        SELECT t.rut_profesor, t.codigo_especialidad FROM tiene t LIMIT 0;
+        SELECT a.codigo, a.cantidad FROM alumnosXcurso a LIMIT 0;
     """;
 }

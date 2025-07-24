@@ -6,6 +6,7 @@ package gui;
 
 import database.Database;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -604,7 +605,7 @@ public class Extraprogramatica extends javax.swing.JPanel {
     
     public void obtenerDatos() {
         this.setDatosAlumnos(database.doReceivingQuery(GET_ALUMNOS_QUERY, 3));
-        this.setDatosProfesores(database.doReceivingQuery(GET_PROFESORES_QUERY, 3));
+        this.setDatosProfesores(database.doReceivingQuery(GET_PROFESORES_QUERY, 2));
         this.setDatosExtraprogramatica(database.doReceivingQuery(GET_EXTRAPROGRAMATICA_QUERY, 8));
     }
     
@@ -657,7 +658,9 @@ public class Extraprogramatica extends javax.swing.JPanel {
             String[][] datos = (alumnos.toArray(String[][]::new));
             this.getTableAlumnos().setModel(new DefaultTableModel(datos, enunciados));
         } else {
-            empty = new String[3][0];
+            System.out.println("jajajaja");
+            empty = new String[0][3];
+            System.out.println(Arrays.deepToString(empty));
             this.getTableAlumnos().setModel(new DefaultTableModel(empty, enunciados));
         }
     }
@@ -715,7 +718,7 @@ public class Extraprogramatica extends javax.swing.JPanel {
         this.actualizarCmbAlumno();
         this.actualizarCmbProfesor();
         
-        System.out.println(this.getCmbActividad().getModel().getSize());
+        // System.out.println(this.getCmbActividad().getModel().getSize());
         
         if (this.getCmbActividad().getModel().getSize() == 0) {
             this.getCmbActividad().setSelectedIndex(-1);
@@ -723,7 +726,7 @@ public class Extraprogramatica extends javax.swing.JPanel {
             this.getCmbActividad().setSelectedIndex(0);
         }
         
-        System.out.println(this.getCmbAlumno().getModel().getSize());
+        // System.out.println(this.getCmbAlumno().getModel().getSize());
         
         if (this.getCmbAlumno().getModel().getSize() == 0) {
             this.getCmbAlumno().setSelectedIndex(-1);
@@ -731,7 +734,7 @@ public class Extraprogramatica extends javax.swing.JPanel {
             this.getCmbAlumno().setSelectedIndex(0);
         }
         
-        System.out.println(this.getCmbProfesor().getModel().getSize());
+        // System.out.println(this.getCmbProfesor().getModel().getSize());
         
         if (this.getCmbProfesor().getModel().getSize() == 0) {
             this.getCmbProfesor().setSelectedIndex(-1);

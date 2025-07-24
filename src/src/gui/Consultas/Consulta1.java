@@ -4,8 +4,10 @@
  */
 package gui.Consultas;
 
+import database.Database;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -98,5 +100,37 @@ public class Consulta1 extends javax.swing.JPanel {
         this.tablaConsultaContainer = tablaConsultaContainer;
     }
 
+    public Database getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(Database database) {
+        this.database = database;
+    }
+
+    public String[][] getDatosConsulta() {
+        return datosConsulta;
+    }
+
+    public void setDatosConsulta(String[][] datosConsulta) {
+        this.datosConsulta = datosConsulta;
+    }
     
+    private String[][] datosConsulta;
+    private Database database;
+    public static final String QUERY = "SELECT a.nombres, c.codigo AS curso, p.nombres AS nombre_profesor, p.apellido_paterno AS apellido_profesor, ap.nombres AS nombre_apoderado FROM alumno a JOIN curso c ON a.codigo_curso = c.codigo JOIN es_jefe ej ON ej.codigo_curso = c.codigo JOIN profesor p ON ej.rut_profesor_jefe = p.rut JOIN representa r ON r.rut_alumno = a.rut JOIN apoderado ap ON r.rut_apoderado=ap.rut WHERE r.fecha_termino > '2025-01-01' AND a.fecha_nacimiento < '2026-01-01' AND c.anio = 2025;";
+    public static final int NOMBRE_ALUMNO = 0;
+    public static final int CODIGO_CURSO = 1;
+    public static final int NOMBRE_PROFESOR = 2;
+    public static final int APELLIDO_PROFESOR = 3;
+    public static final int NOMBRE_APODERADO = 4;
+    public static final String[] ENUNCIADOS = {"Nombre Al.", "Curso", "Nombre P.", "Apellido P.", "Nombre Ap."};
+    
+    public void obtenerDatos() {
+        this.datosConsulta = this.database.doReceivingQuery(QUERY, 5);
+    }
+    
+    public void actualizarTabla() {
+        this.getTablaConsulta().setModel(new DefaultTableModel(datosConsulta, ENUNCIADOS));
+    }
 }

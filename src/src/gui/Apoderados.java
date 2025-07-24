@@ -376,22 +376,29 @@ public class Apoderados extends javax.swing.JPanel {
     }
     
     public void actualizarCamposActuales() {
-        String selectedItem = this.getCmbApoderado().getSelectedItem().toString();
+        Object selectedItem = this.getCmbApoderado().getSelectedItem();
         
-        if (isEmpty(selectedItem)) {
+        
+        if (selectedItem == null) {
             this.getTxtNombres().setText("");
             this.getTxtDireccion().setText("");
             this.getTxtCiudad().setText("");
             this.getTxtApellidoPaterno().setText("");
             this.getTxtApellidoMaterno().setText("");
         } else {
-            String[] datosActuales = buscarPorRut(selectedItem);
+            String[] datosActuales = buscarPorRut(selectedItem.toString());
             if (datosActuales != null) {
                 this.getTxtNombres().setText(datosActuales[APODERADO_NOMBRES]);
                 this.getTxtDireccion().setText(datosActuales[APODERADO_DIRECCION]);
                 this.getTxtCiudad().setText(datosActuales[APODERADO_CIUDAD]);
                 this.getTxtApellidoMaterno().setText(datosActuales[APODERADO_AM]);
                 this.getTxtApellidoPaterno().setText(datosActuales[APODERADO_AP]);
+            } else {
+                this.getTxtNombres().setText("");
+                this.getTxtDireccion().setText("");
+                this.getTxtCiudad().setText("");
+                this.getTxtApellidoPaterno().setText("");
+                this.getTxtApellidoMaterno().setText("");
             }
         }
     }

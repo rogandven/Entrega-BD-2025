@@ -4,8 +4,10 @@
  */
 package gui.Consultas;
 
+import database.Database;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -96,5 +98,35 @@ public class AlumnosPorCurso extends javax.swing.JPanel {
         this.tablaConsultaContainer = tablaConsultaContainer;
     }
 
+    private String[][] datosConsulta;
+    private Database database;
+
+    public String[][] getDatosConsulta() {
+        return datosConsulta;
+    }
+
+    public void setDatosConsulta(String[][] datosConsulta) {
+        this.datosConsulta = datosConsulta;
+    }
+
+    public Database getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(Database database) {
+        this.database = database;
+    }
     
+    public static final String QUERY = "SELECT axc.codigo, axc.cantidad FROM alumnosXcurso axc;";
+    public static final int CODIGO = 0;
+    public static final int CANTIDAD = 1;
+    public static final String[] ENUNCIADOS = {"Código", "Cantidad"};
+    
+    public void obtenerDatos() {
+        this.datosConsulta = this.database.doReceivingQuery(QUERY, 2);
+    }
+    
+    public void actualizarTabla() {
+        this.getTablaConsulta().setModel(new DefaultTableModel(datosConsulta, ENUNCIADOS));
+    }  
 }
