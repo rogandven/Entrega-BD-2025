@@ -3,3 +3,5 @@ progress.png
 /src/build/
 /test/nbproject/private/
 /src/dist/
+/loggertest/nbproject/private/
+/loggertest/build/

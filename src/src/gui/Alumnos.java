@@ -324,8 +324,10 @@ public class Alumnos extends javax.swing.JPanel {
             this.actualizarCampos(true);
             this.showSimplifiedDialog("Alumno ingresado con éxito!", "Éxito");
         } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
             this.showSimplifiedDialog(e.getMessage(), "Error!");
         } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
             this.showSimplifiedDialog("Error desconocido.", "Error!");
         }     
     }//GEN-LAST:event_btnCrearAlumnoActionPerformed
@@ -337,8 +339,10 @@ public class Alumnos extends javax.swing.JPanel {
             this.actualizarCampos(true);
             this.showSimplifiedDialog("Alumno modificado con éxito!", "Éxito");
         } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
             this.showSimplifiedDialog(e.getMessage(), "Error!");
         } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
             this.showSimplifiedDialog("Error desconocido.", "Error!");
         } 
 
@@ -352,8 +356,10 @@ public class Alumnos extends javax.swing.JPanel {
             this.actualizarCampos(true);
             this.showSimplifiedDialog("Alumno eliminado con éxito!", "Éxito");
         } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
             this.showSimplifiedDialog(e.getMessage(), "Error!");
         } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
             this.showSimplifiedDialog("Error desconocido.", "Error!");
         }         
         
@@ -370,8 +376,10 @@ public class Alumnos extends javax.swing.JPanel {
             this.actualizarCampos(true);
             this.showSimplifiedDialog("Apoderado agregado con éxito!", "Éxito");
         } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
             this.showSimplifiedDialog(e.getMessage(), "Error!");
         } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
             this.showSimplifiedDialog("Error desconocido.", "Error!");
         } 
     }//GEN-LAST:event_btnAgregarApoderadoActionPerformed
@@ -384,8 +392,10 @@ public class Alumnos extends javax.swing.JPanel {
             this.actualizarCampos(true);
             this.showSimplifiedDialog("Apoderado eliminado con éxito!", "Éxito");
         } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
             this.showSimplifiedDialog(e.getMessage(), "Error!");
         } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
             this.showSimplifiedDialog("Error desconocido.", "Error!");
         }
     }//GEN-LAST:event_btnEliminarApoderadoActionPerformed
@@ -398,8 +408,10 @@ public class Alumnos extends javax.swing.JPanel {
             this.actualizarCampos(true);
             this.showSimplifiedDialog("Apoderado modificado con éxito!", "Éxito");
         } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
             this.showSimplifiedDialog(e.getMessage(), "Error!");
         } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
             this.showSimplifiedDialog("Error desconocido.", "Error!");
         } 
     }//GEN-LAST:event_btnModificarApoderadoActionPerformed
@@ -854,7 +866,7 @@ public class Alumnos extends javax.swing.JPanel {
         return JOptionPane.showInputDialog(this, "Ingrese el RUT del alumno a ingresar:");
     }
     
-    public void doQueries() {
+    public void doQueries() throws PrintableException {
         this.setDatosAlumnos(database.doReceivingQuery(GET_ALUMNOS_QUERY, 8));
         this.setDatosApoderados(database.doReceivingQuery(GET_APODERADOS_QUERY, 5));
         // System.out.println(Arrays.deepToString(this.getDatosApoderados()));

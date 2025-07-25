@@ -8,6 +8,7 @@ import database.Database;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import validations.PrintableException;
 
 /**
  *
@@ -122,7 +123,7 @@ public class AlumnosPorCurso extends javax.swing.JPanel {
     public static final int CANTIDAD = 1;
     public static final String[] ENUNCIADOS = {"Código", "Cantidad"};
     
-    public void obtenerDatos() {
+    public void obtenerDatos() throws PrintableException {
         this.datosConsulta = this.database.doReceivingQuery(QUERY, 2);
     }
     

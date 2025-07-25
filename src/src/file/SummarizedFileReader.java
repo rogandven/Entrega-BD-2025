@@ -8,6 +8,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import validations.PrintableException;
+
 /**
  *
  * @author Roger
@@ -24,6 +26,7 @@ public class SummarizedFileReader {
                 file = file + (line + '\n');
             }
         } catch (IOException ex) {
+            PrintableException.PrintOtherException(ex);
             file = null;
         }
         return file;

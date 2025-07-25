@@ -237,44 +237,97 @@ public class Profesores extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+        /*
+        try {
 
+        } catch (PrintableException e) {
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        } 
+        */
+    
     private void btnCrearProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearProfesorActionPerformed
-        this.crearProfesor();
-        this.obtenerDatos();
-        this.actualizarTodo();
+        try {
+            this.crearProfesor();
+            this.obtenerDatos();
+            this.actualizarTodo();
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        } 
+
         Profesores.showSimplifiedDialog("¡Profesor creado con éxito!", "¡Éxito!");
     }//GEN-LAST:event_btnCrearProfesorActionPerformed
 
     private void btnModificarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarProfesorActionPerformed
         // TODO add your handling code here:
-        this.modificarProfesor();
-        this.obtenerDatos();
-        this.actualizarTodo();
-        Profesores.showSimplifiedDialog("¡Profesor modificado con éxito!", "¡Éxito!");
+        try {
+            this.modificarProfesor();
+            this.obtenerDatos();
+            this.actualizarTodo();
+            Profesores.showSimplifiedDialog("¡Profesor modificado con éxito!", "¡Éxito!");
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        } 
+
     }//GEN-LAST:event_btnModificarProfesorActionPerformed
 
     private void btnEliminarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProfesorActionPerformed
         // TODO add your handling code here:
-        this.eliminarProfesor();
-        this.obtenerDatos();
-        this.actualizarTodo();
-        Profesores.showSimplifiedDialog("¡Profesor eliminado con éxito!", "¡Éxito!");
+        try {
+            this.eliminarProfesor();
+            this.obtenerDatos();
+            this.actualizarTodo();
+            Profesores.showSimplifiedDialog("¡Profesor eliminado con éxito!", "¡Éxito!");
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        } 
+
     }//GEN-LAST:event_btnEliminarProfesorActionPerformed
 
     private void btnAgregarEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEspecialidadActionPerformed
         // TODO add your handling code here:
-        this.agregarEspecialidad();
-        this.obtenerDatos();
-        this.actualizarTodo();
+        try {
+            this.agregarEspecialidad();
+            this.obtenerDatos();
+            this.actualizarTodo();
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        } 
+
         Profesores.showSimplifiedDialog("¡Especialidad agregada con éxito!", "¡Éxito!");
     }//GEN-LAST:event_btnAgregarEspecialidadActionPerformed
 
     private void btnEliminarEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEspecialidadActionPerformed
         // TODO add your handling code here:
-        this.eliminarEspecialidad();
-        this.obtenerDatos();
-        this.actualizarTodo();
-        Profesores.showSimplifiedDialog("¡Especialidad eliminada con éxito!", "¡Éxito!");
+        try {
+            this.eliminarEspecialidad();
+            this.obtenerDatos();
+            this.actualizarTodo();
+            Profesores.showSimplifiedDialog("¡Especialidad eliminada con éxito!", "¡Éxito!");
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        } 
     }//GEN-LAST:event_btnEliminarEspecialidadActionPerformed
 
 
@@ -531,7 +584,7 @@ public class Profesores extends javax.swing.JPanel {
     public static final int ESPECIALIDAD_CODIGO = 1;
     public static final int ESPECIALIDAD_DESCRIPCION = 2;
     
-    public void obtenerDatos() {
+    public void obtenerDatos() throws PrintableException {
        this.setDatosProfesores(database.doReceivingQuery(GET_PROFESORES_QUERY, 6));
        this.setDatosEspecialidades(database.doReceivingQuery(GET_ESPECIALIDADES_QUERY, 3));
        this.setDatosCmbEspecialidades(database.doReceivingQuery(GET_CMB_ESPECIALIDADES_QUERY, 1));
@@ -600,7 +653,7 @@ public class Profesores extends javax.swing.JPanel {
     public void actualizarCmbEspecialidades() {
         LinkedHashSet<String> especialidades = new LinkedHashSet<>();
         for (String[] s : this.datosCmbEspecialidades) {
-            System.out.println(especialidades.toString());
+            // System.out.println(especialidades.toString());
             especialidades.add(s[0]);
         }
         String[] codigos = especialidades.toArray(String[]::new);

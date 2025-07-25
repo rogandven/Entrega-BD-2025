@@ -4,11 +4,15 @@
  */
 package validations;
 
+import java.lang.System.Logger;
+
 /**
  *
  * @author Roger
  */
 public class PrintableException extends Exception {
+    public static boolean DEBUG_MESSAGES = true;
+    
     public PrintableException() {
         super("Error desconocido.");
     }
@@ -27,5 +31,19 @@ public class PrintableException extends Exception {
 
     public PrintableException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
+    }
+    
+    public static void PrintOtherException(Exception e) {
+        if (DEBUG_MESSAGES) {
+            System.getLogger(PrintableException.class.getName()).log(System.Logger.Level.ERROR, (String) null, e);
+            /*
+            System.out.println(e.getClass().getSimpleName() + ": " + e.getMessage());
+            for (Object o : e.getStackTrace()) {
+                try {
+                    System.out.println(o.toString());
+                } catch (Exception ex) {}
+            }
+            */
+        }
     }
 }

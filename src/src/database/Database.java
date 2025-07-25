@@ -5,6 +5,7 @@
 package database;
 import java.sql.*;
 import java.util.ArrayList;
+import validations.PrintableException;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Database {
         try {
             this.connection = DriverManager.getConnection("jdbc:postgresql://" + host + ":" + port.toString() + "/" + database, username, password);
         } catch (SQLException e) {
+            PrintableException.PrintOtherException(e);
             throw new RuntimeException(e.getMessage(), e);
         } 
     }
@@ -29,21 +31,23 @@ public class Database {
         try {
             this.connection.close();
         } catch (SQLException e) {
+            PrintableException.PrintOtherException(e);
             throw new RuntimeException(e.getMessage(), e);
         } finally {
             this.connection = null;
         }
     }
     
-    public void doSendingQuery(String query) {
+    public void doSendingQuery(String query) throws PrintableException {
         try {
             this.connection.prepareStatement(query).execute();
         } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage(), e);
+            PrintableException.PrintOtherException(e);
+            throw new PrintableException("Hubo un error enviando los datos a la base de datos.", e);
         }
     }
     
-    public String[][] doReceivingQuery(String query, int columnAmount) {
+    public String[][] doReceivingQuery(String query, int columnAmount) throws PrintableException {
         try {
             ResultSet rs = this.connection.prepareStatement(query).executeQuery();
             
@@ -60,7 +64,8 @@ public class Database {
             }
             return results.toArray(String[][]::new);
         } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage(), e);
+            PrintableException.PrintOtherException(e);
+            throw new PrintableException("Hubo un error recibiendo los datos de la base de datos.", e);
         }
     }    
     

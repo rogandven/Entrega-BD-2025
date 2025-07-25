@@ -20,7 +20,17 @@ import validations.Validations;
  * @author Roger
  */
 public class Especialidad extends javax.swing.JPanel {
+    /*
+        try {
 
+        } catch (PrintableException e) {
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        }     
+    */
+    
+    
     /**
      * Creates new form Apoderados
      */
@@ -118,24 +128,51 @@ public class Especialidad extends javax.swing.JPanel {
 
     private void btnCrearEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearEspecialidadActionPerformed
         // TODO add your handling code here:
-        this.crearEspecialidad();
-        this.obtenerDatos();
-        this.actualizarTodosLosDatos();
-        Especialidad.showSimplifiedDialog("¡Especialidad creada con éxito!", "¡Éxito!");
+        try {
+            this.crearEspecialidad();
+            this.obtenerDatos();
+            this.actualizarTodosLosDatos();
+            Especialidad.showSimplifiedDialog("¡Especialidad creada con éxito!", "¡Éxito!");
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        }     
+        
     }//GEN-LAST:event_btnCrearEspecialidadActionPerformed
 
     private void btnModificarEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarEspecialidadActionPerformed
-        this.modificarEspecialidad();
-        this.obtenerDatos();
-        this.actualizarTodosLosDatos();
-        Especialidad.showSimplifiedDialog("¡Especialidad modificada con éxito!", "¡Éxito!");
+        try {
+            this.modificarEspecialidad();
+            this.obtenerDatos();
+            this.actualizarTodosLosDatos();
+            Especialidad.showSimplifiedDialog("¡Especialidad modificada con éxito!", "¡Éxito!");
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        } 
     }//GEN-LAST:event_btnModificarEspecialidadActionPerformed
 
     private void btnEliminarEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEspecialidadActionPerformed
-        this.eliminarEspecialidad();
-        this.obtenerDatos();
-        this.actualizarTodosLosDatos();
-        Especialidad.showSimplifiedDialog("¡Especialidad eliminada con éxito!", "¡Éxito!");
+        
+        try {
+            this.eliminarEspecialidad();
+            this.obtenerDatos();
+            this.actualizarTodosLosDatos();
+            Especialidad.showSimplifiedDialog("¡Especialidad eliminada con éxito!", "¡Éxito!");
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        }
+        
     }//GEN-LAST:event_btnEliminarEspecialidadActionPerformed
 
 
@@ -230,7 +267,7 @@ public class Especialidad extends javax.swing.JPanel {
     public static final int ESP_CODIGO = 0;
     public static final int ESP_DESCRIPCION = 1;
     
-    public void obtenerDatos() {
+    public void obtenerDatos() throws PrintableException {
         this.setDatosEspecialidad(database.doReceivingQuery(GET_ESPECIALIDAD_QUERY, 2));
     }
     

@@ -164,31 +164,67 @@ public class Apoderados extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+    
+    /*
+        try {
 
+        } catch (PrintableException e) {
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        }     
+    */
     private void btnCrearApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearApoderadoActionPerformed
         // TODO add your handling code here:
-        this.getDatabase().doSendingQuery(this.getQueryCrearApoderado());
-        this.obtenerDatos();
-        this.actualizarTodosLosCampos();
-        this.showSimplifiedDialog("Apoderado ingresado con éxito!", "Éxito");
+        try {
+            this.getDatabase().doSendingQuery(this.getQueryCrearApoderado());
+            this.obtenerDatos();
+            this.actualizarTodosLosCampos();
+            this.showSimplifiedDialog("Apoderado ingresado con éxito!", "Éxito");
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        }     
+
     }//GEN-LAST:event_btnCrearApoderadoActionPerformed
 
     private void btnModificarApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarApoderadoActionPerformed
         // TODO add your handling code here:
         // System.out.println(this.getQueryModificarApoderado());
-        this.getDatabase().doSendingQuery(this.getQueryModificarApoderado());
-        this.obtenerDatos();
-        this.actualizarTodosLosCampos();
-        this.showSimplifiedDialog("Apoderado modificado con éxito!", "Éxito");
+        try {
+            this.getDatabase().doSendingQuery(this.getQueryModificarApoderado());
+            this.obtenerDatos();
+            this.actualizarTodosLosCampos();
+            this.showSimplifiedDialog("Apoderado modificado con éxito!", "Éxito");
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        }  
+
     }//GEN-LAST:event_btnModificarApoderadoActionPerformed
 
     private void btnEliminarApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarApoderadoActionPerformed
         // TODO add your handling code here:
         // System.out.println(this.getQueryEliminarApoderado());
-        this.getDatabase().doSendingQuery(this.getQueryEliminarApoderado());
-        this.obtenerDatos();
-        this.actualizarTodosLosCampos();
-        this.showSimplifiedDialog("Apoderado eliminado con éxito!", "Éxito");
+        
+        try {
+            this.getDatabase().doSendingQuery(this.getQueryEliminarApoderado());
+            this.obtenerDatos();
+            this.actualizarTodosLosCampos();
+            this.showSimplifiedDialog("Apoderado eliminado con éxito!", "Éxito");
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        } 
     }//GEN-LAST:event_btnEliminarApoderadoActionPerformed
 
 
@@ -357,7 +393,7 @@ public class Apoderados extends javax.swing.JPanel {
     public static final int APODERADO_DIRECCION = 4;
     public static final int APODERADO_CIUDAD = 5;
     
-    public void obtenerDatos() {
+    public void obtenerDatos() throws PrintableException {
         this.setDatosApoderados(database.doReceivingQuery(GET_APODERADOS_QUERY, 6));
     }
     

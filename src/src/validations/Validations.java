@@ -24,7 +24,7 @@ public interface Validations {
             throw new PrintableException("Caracteres no válidos en \"" + name + "\".");
         }
         for (char c : s.toCharArray()) {
-            System.out.println(c);
+            // System.out.println(c);
             switch (c) {
                 case '\'':
                 case '/':
@@ -64,6 +64,7 @@ public interface Validations {
         try {
             a = Integer.valueOf(s);
         } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
             throw new PrintableException("El valor \"" + name + "\" debe ser un número.");
         }
         return a;
@@ -95,6 +96,7 @@ public interface Validations {
             Date date = formatter.parse(s);
             return s;
         } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
             throw new PrintableException("La fecha \"" + s + "\" no es válida. Debe estar en formato YYYY-MM-DD");
         }
     }
@@ -107,8 +109,10 @@ public interface Validations {
             }
             return h.toString();
         } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
             throw e;  
         } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
             throw new PrintableException("La hora debe estar en formato militar.");
         }
     }

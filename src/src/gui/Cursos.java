@@ -37,6 +37,16 @@ public class Cursos extends javax.swing.JPanel {
         });
     }
 
+    /*
+        try {
+
+        } catch (PrintableException e) {
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        }     
+    */
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -253,41 +263,95 @@ public class Cursos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCursoActionPerformed
-        crearCurso();
-        obtenerYactualizarTodosLosDatos();
-        Cursos.showSimplifiedDialog("Curso creado con éxito!", "Éxito");
+        try {
+            crearCurso();
+            obtenerYactualizarTodosLosDatos();
+            Cursos.showSimplifiedDialog("Curso creado con éxito!", "Éxito");
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        }     
+        
+
     }//GEN-LAST:event_btnCrearCursoActionPerformed
 
     private void btnModificarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCursoActionPerformed
         // TODO add your handling code here:
-        modificarCurso();
-        obtenerYactualizarTodosLosDatos();
-        Cursos.showSimplifiedDialog("Curso modificado con éxito!", "Éxito");
+        try {
+            modificarCurso();
+            obtenerYactualizarTodosLosDatos();
+            Cursos.showSimplifiedDialog("Curso modificado con éxito!", "Éxito");
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        } 
+
     }//GEN-LAST:event_btnModificarCursoActionPerformed
 
     private void btnEliminarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCursoActionPerformed
         // TODO add your handling code here:
-        eliminarCurso();
-        obtenerYactualizarTodosLosDatos();
-        Cursos.showSimplifiedDialog("Curso eliminado con éxito!", "Éxito");
+        try {
+            eliminarCurso();
+            obtenerYactualizarTodosLosDatos();
+            Cursos.showSimplifiedDialog("Curso eliminado con éxito!", "Éxito");
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        }     
     }//GEN-LAST:event_btnEliminarCursoActionPerformed
 
     private void btnAgregarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProfesorActionPerformed
-        agregarProfesor();
-        obtenerYactualizarTodosLosDatos();
-        Cursos.showSimplifiedDialog("Profesor agregado con éxito!", "Éxito");        
+        try {
+            agregarProfesor();
+            obtenerYactualizarTodosLosDatos();
+            Cursos.showSimplifiedDialog("Profesor agregado con éxito!", "Éxito");      
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        }  
+  
     }//GEN-LAST:event_btnAgregarProfesorActionPerformed
 
     private void btnEliminarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProfesorActionPerformed
-        eliminarProfesor();
-        obtenerYactualizarTodosLosDatos();
-        Cursos.showSimplifiedDialog("Profesor eliminado con éxito!", "Éxito");    
+        try {
+            eliminarProfesor();
+            obtenerYactualizarTodosLosDatos();
+            Cursos.showSimplifiedDialog("Profesor eliminado con éxito!", "Éxito");  
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        } 
+  
     }//GEN-LAST:event_btnEliminarProfesorActionPerformed
 
     private void btnModificarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarProfesorActionPerformed
-        modificarProfesor();
-        obtenerYactualizarTodosLosDatos();
-        Cursos.showSimplifiedDialog("Profesor modificado con éxito!", "Éxito");    
+
+        try {
+            modificarProfesor();
+            obtenerYactualizarTodosLosDatos();
+            Cursos.showSimplifiedDialog("Profesor modificado con éxito!", "Éxito");
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        }    
     }//GEN-LAST:event_btnModificarProfesorActionPerformed
 
 
@@ -516,7 +580,7 @@ public class Cursos extends javax.swing.JPanel {
         this.database = database;
     }
     
-    public void obtenerDatos() {
+    public void obtenerDatos() throws PrintableException {
         this.setDatosCursos(database.doReceivingQuery(GET_CURSOS_QUERY, 5));
         // System.out.println(Arrays.deepToString(datosCursos));
         this.setDatosProfesores(database.doReceivingQuery(GET_PROFESORES_QUERY, 4));
@@ -619,7 +683,7 @@ public class Cursos extends javax.swing.JPanel {
         this.actualizarTablaProfesores();
     }
     
-    public void obtenerYactualizarTodosLosDatos() {
+    public void obtenerYactualizarTodosLosDatos() throws PrintableException {
         this.obtenerDatos();
         this.actualizarCmbCurso();
         this.actualizarCmbProfesores();
@@ -635,10 +699,10 @@ public class Cursos extends javax.swing.JPanel {
         return this.getTxtOrientacion().getText();
     }
     
-    public void crearCurso() {
+    public void crearCurso() throws PrintableException {
         Integer codigo = pedirCodigo();
         String orientacion = null;
-        String query1 = "INSERT INTO curso (codigo, anio) VALUES (" + codigo.toString() + ", " + Integer.valueOf(this.getTxtAnio().getText()).toString() + ");"; 
+        String query1 = "INSERT INTO curso (codigo, anio) VALUES (" + Validations.validatePositiveInt(codigo.toString(), "codigo") + ", " + Validations.validatePositiveInt(this.getTxtAnio().getText(), "año") + ");"; 
         String query2 = "SELECT 1 FROM curso LIMIT 0;";
         this.database.doSendingQuery(query1);
         switch(this.getCmbTipo().getSelectedIndex()) {
@@ -655,8 +719,8 @@ public class Cursos extends javax.swing.JPanel {
         this.database.doSendingQuery(query2);
     }
     
-    public void modificarCurso() {
-        String codigo = this.getCmbCurso().getSelectedItem().toString();
+    public void modificarCurso() throws PrintableException {
+        String codigo = Validations.validatePositiveInt(this.getCmbCurso().getSelectedItem().toString(), "codigo").toString();
         String query1 = "DELETE FROM media WHERE codigo_curso = " + codigo + ";";
         String query2 = "DELETE FROM basica WHERE codigo_curso = " + codigo + ";";
         String query3 = null;
@@ -669,7 +733,7 @@ public class Cursos extends javax.swing.JPanel {
                 query3 = "INSERT INTO basica (codigo_curso) VALUES (" + codigo + ");";
                 break;
             case TIPO_MEDIA:
-                orientacion = pedirOrientacion();
+                orientacion = Validations.validateString(pedirOrientacion(), "orientación");
                 query3 = "INSERT INTO media (codigo_curso, orientacion) VALUES (" + codigo + ", '" + orientacion + "');";
                 break;
             default:
@@ -682,8 +746,8 @@ public class Cursos extends javax.swing.JPanel {
         database.doSendingQuery(query4);
     }
     
-    public void eliminarCurso() {
-        String codigo = this.getCmbCurso().getSelectedItem().toString();
+    public void eliminarCurso() throws PrintableException {
+        String codigo = Validations.validatePositiveInt(this.getCmbCurso().getSelectedItem().toString(), "codigo").toString();
         String query1 = "DELETE FROM media WHERE codigo_curso = " + codigo + ";";
         String query2 = "DELETE FROM basica WHERE codigo_curso = " + codigo + ";";
         String query3 = "DELETE FROM es_jefe WHERE codigo_curso = " + codigo + ";";
@@ -725,7 +789,7 @@ public class Cursos extends javax.swing.JPanel {
     }
     
     public void eliminarProfesor() throws PrintableException {
-        String profesor = Validations.validateRut(this.getCmbProfesor().getSelectedItem().toString()).toString();
+        String profesor = Validations.validateRut(this.getCmbProfesor().getSelectedItem().toString());
         String curso = Validations.validatePositiveInt(this.getCmbCurso().getSelectedItem().toString(), "curso").toString();
         String query1 = "DELETE FROM es_jefe WHERE codigo_curso = " + curso + " AND rut_profesor_jefe = '" + profesor + "';";
         String query2 = "DELETE FROM es_asistente WHERE codigo_curso = " + curso + " AND rut_profesor_jefe = '" + profesor + "';";

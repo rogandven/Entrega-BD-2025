@@ -25,7 +25,6 @@ import validations.Validations;
  * @author Roger
  */
 public class Extraprogramatica extends javax.swing.JPanel {
-
     /**
      * Creates new form alumnos
      */
@@ -35,7 +34,15 @@ public class Extraprogramatica extends javax.swing.JPanel {
             this.actualizarDatosActuales();
         });
     }
+    /*
+        try {
 
+        } catch (PrintableException e) {
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        }     
+    */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -272,42 +279,84 @@ public class Extraprogramatica extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActividadActionPerformed
-        this.agregarActividad();
-        this.obtenerDatos();
-        this.actualizarTodos();
-        Extraprogramatica.showSimplifiedDialog("¡Actividad creada con éxito!", "¡Éxito!");
+        try {
+            this.agregarActividad();
+            this.obtenerDatos();
+            this.actualizarTodos();
+            Extraprogramatica.showSimplifiedDialog("¡Actividad creada con éxito!", "¡Éxito!");
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        } 
+        
+
     }//GEN-LAST:event_btnCrearActividadActionPerformed
 
     private void btnModificarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActividadActionPerformed
         // TODO add your handling code here:
-        this.modificarActividad();
-        this.obtenerDatos();
-        this.actualizarTodos();
-        Extraprogramatica.showSimplifiedDialog("¡Actividad modificada con éxito!", "¡Éxito!");
+        try {
+            this.modificarActividad();
+            this.obtenerDatos();
+            this.actualizarTodos();
+            Extraprogramatica.showSimplifiedDialog("¡Actividad modificada con éxito!", "¡Éxito!");
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        } 
     }//GEN-LAST:event_btnModificarActividadActionPerformed
 
     private void btnEliminarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActividadActionPerformed
         // TODO add your handling code here:
-        this.eliminarActividad();
-        this.obtenerDatos();
-        this.actualizarTodos();
-        Extraprogramatica.showSimplifiedDialog("¡Actividad eliminada con éxito!", "¡Éxito!");
+        try {
+            this.eliminarActividad();
+            this.obtenerDatos();
+            this.actualizarTodos();
+            Extraprogramatica.showSimplifiedDialog("¡Actividad eliminada con éxito!", "¡Éxito!");
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        }   
     }//GEN-LAST:event_btnEliminarActividadActionPerformed
 
     private void btnAgregarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAlumnoActionPerformed
         // TODO add your handling code here:
-        this.agregarAlumno();
-        this.obtenerDatos();
-        this.actualizarTodos();
-        Extraprogramatica.showSimplifiedDialog("¡Alumno agregado con éxito!", "¡Éxito!");
+        try {
+            this.agregarAlumno();
+            this.obtenerDatos();
+            this.actualizarTodos();
+            Extraprogramatica.showSimplifiedDialog("¡Alumno agregado con éxito!", "¡Éxito!");
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        }  
     }//GEN-LAST:event_btnAgregarAlumnoActionPerformed
 
     private void btnEliminarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAlumnoActionPerformed
         // TODO add your handling code here:
-        this.eliminarAlumno();
-        this.obtenerDatos();
-        this.actualizarTodos();
-        Extraprogramatica.showSimplifiedDialog("¡Alumno eliminado con éxito!", "¡Éxito!");
+        try {
+            this.eliminarAlumno();
+            this.obtenerDatos();
+            this.actualizarTodos();
+            Extraprogramatica.showSimplifiedDialog("¡Alumno eliminado con éxito!", "¡Éxito!");
+        } catch (PrintableException e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        }     
     }//GEN-LAST:event_btnEliminarAlumnoActionPerformed
 
 
@@ -605,7 +654,7 @@ public class Extraprogramatica extends javax.swing.JPanel {
     public static final int ALUMNOS_NOMBRES = 1;
     public static final int ALUMNOS_CODIGO = 2;
     
-    public void obtenerDatos() {
+    public void obtenerDatos() throws PrintableException {
         this.setDatosAlumnos(database.doReceivingQuery(GET_ALUMNOS_QUERY, 3));
         this.setDatosProfesores(database.doReceivingQuery(GET_PROFESORES_QUERY, 2));
         this.setDatosExtraprogramatica(database.doReceivingQuery(GET_EXTRAPROGRAMATICA_QUERY, 8));
@@ -660,9 +709,9 @@ public class Extraprogramatica extends javax.swing.JPanel {
             String[][] datos = (alumnos.toArray(String[][]::new));
             this.getTableAlumnos().setModel(new DefaultTableModel(datos, enunciados));
         } else {
-            System.out.println("jajajaja");
+            // System.out.println("jajajaja");
             empty = new String[0][3];
-            System.out.println(Arrays.deepToString(empty));
+            // System.out.println(Arrays.deepToString(empty));
             this.getTableAlumnos().setModel(new DefaultTableModel(empty, enunciados));
         }
     }
@@ -771,7 +820,7 @@ public class Extraprogramatica extends javax.swing.JPanel {
     }
     
     public void modificarActividad() throws PrintableException {
-       String codigo = Validations.validatePositiveInt(this.getCmbProfesor().getSelectedItem().toString(), codigo).toString();
+       String codigo = Validations.validatePositiveInt(this.getCmbProfesor().getSelectedItem().toString(), "codigo").toString();
        String nombre = Validations.validateString(this.getTxtNombre().getText(), "nombre");
        String dia = Validations.validateDay(this.getTxtDia().getText()).toString();
        String horaInicio = Validations.validateHour(this.getTxtHoraInicio().getText());
