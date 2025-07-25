@@ -55,7 +55,7 @@ public interface Validations {
         
         s = s.trim();
         
-        Pattern p = Pattern.compile("^[0-9]{1,}.[0-9]{1,}.[0-9]{1,}-[0-9kK]$");
+        Pattern p = Pattern.compile("^[0-9]{1,}\\.[0-9]{1,}\\.[0-9]{1,}-[0-9kK]$");
         Matcher m = p.matcher(s);
         System.out.println(s);
         if (!m.matches()) {
