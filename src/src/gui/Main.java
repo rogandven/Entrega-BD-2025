@@ -4,8 +4,10 @@
  */
 package gui;
 
+import database.Database;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
+import validations.PrintableException;
 
 /**
  *
@@ -39,6 +41,11 @@ public class Main extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(456, 750));
         setMinimumSize(new java.awt.Dimension(456, 750));
         setPreferredSize(new java.awt.Dimension(456, 750));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                connectionCloser(evt);
+            }
+        });
 
         TabContainer.setMaximumSize(new java.awt.Dimension(450, 590));
         TabContainer.setMinimumSize(new java.awt.Dimension(450, 590));
@@ -66,6 +73,14 @@ public class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void connectionCloser(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_connectionCloser
+        try {
+            database.closeConnection();
+        } catch (Exception e) {
+            PrintableException.PrintOtherException(e);
+        }
+    }//GEN-LAST:event_connectionCloser
 
     /**
      * @param args the command line arguments
@@ -96,4 +111,16 @@ public class Main extends javax.swing.JFrame {
     public void setBtnUpdate(JButton btnUpdate) {
         this.btnUpdate = btnUpdate;
     }
+    
+    Database database;
+
+    public Database getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(Database database) {
+        this.database = database;
+    }
+    
+    
 }

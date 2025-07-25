@@ -174,6 +174,8 @@ public class main {
 
             });
             
+            m.setDatabase(d);
+            
             m.setVisible(true);
         } catch (PrintableException ex) {
             PrintableException.PrintOtherException(ex);
