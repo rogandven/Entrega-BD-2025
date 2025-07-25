@@ -653,7 +653,7 @@ public class Profesores extends javax.swing.JPanel {
         database.doSendingQuery(query);
     }
 
-    public void eliminarProfesor() {
+    public void eliminarProfesor() throws PrintableException {
         String rut = Validations.validateRut(this.getCmbProfesor().getSelectedItem().toString());
         String query = "DELETE FROM profesor WHERE rut = '" + rut + "';";
         database.doSendingQuery(query);
