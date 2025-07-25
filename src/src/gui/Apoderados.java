@@ -12,7 +12,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
+import validations.*;
 /**
  *
  * @author Roger
@@ -426,19 +426,31 @@ public class Apoderados extends javax.swing.JPanel {
         actualizarCamposActuales();
     }
     
-    public String getQueryCrearApoderado() {
-        return "INSERT INTO apoderado (rut, nombres, apellido_paterno, apellido_materno, direccion, ciudad) VALUES ('" + this.pedirRut().trim() + "', '" + this.getTxtNombres().getText().trim() + "', '" + this.getTxtApellidoPaterno().getText().trim() + "', '" + this.getTxtApellidoMaterno().getText().trim() + "', '" + this.getTxtDireccion().getText().trim() + "', '" + this.getTxtCiudad().getText().trim() + "');";
+    public String getQueryCrearApoderado() throws PrintableException {
+        return "INSERT INTO apoderado (rut, nombres, apellido_paterno, apellido_materno, direccion, ciudad) VALUES ('" + 
+                Validations.validateRut(this.pedirRut()) + "', '" + 
+                Validations.validateString(this.getTxtNombres().getText(), "nombres") + "', '" + 
+                Validations.validateString(this.getTxtApellidoPaterno().getText(), "apellido paterno") + "', '" + 
+                Validations.validateString(this.getTxtApellidoMaterno().getText(), "apellido materno") + "', '" + 
+                Validations.validateString(this.getTxtDireccion().getText(), "dirección") + "', '" + 
+                Validations.validateString(this.getTxtCiudad().getText(), "ciudad") + "');";
     }
     
     public static void showSimplifiedDialog(String error, String title) {
         JOptionPane.showMessageDialog(null, error, title, -1, null);
     }
 
-    private String getQueryModificarApoderado() {
-        return "UPDATE apoderado SET nombres = '" + this.getTxtNombres().getText().trim() + "', apellido_paterno = '" + this.getTxtApellidoPaterno().getText().trim() + "', apellido_materno = '" + this.getTxtApellidoMaterno().getText() + "', direccion = '" + this.getTxtDireccion().getText().trim() + "', ciudad = '" + this.getTxtCiudad().getText().trim() + "' WHERE rut = '" + this.getCmbApoderado().getSelectedItem().toString().trim() + "';";
+    public String getQueryModificarApoderado() throws PrintableException {
+        return "UPDATE apoderado SET nombres = '" + 
+        Validations.validateString(this.getTxtNombres().getText(), "nombres") + "', apellido_paterno = '" + 
+        Validations.validateString(this.getTxtApellidoPaterno().getText(), "apellido paterno") + "', apellido_materno = '" + 
+        Validations.validateString(this.getTxtApellidoMaterno().getText(), "apellido materno") + "', direccion = '" + 
+        Validations.validateString(this.getTxtDireccion().getText(), "dirección") + "', ciudad = '" + 
+        Validations.validateString(this.getTxtCiudad().getText(), "ciudad") + "' WHERE rut = '" + 
+        Validations.validateRut(this.getCmbApoderado().getSelectedItem().toString()) + "';";
     }
 
-    private String getQueryEliminarApoderado() {
-        return "DELETE FROM apoderado WHERE rut = '" + this.getCmbApoderado().getSelectedItem().toString().trim() + "';";
+    public String getQueryEliminarApoderado() throws PrintableException {
+        return "DELETE FROM apoderado WHERE rut = '" + Validations.validateRut(this.getCmbApoderado().getSelectedItem().toString().trim()) + "';";
     }
 }

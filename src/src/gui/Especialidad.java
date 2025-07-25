@@ -12,6 +12,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import validations.PrintableException;
+import validations.Validations;
 
 /**
  *
@@ -277,26 +279,29 @@ public class Especialidad extends javax.swing.JPanel {
         this.actualizarDatosActuales();
     }
     
-    public void crearEspecialidad() {
-        Integer codigo = this.pedirCodigo();
-        String query = "INSERT INTO especialidad (codigo, descripcion) VALUES (" + codigo.toString() + ", '" + this.getTxtDescripcion().getText() + "');";
+    public void crearEspecialidad() throws PrintableException {
+        String codigo = this.pedirCodigo();
+        String query = "INSERT INTO especialidad (codigo, descripcion) VALUES (" + 
+        Validations.validatePositiveInt(codigo, "codigo") + ", '" + 
+        Validations.validateString(this.getTxtDescripcion().getText(), "descripción") + "');";
         database.doSendingQuery(query);
     }
     
-    public void modificarEspecialidad() {
-        String codigo = Integer.valueOf(this.getCmbEspecialidad().getSelectedItem().toString()).toString();
-        String query = "UPDATE especialidad SET descripcion = '" + this.getTxtDescripcion().getText() + "' WHERE codigo = " + codigo + ";";
+    public void modificarEspecialidad() throws PrintableException {
+        String codigo = this.getCmbEspecialidad().getSelectedItem().toString();
+        String query = "UPDATE especialidad SET descripcion = '" + Validations.validateString(this.getTxtDescripcion().getText(), "descripción") + "' WHERE codigo = " + 
+                Validations.validatePositiveInt(codigo, "codigo") + ";";
         database.doSendingQuery(query);
     }
     
-    public void eliminarEspecialidad() {
-        String codigo = Integer.valueOf(this.getCmbEspecialidad().getSelectedItem().toString()).toString();
-        String query = "DELETE FROM especialidad WHERE codigo = " + codigo + ";";
+    public void eliminarEspecialidad() throws PrintableException {
+        String codigo = this.getCmbEspecialidad().getSelectedItem().toString();
+        String query = "DELETE FROM especialidad WHERE codigo = " + Validations.validatePositiveInt(codigo, "codigo") + ";";
         database.doSendingQuery(query);
     }
     
-    public Integer pedirCodigo() {
-        return Integer.valueOf(JOptionPane.showInputDialog(this, "Ingrese el código de la especialidad a ingresar:"));
+    public String pedirCodigo() {
+        return JOptionPane.showInputDialog(this, "Ingrese el código de la especialidad a ingresar:");
     }
     
     public static void showSimplifiedDialog(String error, String title) {

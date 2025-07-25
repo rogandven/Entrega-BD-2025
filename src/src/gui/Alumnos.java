@@ -18,6 +18,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import validations.PrintableException;
+import validations.Validations;
 
 /**
  *
@@ -811,7 +813,7 @@ public class Alumnos extends javax.swing.JPanel {
         this.setDatosCursos(database.doReceivingQuery(GET_CURSOS_QUERY, 2));
     }
     
-    public String getQueryCrearAlumno() {
+    public String getQueryCrearAlumno() throws PrintableException {
         return 
         """
                INSERT INTO alumno 
@@ -822,41 +824,57 @@ public class Alumnos extends javax.swing.JPanel {
                 fecha_nacimiento, 
                 direccion, ciudad, 
                 codigo_curso
-                ) VALUES ('""" + this.pedirRut().trim() + "', '" + 
-              this.getTxtNombres().getText().trim() + "', '" + 
-              this.getTxtApellidoPaterno().getText().trim() + "', '" +
-              this.getTxtApellidoMaterno().getText().trim() + "', '" +
-              this.getTxtFechaNacimiento().getText().trim() + "', '" +
-              this.getTxtDireccion().getText().trim() + "','" +
-              this.getTxtCiudad().getText().trim() + "', " +
-              this.getCmbCurso().getSelectedItem().toString().trim() + ");";
+                ) VALUES ('""" + 
+              Validations.validateRut(this.pedirRut()) + "', '" + 
+              Validations.validateString(this.getTxtNombres().getText(), "nombres") + "', '" + 
+              Validations.validateString(this.getTxtApellidoPaterno().getText(), "apellido paterno") + "', '" +
+              Validations.validateString(this.getTxtApellidoMaterno().getText(), "apellido materno") + "', '" +
+              Validations.validateDate(this.getTxtFechaNacimiento().getText()) + "', '" +
+              Validations.validateString(this.getTxtDireccion().getText(), "direccion") + "','" +
+              Validations.validateString(this.getTxtCiudad().getText(), "ciudad") + "', " +
+              Validations.validatePositiveInt(this.getCmbCurso().getSelectedItem().toString(), "curso") + ");";
     }
     
-    public String getQueryModificarAlumno() {
-        return "UPDATE alumno SET nombres = '" + this.getTxtNombres().getText().trim() +
-               "', apellido_paterno = '" + this.getTxtNombres().getText().trim() +
-               "', apellido_materno = '" + this.getTxtApellidoMaterno().getText().trim() +
-               "', fecha_nacimiento = '" + this.getTxtFechaNacimiento().getText().trim() +
-               "', direccion = '" + this.getTxtDireccion().getText().trim() +
-               "', ciudad = '" + this.getTxtCiudad().getText().trim() +
-               "', codigo_curso = " + this.getCmbCurso().getSelectedItem().toString().trim() + 
-               " WHERE rut = '" + this.getCmbAlumno().getSelectedItem().toString().trim() + "';";
+    public String getQueryModificarAlumno() throws PrintableException {
+        return "UPDATE alumno SET nombres = '" + 
+                Validations.validateString(this.getTxtNombres().getText(), "nombres") +
+               "', apellido_paterno = '" + 
+                Validations.validateString(this.getTxtNombres().getText(), "apellido paterno") +
+               "', apellido_materno = '" + 
+                Validations.validateString(this.getTxtApellidoMaterno().getText(), "apellido materno") +
+               "', fecha_nacimiento = '" + 
+                Validations.validateDate(this.getTxtFechaNacimiento().getText()) +
+               "', direccion = '" + 
+                Validations.validateString(this.getTxtDireccion().getText(), "direccion") +
+               "', ciudad = '" + 
+                Validations.validateString(this.getTxtCiudad().getText(), "ciudad") +
+               "', codigo_curso = " + 
+                Validations.validatePositiveInt(this.getCmbCurso().getSelectedItem().toString(), "curso") + 
+               " WHERE rut = '" + 
+                Validations.validateRut(this.getCmbAlumno().getSelectedItem().toString()) + "';";
     }
     
-    public String getQueryEliminarAlumno() {
-        return "DELETE FROM alumno WHERE rut = '" + this.getCmbAlumno().getSelectedItem().toString().trim() + "';";
+    public String getQueryEliminarAlumno() throws PrintableException {
+        return "DELETE FROM alumno WHERE rut = '" + 
+                Validations.validateRut(this.getCmbAlumno().getSelectedItem().toString()) + "';";
     }
     
-    public String getQueryAgregarApoderado() {
-        return "INSERT INTO representa (rut_alumno, rut_apoderado, fecha_inicio, fecha_termino) VALUES ('" + this.getCmbAlumno().getSelectedItem().toString().trim() + "', '" + this.getCmbApoderado().getSelectedItem().toString().trim() + "','" + this.getTxtFechaInicio().getText().trim() + "','" + this.getTxtFechaTermino().getText().trim() + "');";
+    public String getQueryAgregarApoderado() throws PrintableException {
+        return "INSERT INTO representa (rut_alumno, rut_apoderado, fecha_inicio, fecha_termino) VALUES ('" + 
+                Validations.validateRut(this.getCmbAlumno().getSelectedItem().toString()) + "', '" + 
+                Validations.validateRut(this.getCmbApoderado().getSelectedItem().toString()) + "','" + 
+                Validations.validateDate(this.getTxtFechaInicio().getText()) + "','" + 
+                Validations.validateDate(this.getTxtFechaTermino().getText()) + "');";
     }
     
-    public String getQueryEliminarApoderado() {
-        return "DELETE FROM representa WHERE rut_alumno = '" + this.getCmbAlumno().getSelectedItem().toString().trim() + "' AND rut_apoderado = '" + this.getCmbApoderado().getSelectedItem().toString().trim() + "';";
+    public String getQueryEliminarApoderado() throws PrintableException {
+        return "DELETE FROM representa WHERE rut_alumno = '" + 
+                Validations.validateRut(this.getCmbAlumno().getSelectedItem().toString()) + "' AND rut_apoderado = '" + 
+                Validations.validateRut(this.getCmbApoderado().getSelectedItem().toString()) + "';";
     }
     
-    public String getQueryModificarApoderado() {
-        return "UPDATE representa SET fecha_inicio = '" + this.getTxtFechaInicio().getText().trim() + "', fecha_termino = '" + this.getTxtFechaTermino().getText().trim() + "' WHERE rut_alumno = '" + this.getCmbAlumno().getSelectedItem().toString().trim() + "' AND rut_apoderado = '" + this.getCmbApoderado().getSelectedItem().toString().trim() + "';"; 
+    public String getQueryModificarApoderado() throws PrintableException {
+        return "UPDATE representa SET fecha_inicio = '" + Validations.validateDate(this.getTxtFechaInicio().getText().trim()) + "', fecha_termino = '" + Validations.validateDate(this.getTxtFechaTermino().getText()) + "' WHERE rut_alumno = '" + Validations.validateRut(this.getCmbAlumno().getSelectedItem().toString()) + "' AND rut_apoderado = '" + Validations.validateRut(this.getCmbApoderado().getSelectedItem().toString()) + "';"; 
     }
     
     public static final String GET_ALUMNOS_QUERY = "SELECT rut, nombres, apellido_paterno, apellido_materno, fecha_nacimiento, direccion, ciudad, codigo_curso FROM alumno;";

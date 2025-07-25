@@ -3,7 +3,6 @@ package src;
 import database.*;
 import gui.*;
 import gui.Consultas.*;
-import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**

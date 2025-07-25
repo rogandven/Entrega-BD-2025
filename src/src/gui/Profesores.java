@@ -17,6 +17,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import validations.PrintableException;
+import validations.Validations;
 
 /**
  *
@@ -627,46 +629,46 @@ public class Profesores extends javax.swing.JPanel {
     
 //  "SELECT rut, nombres, apellido_paterno, apellido_materno, direccion, ciudad FROM profesor;";    
     
-    public void crearProfesor() {
-        String rut = pedirRut();
-        String nombres = this.getTxtNombres().getText();
-        String AP = this.getTxtApellidoPaterno().getText();
-        String AM = this.getTxtApellidoMaterno().getText();
-        String direccion = this.getTxtDireccion().getText();
-        String ciudad = this.getTxtCiudad().getText();
+    public void crearProfesor() throws PrintableException {
+        String rut = Validations.validateRut(pedirRut());
+        String nombres = Validations.validateString(this.getTxtNombres().getText(), "nombres");
+        String AP = Validations.validateString(this.getTxtApellidoPaterno().getText(), "apellido paterno");
+        String AM = Validations.validateString(this.getTxtApellidoMaterno().getText(), "apellido materno");
+        String direccion = Validations.validateString(this.getTxtDireccion().getText(), "dirección");
+        String ciudad = Validations.validateString(this.getTxtCiudad().getText(), "ciudad");
         
         String query = "INSERT INTO profesor (rut, nombres, apellido_paterno, apellido_materno, direccion, ciudad) VALUES ('" + rut + "', '" + nombres + "', '" + AP + "', '" + AM + "', '" + direccion + "', '" + ciudad + "');";
         database.doSendingQuery(query);
     }
     
-    public void modificarProfesor() {
-        String rut = this.getCmbProfesor().getSelectedItem().toString();
-        String nombres = this.getTxtNombres().getText();
-        String AP = this.getTxtApellidoPaterno().getText();
-        String AM = this.getTxtApellidoMaterno().getText();
-        String direccion = this.getTxtDireccion().getText();
-        String ciudad = this.getTxtCiudad().getText();
+    public void modificarProfesor() throws PrintableException {
+        String rut = Validations.validateRut(this.getCmbProfesor().getSelectedItem().toString());
+        String nombres = Validations.validateString(this.getTxtNombres().getText(), "nombres");
+        String AP = Validations.validateString(this.getTxtApellidoPaterno().getText(), "apellido paterno");
+        String AM = Validations.validateString(this.getTxtApellidoMaterno().getText(), "apellido materno");
+        String direccion = Validations.validateString(this.getTxtDireccion().getText(), "dirección");
+        String ciudad = Validations.validateString(this.getTxtCiudad().getText(), "ciudad");
         
         String query = "UPDATE profesor SET nombres = '" + nombres + "', apellido_paterno = '" + AP + "', apellido_materno = '" + AM + "', direccion = '" + direccion + "', ciudad = '" + ciudad + "' WHERE rut = '" + rut + "';";
         database.doSendingQuery(query);
     }
 
     public void eliminarProfesor() {
-        String rut = this.getCmbProfesor().getSelectedItem().toString();
+        String rut = Validations.validateRut(this.getCmbProfesor().getSelectedItem().toString());
         String query = "DELETE FROM profesor WHERE rut = '" + rut + "';";
         database.doSendingQuery(query);
     }    
     
-    public void agregarEspecialidad() {
-        String rut = this.getCmbProfesor().getSelectedItem().toString();
-        String especialidad = this.getCmbEspecialidad().getSelectedItem().toString();
+    public void agregarEspecialidad() throws PrintableException {
+        String rut = Validations.validateRut(this.getCmbProfesor().getSelectedItem().toString());
+        String especialidad = Validations.validatePositiveInt(this.getCmbEspecialidad().getSelectedItem().toString(), "especialidad").toString();
         String query = "INSERT INTO tiene (rut_profesor, codigo_especialidad) VALUES ('" + rut + "', " + especialidad + ");";
         database.doSendingQuery(query);
     }
     
-    public void eliminarEspecialidad() {
-        String rut = this.getCmbProfesor().getSelectedItem().toString();
-        String especialidad = this.getCmbEspecialidad().getSelectedItem().toString();
+    public void eliminarEspecialidad() throws PrintableException {
+        String rut = Validations.validateRut(this.getCmbProfesor().getSelectedItem().toString());
+        String especialidad = Validations.validatePositiveInt(this.getCmbEspecialidad().getSelectedItem().toString(), "especialidad").toString();
         String query = "DELETE FROM tiene WHERE rut_profesor = '" + rut + "' AND codigo_especialidad = " + especialidad + ";";
         database.doSendingQuery(query);
     }

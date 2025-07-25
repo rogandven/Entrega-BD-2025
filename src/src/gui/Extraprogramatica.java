@@ -17,6 +17,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import validations.PrintableException;
+import validations.Validations;
 
 /**
  *
@@ -745,40 +747,50 @@ public class Extraprogramatica extends javax.swing.JPanel {
         this.actualizarDatosActuales();
     }
     
-    public Integer pedirCodigo() {
-        return Integer.valueOf(JOptionPane.showInputDialog(this, "Ingrese el código de la actividad a ingresar:"));
+    public String pedirCodigo() {
+        return JOptionPane.showInputDialog(this, "Ingrese el código de la actividad a ingresar:");
     }
     
-    public void agregarActividad() {
-       String codigo = pedirCodigo().toString();
-       String nombre = this.getTxtNombre().getText();
-       String dia = this.getTxtDia().getText();
-       String horaInicio = this.getTxtHoraInicio().getText();
-       String horaFinal = this.getTxtHoraFin().getText();
-       String cupos = this.getTxtCupos().getText();
-       String lugar = this.getTxtLugar().getText();
-       String profesor = this.getCmbProfesor().getSelectedItem().toString();
+    public void agregarActividad() throws PrintableException {
+       String codigo = Validations.validatePositiveInt(pedirCodigo(), "codigo").toString();
+       String nombre = Validations.validateString(this.getTxtNombre().getText(), "nombre");
+       String dia = Validations.validateDay(this.getTxtDia().getText()).toString();
+       String horaInicio = Validations.validateHour(this.getTxtHoraInicio().getText());
+       String horaFinal = Validations.validateHour(this.getTxtHoraFin().getText());
+       
+       if (Integer.parseInt(horaInicio) > Integer.parseInt(horaFinal)) {
+           throw new PrintableException("Intervalo de horas no euclidiano.");
+       }
+       
+       String cupos = Validations.validatePositiveInt(this.getTxtCupos().getText(), "cupos").toString();
+       String lugar = Validations.validateString(this.getTxtLugar().getText(), "lugar");
+       String profesor = Validations.validateRut(this.getCmbProfesor().getSelectedItem().toString());
        
        String query = "INSERT INTO extraprogramatica (codigo, nombre, dia, hora_inicio, hora_fin, cupos, lugar, rut_profesor) VALUES (" + codigo + ", '" + nombre + "', " + dia + ", " + horaInicio + ", " + horaFinal + ", " + cupos + ", " + lugar + ", '" + profesor + "');";
        this.database.doSendingQuery(query);
     }
     
-    public void modificarActividad() {
-       String codigo = this.getCmbProfesor().getSelectedItem().toString();
-       String nombre = this.getTxtNombre().getText();
-       String dia = this.getTxtDia().getText();
-       String horaInicio = this.getTxtHoraInicio().getText();
-       String horaFinal = this.getTxtHoraFin().getText();
-       String cupos = this.getTxtCupos().getText();
-       String lugar = this.getTxtLugar().getText();
-       String profesor = this.getCmbProfesor().getSelectedItem().toString();
+    public void modificarActividad() throws PrintableException {
+       String codigo = Validations.validatePositiveInt(this.getCmbProfesor().getSelectedItem().toString(), codigo).toString();
+       String nombre = Validations.validateString(this.getTxtNombre().getText(), "nombre");
+       String dia = Validations.validateDay(this.getTxtDia().getText()).toString();
+       String horaInicio = Validations.validateHour(this.getTxtHoraInicio().getText());
+       String horaFinal = Validations.validateHour(this.getTxtHoraFin().getText());
+       
+       if (Integer.parseInt(horaInicio) > Integer.parseInt(horaFinal)) {
+           throw new PrintableException("Intervalo de horas no euclidiano.");
+       }
+       
+       String cupos = Validations.validatePositiveInt(this.getTxtCupos().getText(), "cupos").toString();
+       String lugar = Validations.validateString(this.getTxtLugar().getText(), "lugar");
+       String profesor = Validations.validateRut(this.getCmbProfesor().getSelectedItem().toString());
        
        String query = "UPDATE extraprogramatica SET nombre = '" + nombre + "', dia = " + dia + ", hora_inicio = " + horaInicio + ", hora_fin = " + horaFinal + ", cupos = " + cupos + ", lugar = '" + lugar + "', rut_profesor = '" + profesor + "' WHERE codigo = " + codigo + ";";
        this.database.doSendingQuery(query);
     }
     
-    public void eliminarActividad() {
-        String codigo = this.getCmbProfesor().getSelectedItem().toString();
+    public void eliminarActividad() throws PrintableException {
+        String codigo = Validations.validatePositiveInt(this.getCmbProfesor().getSelectedItem().toString(), "codigo").toString();
         String query = "DELETE FROM extraprogramatica WHERE codigo = " + codigo + ";";
         this.database.doSendingQuery(query);
     }
@@ -787,16 +799,16 @@ public class Extraprogramatica extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, error, title, -1, null);
     }
     
-    public void agregarAlumno() {
-        String rut = this.getCmbAlumno().getSelectedItem().toString();
-        String actividad = this.getCmbActividad().getSelectedItem().toString();
+    public void agregarAlumno() throws PrintableException {
+        String rut = Validations.validateRut(this.getCmbAlumno().getSelectedItem().toString());
+        String actividad = Validations.validatePositiveInt(this.getCmbActividad().getSelectedItem().toString(), "actividad").toString();
         String query = "INSERT INTO participa (rut_alumno, codigo) VALUES ('" + rut + "', " + actividad + ");";
         this.database.doSendingQuery(query);
     }
     
-    public void eliminarAlumno() {
-        String rut = this.getCmbAlumno().getSelectedItem().toString();
-        String actividad = this.getCmbActividad().getSelectedItem().toString();
+    public void eliminarAlumno() throws PrintableException {
+        String rut = Validations.validateRut(this.getCmbAlumno().getSelectedItem().toString());
+        String actividad = Validations.validatePositiveInt(this.getCmbActividad().getSelectedItem().toString(), "actividad").toString();
         String query = "DELETE FROM participa WHERE rut = '" + rut + "' AND codigo = " + actividad + ";";
         this.database.doSendingQuery(query);
     }

@@ -16,6 +16,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import validations.PrintableException;
+import validations.Validations;
 
 /**
  *
@@ -699,9 +701,9 @@ public class Cursos extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, error, title, -1, null);
     }
     
-    public void agregarProfesor() {
-        String profesor = this.getCmbProfesor().getSelectedItem().toString();
-        String curso = this.getCmbCurso().getSelectedItem().toString();
+    public void agregarProfesor() throws PrintableException {
+        String profesor = Validations.validateRut(this.getCmbProfesor().getSelectedItem().toString());
+        String curso = Validations.validatePositiveInt(this.getCmbCurso().getSelectedItem().toString(), "curso").toString();
         String query = null;
         
         switch (this.getCmbCargo().getSelectedIndex()) {
@@ -710,7 +712,7 @@ public class Cursos extends javax.swing.JPanel {
                 break;
             case TIPO_ASISTENTE:
                 if (this.getCmbTipo().getSelectedIndex() == TIPO_MEDIA) {
-                    throw new RuntimeException("Solo pueden haber asistentes en cursos de básica");
+                    throw new PrintableException("Solo pueden haber asistentes en cursos de básica.");
                 }
                 
                 query = "INSERT INTO es_asistente (codigo_curso, rut_profesor_asistente) VALUES (" + curso + ", '" + profesor + "');";
@@ -722,16 +724,16 @@ public class Cursos extends javax.swing.JPanel {
         database.doSendingQuery(query);
     }
     
-    public void eliminarProfesor() {
-        String profesor = this.getCmbProfesor().getSelectedItem().toString();
-        String curso = this.getCmbCurso().getSelectedItem().toString();
+    public void eliminarProfesor() throws PrintableException {
+        String profesor = Validations.validateRut(this.getCmbProfesor().getSelectedItem().toString()).toString();
+        String curso = Validations.validatePositiveInt(this.getCmbCurso().getSelectedItem().toString(), "curso").toString();
         String query1 = "DELETE FROM es_jefe WHERE codigo_curso = " + curso + " AND rut_profesor_jefe = '" + profesor + "';";
         String query2 = "DELETE FROM es_asistente WHERE codigo_curso = " + curso + " AND rut_profesor_jefe = '" + profesor + "';";
         database.doSendingQuery(query1);
         database.doSendingQuery(query2);
     }
     
-    public void modificarProfesor() {
+    public void modificarProfesor() throws PrintableException {
         this.eliminarProfesor();
         this.agregarProfesor();
     }
