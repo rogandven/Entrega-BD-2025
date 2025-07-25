@@ -6,6 +6,7 @@ package validations;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 /**
  *
@@ -51,8 +52,13 @@ public interface Validations {
         if (s == null) {
             throw new PrintableException("El RUT no puede ser nulo.");
         }
+        
         s = s.trim();
-        if (!Pattern.matches(s, "/^\\d{2}\\.\\d{3}\\.\\d{3}-[\\dkK]$/")) {
+        
+        Pattern p = Pattern.compile("^[0-9]{1,}.[0-9]{1,}.[0-9]{1,}-[0-9kK]$");
+        Matcher m = p.matcher(s);
+        System.out.println(s);
+        if (!m.matches()) {
             throw new PrintableException("El RUT debe estar en formato XX.XXX.XXX-X.");
         }
         return s;

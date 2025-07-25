@@ -35,6 +35,11 @@ public class Cursos extends javax.swing.JPanel {
         this.getCmbCurso().addActionListener(e -> {
             this.actualizarDatosActuales();
         });
+        this.getCmbTipo().addActionListener(e -> {
+            System.out.println("minecraft");
+            this.getLabelOrientacion().setVisible(cmbTipo.getSelectedIndex() == TIPO_MEDIA);
+            this.getTxtOrientacion().setVisible(cmbTipo.getSelectedIndex() == TIPO_MEDIA);
+        });
     }
 
     /*
