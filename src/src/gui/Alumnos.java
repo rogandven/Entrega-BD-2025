@@ -308,52 +308,100 @@ public class Alumnos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearAlumnoActionPerformed
+        /*
+        try {
 
-        this.getDatabase().doSendingQuery(this.getQueryCrearAlumno());
-        this.doQueries();
-        this.actualizarCampos(true);
-        this.showSimplifiedDialog("Alumno ingresado con éxito!", "Éxito");
+        } catch (PrintableException e) {
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        } 
+        */
         
+        try {
+            this.getDatabase().doSendingQuery(this.getQueryCrearAlumno());
+            this.doQueries();
+            this.actualizarCampos(true);
+            this.showSimplifiedDialog("Alumno ingresado con éxito!", "Éxito");
+        } catch (PrintableException e) {
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        }     
     }//GEN-LAST:event_btnCrearAlumnoActionPerformed
 
     private void btnModificarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarAlumnoActionPerformed
-        
-        this.getDatabase().doSendingQuery(this.getQueryModificarAlumno());
-        this.doQueries();
-        this.actualizarCampos(true);
-        this.showSimplifiedDialog("Alumno modificado con éxito!", "Éxito");
+        try {
+            this.getDatabase().doSendingQuery(this.getQueryModificarAlumno());
+            this.doQueries();
+            this.actualizarCampos(true);
+            this.showSimplifiedDialog("Alumno modificado con éxito!", "Éxito");
+        } catch (PrintableException e) {
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        } 
+
 
     }//GEN-LAST:event_btnModificarAlumnoActionPerformed
 
     private void btnEliminarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAlumnoActionPerformed
-        this.getDatabase().doSendingQuery(this.getQueryEliminarAlumno());
-        this.doQueries();
-        this.actualizarCampos(true);
-        this.showSimplifiedDialog("Alumno eliminado con éxito!", "Éxito");
+        try {
+            this.getDatabase().doSendingQuery(this.getQueryEliminarAlumno());
+            this.doQueries();
+            this.actualizarCampos(true);
+            this.showSimplifiedDialog("Alumno eliminado con éxito!", "Éxito");
+        } catch (PrintableException e) {
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        }         
+        
+
     }//GEN-LAST:event_btnEliminarAlumnoActionPerformed
 
     private void btnAgregarApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarApoderadoActionPerformed
         // TODO add your handling code here:
-        this.getDatabase().doSendingQuery(this.getQueryAgregarApoderado());
-        this.doQueries();
-        this.actualizarCampos(true);
-        this.showSimplifiedDialog("Apoderado agregado con éxito!", "Éxito");
+
+        
+        try {
+            this.getDatabase().doSendingQuery(this.getQueryAgregarApoderado());
+            this.doQueries();
+            this.actualizarCampos(true);
+            this.showSimplifiedDialog("Apoderado agregado con éxito!", "Éxito");
+        } catch (PrintableException e) {
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        } 
     }//GEN-LAST:event_btnAgregarApoderadoActionPerformed
 
     private void btnEliminarApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarApoderadoActionPerformed
         // TODO add your handling code here:
-        this.getDatabase().doSendingQuery(this.getQueryEliminarAlumno());
-        this.doQueries();
-        this.actualizarCampos(true);
-        this.showSimplifiedDialog("Apoderado eliminado con éxito!", "Éxito");
+        try {
+            this.getDatabase().doSendingQuery(this.getQueryEliminarAlumno());
+            this.doQueries();
+            this.actualizarCampos(true);
+            this.showSimplifiedDialog("Apoderado eliminado con éxito!", "Éxito");
+        } catch (PrintableException e) {
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        }
     }//GEN-LAST:event_btnEliminarApoderadoActionPerformed
 
     private void btnModificarApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarApoderadoActionPerformed
         // TODO add your handling code here:
-        this.getDatabase().doSendingQuery(this.getQueryModificarApoderado());
-        this.doQueries();
-        this.actualizarCampos(true);
-        this.showSimplifiedDialog("Apoderado modificado con éxito!", "Éxito");
+        try {
+            this.getDatabase().doSendingQuery(this.getQueryModificarApoderado());
+            this.doQueries();
+            this.actualizarCampos(true);
+            this.showSimplifiedDialog("Apoderado modificado con éxito!", "Éxito");
+        } catch (PrintableException e) {
+            this.showSimplifiedDialog(e.getMessage(), "Error!");
+        } catch (Exception e) {
+            this.showSimplifiedDialog("Error desconocido.", "Error!");
+        } 
     }//GEN-LAST:event_btnModificarApoderadoActionPerformed
 
 
